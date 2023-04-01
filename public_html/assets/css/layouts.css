@@ -1,0 +1,36 @@
+@charset "utf-8";
+
+
+/**************************************************************
+* l-main-whole-wrapper
+**************************************************************/
+.l-main-whole-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  height: 100vh;
+}
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/**************************************************************
+* l-config-wrapper
+**************************************************************/
+.l-config-wrapper {
+  width: 30rem;
+}
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/**************************************************************
+* l-main-wrapper
+**************************************************************/
+.l-main-wrapper {
+  width: calc(100vw - 30rem);
+  padding-left: 3rem;
+  padding-right: 3rem;
+}
+
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}

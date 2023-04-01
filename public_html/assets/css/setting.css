@@ -4,20 +4,12 @@
 /**************************************************************
 * 変数設定
 **************************************************************/
-
 :root {
   --base-font-size: 62.5%;
-  --base-font-family: "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
-  --contents-width: 136rem;
+  --base-font-family: "Helvetica Neue" , Helvetica , Arial , Verdana , Roboto , "游ゴシック" , "Yu Gothic" , "游ゴシック体" , "YuGothic" , "ヒラギノ角ゴ Pro W3" , "Hiragino Kaku Gothic Pro" , "Meiryo UI" , "メイリオ" , Meiryo , "ＭＳ Ｐゴシック" , "MS PGothic" , sans-serif;
 
-  --base-font-color: #222020;
-  --base-bg-color: #EDEDED;
-
-  --main-bg-color: #222020;
-  --main-font-color: #fff;
-  --main-ttl-color: var(--base-font-color);
-  --main-header-color: #D3D5D8;
-  --main-ttl-font-family: 'Roboto', sans-serif, "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝";
+  --base-font-color: #404040;
+  --base-bg-color: #fff;
 
   --transition-speed: .3s;
   --transition-anima-speed: 1.5s;

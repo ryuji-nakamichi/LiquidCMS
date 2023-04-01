@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="21.234" height="20" viewBox="0 0 21.234 20">
+  <g id="news-icon" transform="translate(0 -14.874)">
+    <path id="news-icon-path-01" data-name="news-icon-path-01" d="M470.9,25.4h0l.013-.007Z" transform="translate(-451.371 -10.086)" fill="#6c6c6c"/>
+    <path id="news-icon-path-02" data-name="news-icon-path-02" d="M20.67,15.34a1.155,1.155,0,0,0-1.14-.023l-1.809.98-2.369-1.284a1.154,1.154,0,0,0-1.1,0L11.885,16.3,9.517,15.014a1.153,1.153,0,0,0-1.1,0L6.05,16.3l-1.806-.979a1.153,1.153,0,0,0-1.7,1.014V31.483H3.727v-15.1l1.773.962a1.155,1.155,0,0,0,1.1,0l2.368-1.284,2.368,1.284a1.155,1.155,0,0,0,1.1,0L14.8,16.065l2.369,1.284a1.155,1.155,0,0,0,1.1,0l1.776-.962V31.815a1.873,1.873,0,0,1-1.873,1.873H3.956a2.77,2.77,0,0,1-2.77-2.77V18.568H0v12.35a3.956,3.956,0,0,0,3.956,3.956H18.175a3.059,3.059,0,0,0,3.059-3.059V16.331A1.154,1.154,0,0,0,20.67,15.34Z" fill="#6c6c6c"/>
+    <rect id="news-icon-rect-01" data-name="news-icon-rect-01" width="13.686" height="4.233" transform="translate(5.091 19.444)" fill="#6c6c6c"/>
+    <rect id="news-icon-rect-02" data-name="news-icon-rect-02" width="4.829" height="5.207" transform="translate(13.949 25.338)" fill="#6c6c6c"/>
+    <rect id="news-icon-rect-03" data-name="news-icon-rect-03" width="7.118" height="0.791" transform="translate(5.091 25.417)" fill="#6c6c6c"/>
+    <rect id="news-icon-rect-04" data-name="news-icon-rect-04" width="7.118" height="0.791" transform="translate(5.091 29.675)" fill="#6c6c6c"/>
+    <rect id="news-icon-rect-05" data-name="news-icon-rect-05" width="7.118" height="0.791" transform="translate(5.091 27.546)" fill="#6c6c6c"/>
+  </g>
+</svg>
