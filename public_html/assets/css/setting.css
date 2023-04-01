@@ -1,0 +1,25 @@
+@charset "utf-8";
+
+
+/**************************************************************
+* 変数設定
+**************************************************************/
+
+:root {
+  --base-font-size: 62.5%;
+  --base-font-family: "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝", serif;
+  --contents-width: 136rem;
+
+  --base-font-color: #222020;
+  --base-bg-color: #EDEDED;
+
+  --main-bg-color: #222020;
+  --main-font-color: #fff;
+  --main-ttl-color: var(--base-font-color);
+  --main-header-color: #D3D5D8;
+  --main-ttl-font-family: 'Roboto', sans-serif, "Hiragino Mincho ProN W3", "ヒラギノ明朝 ProN W3", "Hiragino Mincho ProN", "游明朝", YuMincho, "HG明朝E", "ＭＳ Ｐ明朝", "ＭＳ 明朝";
+
+  --transition-speed: .3s;
+  --transition-anima-speed: 1.5s;
+  --opacity-degree: .7;
+}

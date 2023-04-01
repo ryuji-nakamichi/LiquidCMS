@@ -1,0 +1,111 @@
+@charset "utf-8";
+
+/**************************************************************
+* c-section
+**************************************************************/
+@media all and (min-width: 768px) {
+}
+@media all and (max-width: 767px) {
+}
+
+
+/**************************************************************
+* c-contents-outer
+**************************************************************/
+.c-contents-outer {
+  position: relative;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media all and (min-width: 768px) {
+  .c-contents-outer {
+    width: 87.5%;
+  }
+}
+@media all and (max-width: 767px) {
+  .c-contents-outer {
+    width: 92%;
+  }
+}
+
+/* --g-header
+**************************************************************/
+.c-contents-outer.--g-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+}
+@media all and (min-width: 768px) {}
+
+
+/* --g-footer
+**************************************************************/
+.c-contents-outer.--g-footer {
+  width: 100%;
+}
+
+/**************************************************************
+* c-contents-inner
+**************************************************************/
+.c-contents-inner {
+  margin-left: auto;
+  margin-right: auto;
+}
+@media all and (min-width: 768px) {
+  .c-contents-inner {
+    width: 100%;
+    min-width: 64rem;
+  }
+}
+@media all and (max-width: 767px) {
+  .c-contents-inner {
+    width: 100%;
+  }
+}
+
+
+/* --g-header
+**************************************************************/
+.c-contents-inner.--g-header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 0;
+  width: 100%;
+  min-width: initial;
+  height: 100%;
+}
+
+/**************************************************************
+* c-home-icon
+**************************************************************/
+.c-home-icon {
+  width: 5.6rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* c-home-icon__icon
+**************************************************************/
+.c-home-icon__icon {
+  display: block;
+  width: 100%;
+}
+.c-home-icon svg {
+  width: 100%;
+  height: 100%;
+}
+.c-home-icon .c-home-icon__icon:hover path {
+  transition: fill var(--transition-speed);
+}
+@media all and (min-width: 768px) {}
+@media (hover: hover) {
+  .c-home-icon__icon:hover path {
+    fill: #007E66;
+  }
+}

@@ -1,0 +1,66 @@
+@charset "utf-8";
+
+
+/**************************************************************
+* デバイスごとの要素表示切り分け
+**************************************************************/
+
+/* u-show-xx
+**************************************************************/
+
+/* u-show-wide-pc
+********************************/
+.u-show-wide-pc {
+  display: none;
+}
+@media all and (min-width: 1366px) {
+  .u-show-wide-pc {
+    display: block;
+  }
+}
+
+/* u-show-pc
+********************************/
+.u-show-pc {
+  display: none;
+}
+@media all and (min-width: 1025px) {
+  .u-show-pc {
+    display: block;
+  }
+}
+
+
+/* u-show-tab
+********************************/
+.u-show-tab {
+  display: none;
+}
+@media all and (min-width: 768px) and (max-width: 1024px) {
+  .u-show-tab {
+    display: block;
+  }
+}
+
+/* u-show-pc-tab
+********************************/
+.u-show-pc-tab {
+  display: none;
+}
+@media all and (min-width: 768px) {
+  .u-show-pc-tab {
+    display: block;
+  }
+}
+
+
+/* u-show-sp
+********************************/
+.u-show-sp {
+  display: none;
+}
+@media all and (max-width: 767px) {
+  .u-show-sp {
+    display: block;
+  }
+}

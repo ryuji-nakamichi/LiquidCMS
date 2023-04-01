@@ -1,0 +1,69 @@
+@charset "utf-8";
+
+/**************************************************************
+* アニメーション設定
+**************************************************************/
+
+/* js-anima
+**************************************************************/
+.js-anima {
+  opacity: 0;
+  transition: all var(--transition-anima-speed);
+}
+
+
+/* data-anima-init
+**************************************************************/
+[data-anima-init="true"] {
+  opacity: initial;
+}
+
+
+/* 汎用アニメーション
+**************************************************************/
+
+/* fadeIn
+********************************/
+.is-show[data-anima="fadeIn"] {
+  opacity: 1;
+}
+
+/* fadeInLeft
+********************************/
+[data-anima="fadeInLeft"] {
+  transform: translate(-6rem, 0);
+}
+.is-show[data-anima="fadeInLeft"] {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* fadeInRight
+********************************/
+[data-anima="fadeInRight"] {
+  transform: translate(6rem, 0);
+}
+.is-show[data-anima="fadeInRight"] {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* fadeInUp
+********************************/
+[data-anima="fadeInUp"] {
+  transform: translate(0, 3rem);
+}
+.is-show[data-anima="fadeInUp"] {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+/* fadeInDown
+********************************/
+[data-anima="fadeInDown"] {
+  transform: translate(0, -3rem);
+}
+.is-show[data-anima="fadeInDown"] {
+  opacity: 1;
+  transform: translate(0, 0);
+}

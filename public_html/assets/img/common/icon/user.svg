@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="14" height="25" viewBox="0 0 14 25">
+  <g id="user-icon" transform="translate(-115.615)">
+    <path id="user-icon-path-01" data-name="user-icon-path-01" d="M136.985,12.8a6.315,6.315,0,0,0,6.227-6.4,6.229,6.229,0,1,0-12.453,0A6.315,6.315,0,0,0,136.985,12.8Z" transform="translate(-14.37)" fill="#4b4b4b"/>
+    <path id="user-icon-path-02" data-name="user-icon-path-02" d="M125.772,289.033h-6.314a8.781,8.781,0,0,0-3.843,6.752v4.642h14v-4.642A8.782,8.782,0,0,0,125.772,289.033Z" transform="translate(0 -275.427)" fill="#4b4b4b"/>
+  </g>
+</svg>

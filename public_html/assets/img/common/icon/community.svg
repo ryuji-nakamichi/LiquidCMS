@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="23" height="20" viewBox="0 0 23 20">
+  <g id="community-icon" data-name="community-icon" transform="translate(-22 -783)">
+    <g id="community-icon-path-01" transform="translate(38.065 790.354)">
+      <path id="community-icon-path-01-01" data-name="community-icon-path-01-01" d="M133.844,6.326a3.125,3.125,0,0,0,3.085-3.163,3.086,3.086,0,1,0-6.17,0A3.125,3.125,0,0,0,133.844,6.326Z" transform="translate(-130.377)" fill="#4b4b4b"/>
+      <path id="community-icon-path-01-02" data-name="community-icon-path-01-02" d="M120.646,289.033h-3.128a4.338,4.338,0,0,0-1.9,3.337v2.294h6.935V292.37A4.338,4.338,0,0,0,120.646,289.033Z" transform="translate(-115.615 -282.018)" fill="#4b4b4b"/>
+    </g>
+    <g id="community-icon-path-02" data-name="community-icon-path-02" transform="translate(22 790.354)">
+      <path id="community-icon-path-02-01" data-name="community-icon-path-02-01" d="M133.844,6.326a3.125,3.125,0,0,0,3.085-3.163,3.086,3.086,0,1,0-6.17,0A3.125,3.125,0,0,0,133.844,6.326Z" transform="translate(-130.377)" fill="#4b4b4b"/>
+      <path id="community-icon-path-02-02" data-name="community-icon-path-02-02" d="M120.646,289.033h-3.128a4.338,4.338,0,0,0-1.9,3.337v2.294h6.935V292.37A4.338,4.338,0,0,0,120.646,289.033Z" transform="translate(-115.615 -282.018)" fill="#4b4b4b"/>
+    </g>
+    <g id="community-icon-path-03" data-name="community-icon-path-03" transform="translate(27.747 783)">
+      <path id="community-icon-path-03-01" data-name="community-icon-path-03-01" d="M135.851,10.442a5.158,5.158,0,0,0,5.093-5.221,5.094,5.094,0,1,0-10.185,0A5.158,5.158,0,0,0,135.851,10.442Z" transform="translate(-130.128)" fill="#4b4b4b"/>
+      <path id="community-icon-path-03-02" data-name="community-icon-path-03-02" d="M123.92,289.033h-5.163a7.16,7.16,0,0,0-3.142,5.508v3.787h11.447v-3.787A7.16,7.16,0,0,0,123.92,289.033Z" transform="translate(-115.615 -278.328)" fill="#4b4b4b"/>
+    </g>
+  </g>
+</svg>
