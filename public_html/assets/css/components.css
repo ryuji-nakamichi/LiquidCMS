@@ -92,6 +92,15 @@
   height: 100%;
 }
 
+
+/* --g-page-head
+**************************************************************/
+.c-contents-inner.--g-page-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
 /**************************************************************
 * c-home-icon
 **************************************************************/
@@ -267,4 +276,287 @@
   font-size: 1.6rem;
   font-weight: bold;
   transition: color var(--transition-speed);
+}
+
+
+/**************************************************************
+* c-submit-btn-outer
+**************************************************************/
+.c-submit-btn-outer {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* c-submit-btn-container
+**************************************************************/
+.c-submit-btn-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+@media all and (min-width: 768px) {
+  .c-submit-btn-container {
+    width: 41.198%;
+    max-width: 33rem;
+  }
+}
+@media all and (max-width: 767px) {
+  .c-submit-btn-container {
+    width: 45.198%;
+  }
+  .--col-1 .c-submit-btn-container {
+    width: 70%;
+  }
+}
+
+/* c-submit-btn
+**************************************************************/
+.c-submit-btn {
+  display: block;
+  position: relative;
+  width: 100%;
+  text-align: center;
+  border: .1rem solid #007E66;
+  background-color: #007E66;
+  transition: background-color var(--transition-speed);
+}
+.c-submit-btn::before,
+.c-submit-btn::after {
+  content: "";
+  display: block;
+  position: absolute;
+  background-color: #fff;
+  transition: width var(--transition-speed);
+}
+.c-submit-btn::before {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  height: .1rem;
+  margin: auto 1.6rem auto 0;
+}
+.c-submit-btn::after {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 0;
+  height: .1rem;
+  margin: auto 1.6rem auto 0;
+}
+.c-submit-btn-container.--prev .c-submit-btn::before {
+  left: 0;
+  right: auto;
+  margin: auto 0 auto 1.6rem;
+}
+.c-submit-btn-container.--prev .c-submit-btn::after {
+  left: 0;
+  right: auto;
+}
+@media all and (min-width: 768px) {
+  .c-submit-btn {
+    padding: 2rem 0;
+  }
+  .c-submit-btn::before {
+    width: 4rem;
+  }
+  .c-submit-btn::after {
+    width: 1.6rem;
+    transform: translate(2px, -6px) rotate(45deg);
+  }
+  .c-submit-btn-container.--prev .c-submit-btn::after {
+    transform: translate(14px, -6px) rotate(-45deg);
+  }
+}
+@media all and (max-width: 767px) {
+  .c-submit-btn {
+    padding: 1rem 0;
+  }
+  .c-submit-btn::before {
+    width: 2rem;
+  }
+  .c-submit-btn::after {
+    width: .8rem;
+  }
+  .c-submit-btn-container .c-submit-btn::after {
+    transform: translate(.1rem, -.3rem) rotate(45deg);
+  }
+  .c-submit-btn-container.--prev .c-submit-btn::after {
+    transform: translate(1.5rem, -.3rem) rotate(-45deg);
+  }
+}
+@media (hover: hover) {
+  .c-submit-btn:hover {
+    border-color: #6C6C6C;
+    background-color: #6C6C6C;
+  }
+  .c-submit-btn:hover::before {
+    width: 0;
+  }
+  .c-submit-btn:hover::after {
+    width: 0;
+  }
+}
+
+/* c-submit-btn__lbl
+********************************/
+.c-submit-btn__lbl {
+  color: #fff;
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+@media all and (min-width: 768px) {
+}
+@media all and (max-width: 767px) {
+}
+
+
+
+/**************************************************************
+* c-recordList-container
+**************************************************************/
+.c-recordList-container {
+  margin-top: 2rem;
+}
+
+/* list__item
+**************************************************************/
+.c-recordList .list__item {
+  border-bottom: .1rem solid #F8F8F8;
+}
+
+/* item__link
+**************************************************************/
+.c-recordList .item__link {
+  display: block;
+  transition: background-color var(--transition-speed);
+}
+@media (hover: hover) {
+  .c-recordList .--public .item__link:hover {
+    background-color: #E5FBE9;
+  }
+  .c-recordList .--private .item__link:hover {
+    background-color: #FBE5E5;
+  }
+}
+
+
+/* item__contents
+**************************************************************/
+.c-recordList .item__contents {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 2rem;
+}
+
+/* item__status
+**************************************************************/
+.c-recordList .item__status {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  position: relative;
+  width: 7rem;
+  margin-right: 2rem;
+}
+
+/* item__status-icon
+********************************/
+.c-recordList .item__status-icon {
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  margin-right: 1rem;
+  border-radius: 100%;
+  
+}
+.c-recordList .item__status-icon.--public {
+  background-color: #007E66;
+}
+.c-recordList .item__status-icon.--private {
+  background-color: #AD2D27;
+}
+
+/* item__status-txt
+********************************/
+.c-recordList .item__status-txt {
+  font-size: 1.4rem;
+  font-weight: bold;
+}
+
+/* item__rows
+**************************************************************/
+.c-recordList .item__rows {
+  display: flex;
+  align-items: center;
+  width: calc(100% - 7rem - 2rem);
+}
+
+/* item__row
+********************************/
+.c-recordList .item__row {
+
+}
+.c-recordList .item__rows .item__row:nth-child(n + 2) {
+  margin-left: 2rem;
+}
+.c-recordList .item__row-txt {
+  font-size: 1.4rem;
+}
+
+
+/* c-recordList-icon-list
+**************************************************************/
+.c-recordList-icon-list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: end;
+  margin-bottom: 3rem;
+}
+
+/* list__item
+********************************/
+.c-recordList-icon-list .list__item {
+  display: block;
+  position: relative;
+  width: 4rem;
+  height: 4rem;
+}
+
+/* item__link
+********************************/
+.c-recordList-icon-list .item__link {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* item__icon
+********************************/
+.c-recordList-icon-list .item__icon {
+  display: block;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+}
+.c-recordList-icon-list .item__icon svg {
+  width: 100%;
+  height: 100%;
+}
+.c-recordList-icon-list .item__link:hover path,
+.c-recordList-icon-list .item__link:hover rect
+{
+  transition: fill var(--transition-speed);
+}
+@media (hover: hover) {
+  .c-recordList-icon-list .item__link:hover path,
+  .c-recordList-icon-list .item__link:hover rect
+  {
+    fill: #007E66;
+  }
 }

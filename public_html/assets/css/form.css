@@ -129,6 +129,7 @@
 /* g-contact-frame
 ********************************/
 .g-contact-frame {
+  width: 100%;
 	margin: 0 auto;
 }
 .g-contact-frame .--input,
@@ -149,10 +150,8 @@
 }
 @media all and (min-width: 768px) {
 	.g-contact-frame {
-    width: 59.558%;
-    min-width: 54rem;
-    margin: 14rem auto 0;
-    padding: 12rem 0;
+    margin: 0 auto;
+    padding: 4rem 0;
 	}
 }
 @media all and (max-width: 767px) {
@@ -171,18 +170,13 @@
 /* g-contact-lead-txt
 ********************************/
 .g-contact-lead-txt {
-  color: var(--base-font-color);
-	line-height: 1.666;
+  font-size: 1.4rem;
+  color: #6C6C6C;
+	line-height: 1.5;
 }
 @media all and (min-width: 768px) {
-	.g-contact-lead-txt {
-		font-size: 1.8rem;
-	}
 }
 @media all and (max-width: 767px) {
-	.g-contact-lead-txt {
-		font-size: 1.4rem;
-	}
 }
 
 
@@ -192,16 +186,14 @@
 	display: none;
 }
 @media all and (min-width: 768px) {
-	.g-contact-form-container {
-		margin-top: 8rem;
-	}
+	.g-contact-form-container {}
 }
 
 /* g-contact-form-contents
 **************************************************************/
 .g-contact-form-contents {
 	display: grid;
-	grid-template-areas:
+	/* grid-template-areas:
         "areaA"
         "areaB"
         "areaC"
@@ -211,7 +203,7 @@
         "areaG"
         "areaH"
         "areaI"
-        "areaJ";
+        "areaJ"; */
   grid-template-columns: 1fr;
   grid-template-rows: 1fr;
 }
@@ -226,7 +218,7 @@
 		width: 100%;
 		margin: 4rem auto 0;
 	}
-	.g-contact-form-blk.--type {
+	/* .g-contact-form-blk.--type {
 		grid-area: areaA;
 	}
 	.g-contact-form-blk.--name {
@@ -256,7 +248,7 @@
 	}
 	.g-contact-form-blk.--submit-area.--confirm {
 		grid-area: areaJ;
-	}
+	} */
 }
 @media all and (max-width: 767px) {
 	.g-contact-form-blk {
@@ -298,10 +290,10 @@
 	text-align: center;
 }
 .form-blk-lbl-status.--required {
-	background-color: var(--contact-status-required-bg-color);
+	background-color: #AD2D27;
 }
 .form-blk-lbl-status.--free {
-  background-color: var(--contact-status-free-bg-color);
+  background-color: #6C6C6C;
 }
 @media all and (min-width: 768px) {
 	.form-blk-lbl-status {
@@ -344,8 +336,8 @@
 .form-blk-input-field {
 	width: 100%;
 	padding: 1rem;
-  color: var(--contact-font-color);
-	background-color: var(--contact-field-bg-color);
+  color: #6C6C6C;
+	background-color: #F2F3F7;
 }
 @media all and (min-width: 768px) {
 	.form-blk-input {
@@ -372,11 +364,11 @@
 .form-blk-textarea-field {
 	width: 100%;
 	padding: 1rem;
-	background-color: var(--contact-field-bg-color);
+	background-color: #F2F3F7;
 }
 .form-blk-textarea-field.privacy-policy {
 	line-height: 1.66;
-	border: .1rem solid #E8E7E1;
+	border: .1rem solid #F2F3F7;
   background-color: #fff;
 }
 @media all and (min-width: 768px) {
@@ -447,7 +439,7 @@
 .form-blk-confirm {
 	width: 100%;
   padding: 1rem;
-  background-color: var(--contact-field-bg-color);
+  background-color: #F2F3F7;
 }
 @media all and (min-width: 768px) {
 	.form-blk-confirm {

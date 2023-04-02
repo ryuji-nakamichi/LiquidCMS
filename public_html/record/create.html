@@ -4,9 +4,9 @@
 <meta charset="UTF-8">
 <meta name="robots" content="noindex">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-<title>LiquidCMS</title>
+<title>登録 | LiquidCMS</title>
 <meta name="description" content="">
-<meta property="og:title" content="LiquidCMS">
+<meta property="og:title" content="登録 | LiquidCMS">
 <meta property="og:description" content="">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://cms.liqsyst.com/">
@@ -252,7 +252,7 @@ crossorigin="anonymous"></script>
                                 </svg>
                               </span>
                               <p class="item__ttl">
-                                <a class="item__link" href="/record/">お知らせ</a>
+                                <a class="item__link" href="/news/">お知らせ</a>
                               </p>
                             </div>
                           </div>
@@ -456,10 +456,10 @@ crossorigin="anonymous"></script>
         <div class="c-contents-inner --g-page-head">
           <div class="g-page-head__contents">
             <div class="g-page-head__pageName c-head-lv">
-              <h1 class="pageName-ttl c-head-lv-1">ダッシュボード</h1>
+              <h1 class="pageName-ttl c-head-lv-1">新規登録</h1>
             </div>
             <div class="g-page-head__pageDes c-lead">
-              <p class="pageDes-txt c-lead-txt">ログイン後のHOME画面です。</p>
+              <p class="pageDes-txt c-lead-txt">新規登録画面です。</p>
             </div>
           </div>
           <div class="g-apis">
@@ -485,108 +485,98 @@ crossorigin="anonymous"></script>
     <div class="g-page-main">
       <div class="c-contents-outer --g-page-main">
         <div class="c-contents-inner --g-page-main">
-          <div class="c-infoList-blkContents">
-            <div class="c-infoList-blk">
-              <div class="g-page-mainTtl c-head-lv">
-                <h2 class="mainTtl-txt c-head-lv-2">重要なお知らせ</h1>
-              </div>
-              <div class="c-infoList-container">
-                <ul class="c-infoList">
-                  <li class="list__item">
-                    <a class="item__link" href="#">
-                      <div class="item__contents">
-                        <p class="item__date">
-                          <time class="item__date-time" datetime="2021-03-25">2021.03.25</time>
-                        </p>
-                        <p class="item__des">
-                          <span class="item__des-txt">LiquidCMS ver.1.0.0 がリリースされました。</span>
-                        </p>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="list__item">
-                    <a class="item__link" href="#">
-                      <div class="item__contents">
-                        <p class="item__date">
-                          <time class="item__date-time" datetime="2021-03-25">2021.03.25</time>
-                        </p>
-                        <p class="item__des">
-                          <span class="item__des-txt">LiquidCMS ver.1.0.0 がリリースされました。</span>
-                        </p>
-                      </div>
-                    </a>
-                  </li>
-                  <li class="list__item">
-                    <a class="item__link" href="#">
-                      <div class="item__contents">
-                        <p class="item__date">
-                          <time class="item__date-time" datetime="2021-03-25">2021.03.25</time>
-                        </p>
-                        <p class="item__des">
-                          <span class="item__des-txt">LiquidCMS ver.1.0.0 がリリースされました。</span>
-                        </p>
-                      </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="c-btn-container">
-                <div class="c-btn">
-                  <a class="c-btn__link" href="#">
-                    <span class="c-btn__lbl">More Read</span>
-                  </a>
+          <div class="g-page-mainTtl c-head-lv">
+            <h2 class="mainTtl-txt c-head-lv-2">新規登録</h2>
+          </div>
+          <div class="c-form-blk">
+            <div class="g-contact-contents">
+              <div class="g-contact-frame --input">
+                <div class="g-contact-lead --input">
+                  <p class="g-contact-lead-txt">以下のフォームに登録したい情報を入力してください。</p>
                 </div>
-              </div>
-            </div>
-            <div class="c-infoList-blk">
-              <div class="g-page-mainTtl c-head-lv">
-                <h2 class="mainTtl-txt c-head-lv-2">運営からのお知らせ</h2>
-              </div>
-              <div class="c-infoList-container">
-                <ul class="c-infoList">
-                  <li class="list__item">
-                    <a class="item__link" href="">
-                      <div class="item__contents">
-                        <p class="item__date">
-                          <time class="item__date-time" datetime="2021-03-25">2021.03.25</time>
-                        </p>
-                        <p class="item__des">
-                          <span class="item__des-txt">運営からのメッセージが届いております。<br>ご確認いただきますようにお願い致します。</span>
-                        </p>
+                <div class="g-contact-lead --confirm">
+                  <p class="g-contact-lead-txt">以下の内容で登録しますがよろしいでしょうか。</p>
+                </div>
+                <div class="g-contact-lead --thanks">
+                  <p class="g-contact-lead-txt">登録完了致しました。</p>
+                </div>
+            
+                <div class="g-contact-form-container">
+                  <form id="g-contact-form" class="g-contact-form" method="post">
+                    <div class="g-contact-form-contents">
+                      <div class="g-contact-form-blk --title">
+                        <div class="form-blk-lbl">
+                          <label class="form-blk-lbl-name" for="title">タイトル</label>
+                          <span class="form-blk-lbl-status --required">必須</span>
+                        </div>
+                        <div class="form-blk-input --input">
+                          <input id="title" class="title form-blk-input-field" type="text" name="title" value="" data-type="text">
+                          <p class="form-blk-input-err"></p>
+                        </div>
+                        <div class="form-blk-input --confirm">
+                          <p class="form-blk-confirm">ここにタイトルが入ります。</p>
+                        </div>
                       </div>
-                    </a>
-                  </li>
-                  <li class="list__item">
-                    <a class="item__link" href="#">
-                      <div class="item__contents">
-                        <p class="item__date">
-                          <time class="item__date-time" datetime="2021-03-25">2021.03.25</time>
-                        </p>
-                        <p class="item__des">
-                          <span class="item__des-txt">運営からのメッセージが届いております。<br>ご確認いただきますようにお願い致します。</span>
-                        </p>
+                      <div class="g-contact-form-blk --date">
+                        <div class="form-blk-lbl">
+                          <label class="form-blk-lbl-name" for="date">日付</label>
+                          <span class="form-blk-lbl-status --required">必須</span>
+                        </div>
+                        <div class="form-blk-input --input">
+                          <input id="date" class="date form-blk-input-field" type="text" name="date" value="" data-type="text">
+                          <p class="form-blk-input-err"></p>
+                        </div>
+                        <div class="form-blk-input --confirm">
+                          <p class="form-blk-confirm">ここに日付が入ります。</p>
+                        </div>
                       </div>
-                    </a>
-                  </li>
-                  <li class="list__item">
-                    <a class="item__link" href="#">
-                      <div class="item__contents">
-                        <p class="item__date">
-                          <time class="item__date-time" datetime="2021-03-25">2021.03.25</time>
-                        </p>
-                        <p class="item__des">
-                          <span class="item__des-txt">運営からのメッセージが届いております。<br>ご確認いただきますようにお願い致します。</span>
-                        </p>
+                      <div class="g-contact-form-blk --message">
+                        <div class="form-blk-lbl">
+                          <label class="form-blk-lbl-name" for="message">お問い合わせ内容</label>
+                          <span class="form-blk-lbl-status --required">必須</span>
+                        </div>
+                        <div class="form-blk-input --input">
+                          <textarea id="message" class="message form-blk-textarea-field" name="message"
+                            data-type="textarea"></textarea>
+                          <p class="form-blk-input-err"></p>
+                        </div>
+                        <div class="form-blk-input --confirm">
+                          <p class="form-blk-confirm">ここにお問い合わせ内容が入ります。</p>
+                        </div>
                       </div>
-                    </a>
-                  </li>
-                </ul>
-              </div>
-              <div class="c-btn-container">
-                <div class="c-btn">
-                  <a class="c-btn__link" href="#">
-                    <span class="c-btn__lbl">More Read</span>
-                  </a>
+                      <div class="g-contact-form-blk --submit-area --input">
+                        <div class="form-blk-input">
+                          <div class="form-blk-input">
+                            <div class="c-submit-btn-outer --col-1">
+                              <div class="c-submit-btn-container">
+                                <button id="g-form-input" class="c-submit-btn" type="button">
+                                  <span class="c-submit-btn__lbl">確認画面へ</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="g-contact-form-blk --submit-area --confirm">
+                        <div class="form-blk-input">
+                          <div class="form-blk-input">
+                            <div class="c-submit-btn-outer">
+                              <div class="c-submit-btn-container --prev">
+                                <button id="g-form-back" class="c-submit-btn" type="button">
+                                  <span class="c-submit-btn__lbl">戻る</span>
+                                </button>
+                              </div>
+                              <div class="c-submit-btn-container">
+                                <button id="g-form-submit" class="c-submit-btn" type="button">
+                                  <span class="c-submit-btn__lbl">送信する</span>
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </form>
                 </div>
               </div>
             </div>
