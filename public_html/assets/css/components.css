@@ -16,16 +16,13 @@
   position: relative;
   margin-left: auto;
   margin-right: auto;
+  padding-left: 3rem;
+  padding-right: 3rem;
 }
 @media all and (min-width: 768px) {
-  .c-contents-outer {
-    width: 87.5%;
-  }
+  .c-contents-outer {}
 }
 @media all and (max-width: 767px) {
-  .c-contents-outer {
-    width: 92%;
-  }
 }
 
 /* --g-header
@@ -84,6 +81,7 @@
 /* --g-header
 **************************************************************/
 .c-contents-inner.--g-header {
+  overflow: auto;
   position: absolute;
   top: 0;
   left: 0;
@@ -136,6 +134,14 @@
 }
 
 
+/* c-head-lv-2
+**************************************************************/
+.c-head-lv-2 {
+  font-size: 1.6rem;
+  font-weight: bold;
+}
+
+
 /**************************************************************
 * c-lead
 **************************************************************/
@@ -144,4 +150,121 @@
 **************************************************************/
 .c-lead-txt {
   font-size: 1.6rem;
+}
+
+
+/**************************************************************
+* c-infoList-blkContents
+**************************************************************/
+@media all and (min-width: 1361px) {
+  .c-infoList-blkContents {
+    display: flex;
+    flex-wrap: wrap;
+  }
+}
+
+/* c-infoList-blk
+**************************************************************/
+@media all and (min-width: 1361px) {
+  .c-infoList-blkContents .c-infoList-blk {
+    width: 44.444%;
+  }
+  .c-infoList-blkContents .c-infoList-blk + .c-infoList-blk {
+    margin-left: 7.407%;
+  }
+}
+@media all and (min-width: 768px) and (max-width: 1360px) {
+  .c-infoList-blkContents .c-infoList-blk+.c-infoList-blk {
+    margin-top: 12%;
+  }
+}
+@media all and (max-width: 767px) {}
+
+
+/* c-infoList-container
+**************************************************************/
+
+
+/* c-infoList
+**************************************************************/
+.c-infoList {
+  padding: 1rem 0 3rem;
+}
+
+/* list__item
+********************************/
+.c-infoList .list__item {
+  border-bottom: .1rem solid #F8F8F8;
+}
+
+/* item__contents
+********************************/
+.c-infoList .item__contents {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+/* item__link
+********************************/
+.c-infoList .item__link {
+  display: block;
+  padding: 2rem 0;
+}
+
+/* item__date
+********************************/
+.c-infoList .item__date {
+  width: 10rem;
+  margin-right: 1rem;
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+/* item__des
+********************************/
+.c-infoList .item__des {
+  width: calc(100% - 10rem - 1rem);
+  font-size: 1.6rem;
+  line-height: 1.5;
+}
+
+
+
+/**************************************************************
+* c-btn-container
+**************************************************************/
+
+/* c-btn
+**************************************************************/
+.c-btn {
+  width: 16rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* c-btn__link
+********************************/
+.c-btn .c-btn__link {
+  display: block;
+  padding: 1.6rem 1rem;
+  text-align: center;
+  border: .1rem solid #007E66;
+  background-color: #007E66;
+  transition: all var(--transition-speed);
+}
+@media (hover: hover) {
+  .c-btn__link:hover {
+    border-color: #404040;
+    background-color: #404040;
+  }
+}
+
+
+/* c-btn__lbl
+********************************/
+.c-btn .c-btn__lbl {
+  color: #fff;
+  font-size: 1.6rem;
+  font-weight: bold;
+  transition: color var(--transition-speed);
 }

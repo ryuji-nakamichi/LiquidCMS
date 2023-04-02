@@ -28,9 +28,6 @@
 **************************************************************/
 .l-main-wrapper {
   width: calc(100vw - 30rem);
-  padding-left: 3rem;
-  padding-right: 3rem;
 }
-
 @media all and (min-width: 768px) {}
 @media all and (max-width: 767px) {}
