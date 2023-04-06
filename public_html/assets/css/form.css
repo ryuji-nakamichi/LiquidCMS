@@ -338,6 +338,7 @@
 	padding: 1rem;
   color: #6C6C6C;
 	background-color: #F2F3F7;
+  box-shadow: 0 .1rem .4rem #ccc;
 }
 @media all and (min-width: 768px) {
 	.form-blk-input {
