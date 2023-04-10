@@ -19,7 +19,7 @@ function fieldCreate() {
 function fieldCreateAjax() {
   const postsObj = {};
   $.ajax({
-    url: "http://httpbin.org/post", // 通信先のURL
+    url: "../controllers/field.php", // 通信先のURL
     type: "POST",		// 使用するHTTPメソッド
     data: $("#g-contact-form").serialize(), // 送信するデータ
     dataType: "json", // 応答のデータの種類 
@@ -32,6 +32,7 @@ function fieldCreateAjax() {
     //  引数のjqXHRは、XMLHttpRequestオブジェクト
   }).done(function (res, textStatus, jqXHR) {
     $("#status-erea-code").text(jqXHR.status); //例：200
+    $("#result-res-txt").text(jqXHR.status); //例：Response
     $("#status-erea-status").text(textStatus); //例：success
 
 
@@ -47,17 +48,21 @@ function fieldCreateAjax() {
     // 5.JSONをJavaScriptオブジェクトにし、
     // キーを指定して値(httpbin.org)を表示
     let res_parse = JSON.parse(res_json);
-    $("#result-host-txt").text(res_parse["headers"]["Host"]);
 
+    console.log('成功');
 
     // 6. failは、通信に失敗した時に実行される
   }).fail(function (jqXHR, textStatus, errorThrown) {
     $("#status-erea-code").text(jqXHR.status); //例：404
+    $("#result-res-txt").text(jqXHR.status); //例：Response
     $("#status-erea-status").text(textStatus); //例：error
     $("#result-err-txt").text(errorThrown); //例：NOT FOUND
 
+    console.log('失敗');
+
     // 7. alwaysは、成功/失敗に関わらず実行される
   }).always(function () {
+    console.log('完了');
     $("#result-cpl-txt").text("complete");
   });
 }
