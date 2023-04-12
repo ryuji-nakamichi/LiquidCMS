@@ -9,6 +9,13 @@ LiquidCMSのリポジトリ
 URL : https://cms.liqsyst.com/
 ```
 
+### ▼BASIC認証
+
+```bash
+ユーザー名 : user
+パスワード : liqsyst
+```
+
 ### ▼サーバー情報
 
 ```bash
