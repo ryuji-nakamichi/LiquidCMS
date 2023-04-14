@@ -30,7 +30,7 @@ class UtilityClass {
   */
   public function routingUrl () {
 
-    if (isset($this->url)) {
+    if (false !== strpos($this->url, '/')) {
       $this->path = explode("/",$this->url);
     }
     // echo '<pre>';
@@ -42,7 +42,7 @@ class UtilityClass {
 
     switch ($this->path[1]) {
       case '': // TOP
-        include "views/dashboard/index.html";
+        include "views/dashboard/index.php";
         break;
 
       case 'field': // field

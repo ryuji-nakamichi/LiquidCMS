@@ -415,3 +415,16 @@ img {
   padding: 4rem 0 9rem;
   min-height: 500px;
 }
+
+
+/**************************************************************
+* Debug
+**************************************************************/
+pre {
+  font-size: 1.6rem;
+}
+.debug-mode .g-header-container,
+.debug-mode .g-menu-container
+{
+  display: none;
+}
