@@ -13,6 +13,7 @@ class UtilityClass {
   // プロパティ
   public $path;
   public $url;
+  public $route;
 
   // コンストラクタ関数
   function __construct($url) {
@@ -25,44 +26,54 @@ class UtilityClass {
   /**
   * ルーティング関数
   *  
-  * @param array $input 検索条件
   * @return array ルーティングの結果配列
   */
   public function routingUrl () {
 
     if (false !== strpos($this->url, '/')) {
-      $this->path = explode("/",$this->url);
-    }
-    // echo '<pre>';
-    // echo $path;
-    // echo '</pre>';
-    // echo '<pre>';
-    // print_r($path);
-    // echo '</pre>';
-
-    switch ($this->path[1]) {
-      case '': // TOP
-        include "views/dashboard/index.php";
-        break;
-
-      case 'field': // field
-
-        switch ($this->path[2]) {
-          case 'create':
-            include "views/field/create.html";
-            break;
-          
-          default: // どの条件にも満たない場合
-            include "views/404/index.html";
-            break;
-        }
-        break;
-      
-      default: // どの条件にも満たない場合
-        include "views/404/index.html";
-        break;
+      $this->path = explode("/", $this->url);
     }
 
+    // ルート情報を初期化
+    $this->route['route'] = [
+      'name' => '',
+      'controller' => '',
+      'params' => '',
+    ];
+
+    // URLによりルート情報を分岐格納する
+    if (isset($this->path[1])) {
+      if ($this->path[1] === '') {
+        $this->route['route'] = [
+          'name' => 'home',
+          'controller' => 'HomeController',
+          'params' => 'test',
+        ];
+      } else {
+        $this->route['route'] = [
+          'name' => '404',
+          'controller' => 'NotFoundController',
+          'params' => '404-test',
+        ];
+      }
+    }
+
+    return $this->route;
+
+  }
+
+
+  /**
+  * ルーティング情報を元にコントローラーファイルを読み込む
+  *  
+  * @param array $route ルーティング情報配列
+  */
+  public function contollerExe ($route) {
+    $_route = $route;
+
+    if ($_route['route']['controller']) {
+      require_once('controllers/' . $_route['route']['controller'] . '.' . 'php');
+    }
   }
 }
 

@@ -8,4 +8,6 @@ use Liqsyst\Utility\UtilityClass as Utility;
 // echo '</pre>';
 $path_info = (isset($_SERVER["PATH_INFO"]) && !is_null($_SERVER["PATH_INFO"])) ? $_SERVER["PATH_INFO"] : '/';
 $utility = new Utility($path_info);
-$utility->routingUrl();
+$routeArr = $utility->routingUrl();
+$utility->contollerExe($routeArr);
+print_r($routeArr);
