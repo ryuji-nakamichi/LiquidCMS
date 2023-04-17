@@ -1,11 +1,26 @@
 <?php
 
-namespace Liqsyst\Utility;
+namespace Liqsyst\Lib\Controller;
 
 /**
  * ControllerClass
  */
 class ControllerClass {
+
+  
+  /**
+   * コントローラーのファイル名をセットする
+   * マッチするルーティングがなければ、404用のコントローラーをセットする
+   *
+   * @param  array $routeMap
+   * @return string $controllerName
+   */
+  private function setControllerName (array $routeMap): string {
+    $directoryName = 'controllers/';
+    $extName = '.php';
+    $controllerName = (!count($routeMap)) ? $directoryName . 'NotFoundController' . $extName: 'controllers/' . $routeMap['info']['controller'] . $extName;
+    return $controllerName;
+  }
 
   
   /**
@@ -17,8 +32,9 @@ class ControllerClass {
    * @param array $routeMap 最終的に一つだけマッチしたルーティングマップ配列
    * @return void
    */
-  public function conrrollerRun(array $routeMap): void {
-    require_once('controllers/' . $routeMap['info']['controller'] . '.' . 'php');
+  public function run(array $routeMap): void {
+    $controllerName = $this->setControllerName($routeMap);
+    require_once($controllerName);
   }
 
 }

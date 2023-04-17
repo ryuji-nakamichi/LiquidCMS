@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Liqsyst\Utility;
+namespace Liqsyst\Lib\Utility;
 
 
 /**

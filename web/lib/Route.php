@@ -1,9 +1,9 @@
 <?php
 
-namespace Liqsyst\Utility;
+namespace Liqsyst\Lib\Route;
 
 require_once('lib/Controller.php');
-use Liqsyst\Utility\ControllerClass as Controller;
+use Liqsyst\Lib\Controller\ControllerClass as Controller;
 
 
 /**
@@ -19,7 +19,7 @@ class RouteClass {
 
     
   /**
-   * __construct
+   * コンストラクタ
    *
    * @param array $routeMap ルーティングマップ配列
    */
@@ -122,9 +122,11 @@ class RouteClass {
    * @return void
    */
   private function contorollerExe(array $routeMap): void {
-    $mapSearchResult = $this->uriInRoutMapParameter($routeMap); 
+    $mapSearchResult = $this->uriInRoutMapParameter($routeMap);
+    // print_r($mapSearchResult);
+    // exit;
     $ControllerObj = new Controller();
-    $ControllerObj->conrrollerRun($mapSearchResult);
+    $ControllerObj->run($mapSearchResult);
   }
 
 
@@ -135,8 +137,6 @@ class RouteClass {
   */
   public function run(): void {
     $this->contorollerExe($this->routeMap);
-  // $mapSearchResult = $this->uriInRoutMapParameter($this->routeMap); // マップ内にパラメータが含まれているかを判定後は、現在アクセス中のURIとパターンが一致するかを走査する。
-    // return $mapSearchResult;
   }
 
 }

@@ -2,7 +2,7 @@
 
 require_once('lib/Route.php');
 require_once('config/route.php');
-use Liqsyst\Utility\RouteClass as Route;
+use Liqsyst\Lib\Route\RouteClass as Route;
 
 $route = new Route($routMap);
 $route->run();
