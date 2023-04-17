@@ -19,3 +19,11 @@ $ docker-compose stop
 
 ## ■環境
 [localhost:8080](localhost:8080)
+
+## ▼phpMyAdmin
+[localhost:4040](localhost:4040)
+
+```bash
+id : root
+password : password
+```

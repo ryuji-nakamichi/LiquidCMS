@@ -10,6 +10,14 @@ $routMap = [
     ]
   ],
   [
+    'path' => '/contents',
+    'info' => [
+      'name' => 'contents',
+      'controller' => 'ContentsController',
+      'params' => 'contents-test',
+    ]
+  ],
+  [
     'path' => '/contents/{page}',
     'info' => [
       'name' => 'contents',
