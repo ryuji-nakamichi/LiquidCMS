@@ -1,106 +1,94 @@
 <?php
 
-
 namespace Liqsyst\Utility;
+
+require_once('lib/Controller.php');
+use Liqsyst\Utility\ControllerClass as Controller;
 
 
 /**
-  * ルーティングClass
-  *  
-  */
+ * RouteClass
+ */
 class RouteClass {
 
   // プロパティ
-  private $routMap;
-  private $uriParameters;
-  private $parameterStatStr = '{';
+  private $routeMap; // index.phpでインクルードされたルーティングマップ配列を格納
+  private $uriParameters; // 現在アクセス中のURIを格納
+  private $parameterStatStr = '{'; // ルーティングマップ配列内にて、パラメーターが設定されている場合は波括弧で括るので、開始部分だけ格納
 
 
-  // コンストラクタ関数
-  function __construct($routMap) {
+    
+  /**
+   * __construct
+   *
+   * @param array $routeMap ルーティングマップ配列
+   */
+  function __construct($routeMap) {
     $this->setUriParameters($_SERVER['REQUEST_URI']);
-    $this->setRoutMap($routMap);
+    $this->setRouteMap($routeMap);
   }
 
 
   /**
-  * 現在アクセス中のURIをプロパティにセットする
-  * @param string $request
-  * @return void
-  */
+   * 現在アクセス中のURIをプロパティにセットする
+   *
+   * @param  string $request
+   * @return void
+   */
   private function setUriParameters(string $request): void {
     $this->uriParameters = $request;
   }
 
 
   /**
-  * 定義済みのルーティングマップ配列をプロパティにセットする
-  * @param array $routMap
-  * @return array 定義済みのルーティングマップ配列
-  */
-  private function setRoutMap(array $routMap): array {
-    $this->routMap = $routMap;
-    return $this->routMap;
+   * 定義済みのルーティングマップ配列をプロパティにセットする
+   *
+   * @param array $routMap
+   * @return array 定義済みのルーティングマップ配列
+   */
+  private function setRouteMap(array $routMap): array {
+    $this->routeMap = $routMap;
+    return $this->routeMap;
   }
 
 
   /**
-  * ルーティングマップ配列内に「{」が含まれているか走査する
-  * @param array $routMap
-  * @return array 定義済みのルーティングマップ配列
-  * パラメーター有無どちらでも動くようになったので削除予定
-  */
-  private function routMapParameterStrExists(array $routMap): array {
-    $_parameterStatStr = $this->parameterStatStr;
-    $_routMap = $routMap; // includeしたルーティングマップ配列
-    $cnt = 0;
-    foreach((array) $_routMap AS $key => $val) {
-
-      // アクセス中のURL内に、マップデータの定義されたパス内に「{」が含まれているか分岐する
-      $mapWithParameters[$cnt]['path'] = $val['path'];
-      $mapWithParameters[$cnt]['info'] = $val['info'];
-
-      $cnt++;
-    }
-    return $mapWithParameters;
-  }
-
-
-  /**
-  * パラメーターの開始文字をセットする
-  * @param string $parameterStatStr
-  * @return string $searchPattern
-  */
+   * パラメーターの開始文字をセットする
+   * パラメータ前半と後半の文字列を連結して、現在アクセス中のURIを走査する
+   * 複数のパラメータが含まれる可能性もあるので、パラメータの数だけループさせる
+   *
+   * @param string $parameterStatStr
+   * @param string $parameterStatStr
+   * @return string $searchPattern
+   */
   private function setSearchPatternStr(array $pregPatternStrArr, string $parameterStatStr): string {
-    // パラメータ前半と後半の文字列を連結して、現在アクセス中のURIを走査する
-    // 複数のパラメータが含まれる可能性もあるので、パラメータの数だけループさせる
     $searchPattern = ''; 
-    foreach($pregPatternStrArr AS $key2 => $val2) {
-      if ($key2 === 0) { // 最初のループだけ
+    foreach($pregPatternStrArr AS $pregKey => $pregVal) {
+      if ($pregKey === 0) { // 最初のループだけ
         $searchPattern .= "#^";
       }
-      if ($key2 > 0) { // 最初と最後以外のループ
-        if (strpos($val2, $parameterStatStr) !== false) { // パラメータの場合
+      if ($pregKey > 0) { // 最初以外のループ
+        if (strpos($pregVal, $parameterStatStr) !== false) { // パラメータの場合
           $searchPattern .= "/[a-zA-Z0-9]+";
         } else { // パラメータではない場合
-          $searchPattern .= "/{$val2}";
+          $searchPattern .= "/{$pregVal}";
         }
       }
-      if ($key2 === (count($pregPatternStrArr) - 1)) { // 最後のループだけ
+      if ($pregKey === (count($pregPatternStrArr) - 1)) { // 最後のループだけ
         $searchPattern .= "$#";
       }
     }
-
     return $searchPattern;
   }
 
 
   /**
-  * 現在アクセス中のURIとパターンが一致するかを走査する。
-  * 定義済みのルーティングマップ配列の中からルーティングの結果、完全マッチした配列だけ返す
-  * @param array $mapWithParameters
-  * @return array $mapSearchResult
-  */
+   * 現在アクセス中のURIとパターンが一致するかを走査する
+   * 定義済みのルーティングマップ配列の中からルーティングの結果、完全マッチした配列だけ返す
+   *
+   * @param array $mapWithParameters
+   * @return array $mapSearchResult
+   */
   private function uriInRoutMapParameter(array $mapWithParameters): array {
     $_parameterStatStr = $this->parameterStatStr;
     $mapSearchResult = [];
@@ -113,10 +101,6 @@ class RouteClass {
 
       preg_match_all($search, $path, $pregStrArr);
       $pregPatternStrArr = explode('/', $path);
-
-
-      // パラメータ前半と後半の文字列を連結して、現在アクセス中のURIを走査する
-      // 複数のパラメータが含まれる可能性もあるので、パラメータの数だけループさせる
       $searchPattern = $this->setSearchPatternStr($pregPatternStrArr, $_parameterStatStr);
       
       if (preg_match($searchPattern, $this->uriParameters)) {
@@ -125,22 +109,34 @@ class RouteClass {
       }
 
     }
-
     return $mapSearchResult;
+  }
+
+  
+  /**
+   * コントローラーを実行する
+   * マップ内にパラメータが含まれているかを判定後は、現在アクセス中のURIとパターンが一致するかを走査
+   * 最終的に、ルーティングと完全マッチした配列だけを一つ抽出してコントローラー実行関数へ渡す
+   *
+   * @param  array $routeMap
+   * @return void
+   */
+  private function contorollerExe(array $routeMap): void {
+    $mapSearchResult = $this->uriInRoutMapParameter($routeMap); 
+    $ControllerObj = new Controller();
+    $ControllerObj->conrrollerRun($mapSearchResult);
   }
 
 
   /**
   * メイン関数実行
   *  
-  * @return array ルーティングの結果配列
+  * @return void
   */
-  public function run(): array {
-
-    // $mapWithParameters = $this->routMapParameterStrExists($this->routMap);
-    $mapSearchResult = $this->uriInRoutMapParameter($this->routMap); // マップ内にパラメータが含まれているかを判定後は、現在アクセス中のURIとパターンが一致するかを走査する。
-
-    return $mapSearchResult;
+  public function run(): void {
+    $this->contorollerExe($this->routeMap);
+  // $mapSearchResult = $this->uriInRoutMapParameter($this->routeMap); // マップ内にパラメータが含まれているかを判定後は、現在アクセス中のURIとパターンが一致するかを走査する。
+    // return $mapSearchResult;
   }
 
 }
