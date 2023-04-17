@@ -11,13 +11,11 @@ use Liqsyst\Lib\Controller\ControllerClass as Controller;
  */
 class RouteClass {
 
-  // プロパティ
   private $routeMap; // index.phpでインクルードされたルーティングマップ配列を格納
   private $uriParameters; // 現在アクセス中のURIを格納
   private $parameterStatStr = '{'; // ルーティングマップ配列内にて、パラメーターが設定されている場合は波括弧で括るので、開始部分だけ格納
 
 
-    
   /**
    * コンストラクタ
    *
@@ -56,6 +54,7 @@ class RouteClass {
    * パラメーターの開始文字をセットする
    * パラメータ前半と後半の文字列を連結して、現在アクセス中のURIを走査する
    * 複数のパラメータが含まれる可能性もあるので、パラメータの数だけループさせる
+   * 最終的に、動的に正規表現を作成
    *
    * @param string $parameterStatStr
    * @param string $parameterStatStr
