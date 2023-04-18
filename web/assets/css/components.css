@@ -154,6 +154,9 @@
 /**************************************************************
 * c-lead
 **************************************************************/
+.c-lead {
+  padding: 2rem 0;
+}
 
 /* c-lead-txt
 **************************************************************/
@@ -559,4 +562,53 @@
   {
     fill: #007E66;
   }
+}
+
+
+/**************************************************************
+* c-annouceList-container
+**************************************************************/
+.c-annouceList-container {
+}
+
+
+/* c-annouceList
+**************************************************************/
+.c-annouceList {
+  list-style-type: disclosure-closed;
+  padding: 4rem;
+  color: #fff;
+  font-size: 1.6rem;
+  border-radius: 1rem;
+  background-color: #009e7f;
+}
+
+
+/* list__item
+**************************************************************/
+.c-annouceList .list__item {}
+.c-annouceList .list__item:nth-child(n + 2) {
+  margin-top: 2rem;
+}
+
+/* item__des
+**************************************************************/
+.c-annouceList .item__des {
+  position: relative;
+  line-height: 1.5;
+}
+
+/* item__mark
+********************************/
+.c-annouceList .item__mark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding-right: 1rem;
+}
+
+/* item__des-inner
+********************************/
+.c-annouceList .item__mark + .item__des-inner {
+  padding-left: 2rem;
 }

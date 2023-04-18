@@ -30,7 +30,7 @@
                   <div class="item__contents-inner">
                     <p class="item__main-ttl">コンテンツ管理</p>
                     <span class="item__main-icon">
-                      <a class="item__link" href="#">
+                      <a class="item__link" href="/contents/create">
                         <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                           <g transform="translate(-227 -70.5)">
                             <rect width="20" height="1" transform="translate(227 80)" fill="#6c6c6c" />

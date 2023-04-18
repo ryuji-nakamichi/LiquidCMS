@@ -10,6 +10,14 @@ $routeMap = [
     ]
   ],
   [
+    'path' => '/contents/create',
+    'info' => [
+      'name' => 'contents',
+      'controller' => 'ContentssController',
+      'params' => 'ContentssController',
+    ]
+  ],
+  [
     'path' => '/field/create',
     'info' => [
       'name' => 'field',

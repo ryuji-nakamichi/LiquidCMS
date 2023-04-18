@@ -395,7 +395,7 @@ img {
 /* g-page-head__pageDes
 **************************************************************/
 .g-page-head__pageDes {
-  margin-top: 2rem;
+  padding-bottom: 0;
 }
 
 

@@ -8,6 +8,12 @@ switch ($routeName) {
     ];
     break;
 
+  case 'contents':
+    $jsArr = [
+      '<script src="/assets/js/contents.js"></script>'
+    ];
+    break;
+
   case 'field':
     $jsArr = [
       '<script src="/assets/js/field.js"></script>'

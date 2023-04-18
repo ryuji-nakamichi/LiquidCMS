@@ -13,6 +13,13 @@ switch ($routeName) {
     ];
     break;
 
+  case 'contents':
+    $pageInfoArr = [
+      'title' => 'コンテンツ新規登録',
+      'description' => 'コンテンツ新規登録画面です。',
+    ];
+    break;
+
   case 'field':
     $pageInfoArr = [
       'title' => 'フィールド新規登録',
@@ -22,8 +29,8 @@ switch ($routeName) {
 
   default;
     $pageInfoArr = [
-      'title' => 'ページが見つかりません｜LiquidCMS',
-      'description' => 'お探しのページが見つかりません。URIをご確認いただき、再度アクセスをお願いいたします。それでも解決できない場合は、お手数ですがサポートへご連絡いただければ幸いです。',
+      'title' => 'ページが見つかりません',
+      'description' => "お探しのページが見つかりません。URIをご確認いただき、再度アクセスをお願いいたします。<br>それでも解決できない場合は、お手数ですがサポートへご連絡いただければ幸いです。",
     ];
 }
 ?>
