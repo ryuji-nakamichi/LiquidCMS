@@ -1,16 +1,22 @@
 <?php
 
-class HomeController {
+namespace Liqsyst\Controllers;
+
+require_once('controllers/BaseController.php');
+use Liqsyst\Controllers\BaseController as Base;
+
+class HomeController extends Base {
 
   // プロパティ
-  public $data = '';
+  public $routeMap = '';
 
 
   /**
    * __construct
    *
    */
-  function __construct() {
+  function __construct($routeMap) {
+    parent::__construct($routeMap);
   }
 
 
@@ -20,7 +26,7 @@ class HomeController {
    * @return void
    */
   public function show() {
-    $data = $this->data;
+    $routeMap = $this->routeMap;
     require_once "views/dashboard/index.php";
   }
 
@@ -35,5 +41,5 @@ class HomeController {
   }
 }
 
-$homeObj = new HomeController();
+$homeObj = new HomeController($routeMap);
 $homeObj->run();

@@ -1,11 +1,8 @@
 <?php
 
-namespace Liqsyst\Controllers;
+namespace Liqsyst\controllers;
 
-require_once('controllers/BaseController.php');
-use Liqsyst\Controllers\BaseController as Base;
-
-class NotFoundController extends Base {
+class FieldsController {
 
   // プロパティ
   public $routeMap = '';
@@ -16,7 +13,7 @@ class NotFoundController extends Base {
    *
    */
   function __construct($routeMap) {
-    parent::__construct($routeMap);
+    $this->routeMap = $routeMap;
   }
 
 
@@ -25,9 +22,9 @@ class NotFoundController extends Base {
    *
    * @return void
    */
-  public function show() {
+  public function showCreate() {
     $routeMap = $this->routeMap;
-    require_once "views/404/index.php";
+    require_once "views/field/create.php";
   }
 
     
@@ -37,9 +34,9 @@ class NotFoundController extends Base {
    * @return void
    */
   public function run() {
-    $this->show();
+    $this->showCreate();
   }
 }
 
-$notFoundObj = new NotFoundController($routeMap);
-$notFoundObj->run();
+$homeObj = new FieldsController($routeMap);
+$homeObj->run();

@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0">
-<title>LiquidCMS</title>
-<meta name="description" content="">
+<?php require_once(INCLUDE_BLOCK_PATH . 'meta.php'); ?>
 <link rel="shortcut icon" href="https://cms.liqsyst.com/assets/img/common/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/assets/css/reset.css">
 <link rel="stylesheet" href="/assets/css/setting.css">

@@ -1,16 +1,19 @@
 <?php
 
-class ContentsController {
+namespace Liqsyst\Controllers;
+
+class BaseController {
 
   // プロパティ
-  public $data = '';
+  public $routeMap = '';
 
 
   /**
    * __construct
    *
    */
-  function __construct() {
+  function __construct($routeMap) {
+    $this->routeMap = $routeMap;
   }
 
 
@@ -20,7 +23,7 @@ class ContentsController {
    * @return void
    */
   public function show() {
-    $data = $this->data;
+    $routeMap = $this->routeMap;
     require_once "views/dashboard/index.php";
   }
 
@@ -35,5 +38,5 @@ class ContentsController {
   }
 }
 
-$homeObj = new ContentsController();
-$homeObj->run();
+// $baseObj = new BaseController($routeMap);
+// $baseObj->run();

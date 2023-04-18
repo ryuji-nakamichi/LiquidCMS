@@ -2,6 +2,8 @@
 
 namespace Liqsyst\Lib\Route;
 
+require_once('lib/Utility.php');
+use Liqsyst\Lib\Utility\UtilityClass as Utility;
 require_once('lib/Controller.php');
 use Liqsyst\Lib\Controller\ControllerClass as Controller;
 
@@ -41,11 +43,11 @@ class RouteClass {
   /**
    * 定義済みのルーティングマップ配列をプロパティにセットする
    *
-   * @param array $routMap
+   * @param array $routeMap
    * @return array 定義済みのルーティングマップ配列
    */
-  private function setRouteMap(array $routMap): array {
-    $this->routeMap = $routMap;
+  private function setRouteMap(array $routeMap): array {
+    $this->routeMap = $routeMap;
     return $this->routeMap;
   }
 
@@ -88,7 +90,7 @@ class RouteClass {
    * @param array $mapWithParameters
    * @return array $mapSearchResult
    */
-  private function uriInRoutMapParameter(array $mapWithParameters): array {
+  private function uriInRouteMapParameter(array $mapWithParameters): array {
     $_parameterStatStr = $this->parameterStatStr;
     $mapSearchResult = [];
     
@@ -121,11 +123,27 @@ class RouteClass {
    * @return void
    */
   private function contorollerExe(array $routeMap): void {
-    $mapSearchResult = $this->uriInRoutMapParameter($routeMap);
+    $mapSearchResult = $this->uriInRouteMapParameter($routeMap);
     // print_r($mapSearchResult);
     // exit;
     $ControllerObj = new Controller();
     $ControllerObj->run($mapSearchResult);
+    $this->getPageInfoarray($mapSearchResult);
+  }
+  
+  
+  /**
+   * 各Viewで使用するmetaや見出し文字列を分岐させるために現在のルーティング情報配列を取得
+   * Views側でも使用可能にする
+   *
+   * @param  array $routeMap
+   * @return array
+   */
+  private function getPageInfoarray(array $routeMap): array {
+    $utilityObj = new Utility();
+    $utilityObj->setRouteCurrentMap($routeMap);
+    $routeMap = $utilityObj->getRouteCurrentMap();
+    return $routeMap;
   }
 
 
