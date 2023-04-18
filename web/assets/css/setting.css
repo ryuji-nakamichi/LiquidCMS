@@ -11,6 +11,11 @@
   --base-font-color: #404040;
   --base-bg-color: #fff;
 
+  --main-01-bg-color: #007E66;
+  --main-02-bg-color: #009e7f;
+
+  --nav-line-color: #6C6C6C;
+
   --transition-speed: .3s;
   --transition-anima-speed: 1.5s;
   --opacity-degree: .7;
