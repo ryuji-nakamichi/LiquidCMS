@@ -2,7 +2,7 @@
 
 namespace Liqsyst\Controllers;
 
-class ContentssController {
+class ContentsListController {
 
   // プロパティ
   public $routeMap = '';
@@ -24,7 +24,7 @@ class ContentssController {
    */
   public function showCreate() {
     $routeMap = $this->routeMap;
-    require_once "views/contents/create.php";
+    require_once "views/contents/index.php";
   }
 
     
@@ -38,5 +38,5 @@ class ContentssController {
   }
 }
 
-$contentsObj = new ContentssController($routeMap);
+$contentsObj = new ContentsListController($routeMap);
 $contentsObj->run();

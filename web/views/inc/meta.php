@@ -14,7 +14,15 @@ switch ($routeName) {
     ];
     break;
 
-  case 'contents':
+  case 'contents_list':
+    $metaArr = [
+      'title' => 'コンテンツ一覧｜LiquidCMS',
+      'description' => 'LiquidCMSのコンテンツ一覧です。編集したいコンテンツを選択してください。',
+      'keywords' => 'LiquidCMS,ヘッドレスCMS,安い,使いやすい,マルチプラットフォーム対応',
+    ];
+    break;
+
+  case 'contents_create':
     $metaArr = [
       'title' => 'コンテンツ追加｜LiquidCMS',
       'description' => 'LiquidCMSのコンテンツ追加です。新らしいコンテンツを追加してからフィールド追加をしてください。',

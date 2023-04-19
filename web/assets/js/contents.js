@@ -1,7 +1,10 @@
 'use strict';
 
 window.addEventListener('load', () => {
-  fieldCreate();
+  initial();
+  moveContentsStep();
+  getInputVal();
+  contentsCreate();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -9,17 +12,69 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 
-function fieldCreate() {
-  $('#g-form-submit').on('click', function() {
-    fieldCreateAjax();
+/**
+ * 初期設定として、入力画面を表示する
+ * @return {void}
+ */
+function initial () {
+  $('.c-switch-contents.--step-1').addClass('--current')
+}
+
+/**
+ * 入力された値を確認画面に出力する
+ * @return {void}
+ */
+function getInputVal() {
+  $('#g-form-confirm').on('click', function () {
+    // ループ処理で入力済みの値を取得するjs-post-field
+    $('.js-post-field').each(function (index, value) {
+      $('#result-' + $(value).attr('id')).text($(value).val());
+    });
   });
 }
 
 
-function fieldCreateAjax() {
-  const postsObj = {};
+/**
+ * ステップ1からステップ4まで遷移させる
+ * @return {void}
+ */
+function moveContentsStep() {
+  let modeStr;
+  let modeInt;
+  let btnMode = '';
+  $('.c-submit-btn').on('click', function () {
+    modeStr = $(this).closest('.c-switch-contents.--current').attr('data-step');
+    modeInt = parseInt(modeStr);
+    btnMode = $(this).attr('data-mode');
+
+    if (btnMode === 'next') {
+      $('.c-switch-contents.--step-' + (modeInt)).removeClass('--current');
+      $('.c-switch-contents.--step-' + (modeInt + 1)).addClass('--current');
+    } else if (btnMode === 'prev') {
+      $('.c-switch-contents.--step-' + (modeInt)).removeClass('--current');
+      $('.c-switch-contents.--step-' + (modeInt - 1)).addClass('--current');
+    }
+    
+  });
+}
+
+
+/**
+ * Ajax送信の実行
+ */
+function contentsCreate() {
+  $('#g-form-submit').on('click', function() {
+    contentsCreateAjax();
+  });
+}
+
+
+/**
+ * 入力された値をAjax送信処理
+ */
+function contentsCreateAjax() {
   $.ajax({
-    url: "../controllers/field.php", // 通信先のURL
+    url: "/apis/contents.php", // 通信先のURL
     type: "POST",		// 使用するHTTPメソッド
     data: $("#g-contact-form").serialize(), // 送信するデータ
     dataType: "json", // 応答のデータの種類 
@@ -31,14 +86,15 @@ function fieldCreateAjax() {
     //  引数のtextStatusは、通信結果のステータス
     //  引数のjqXHRは、XMLHttpRequestオブジェクト
   }).done(function (res, textStatus, jqXHR) {
-    $("#status-erea-code").text(jqXHR.status); //例：200
-    $("#result-res-txt").text(jqXHR.status); //例：Response
-    $("#status-erea-status").text(textStatus); //例：success
+    $("#status-code").text(jqXHR.status); //例：200
+    $("#result-response").text(jqXHR.status); //例：Response
+    $("#status-mode").text(textStatus); //例：success
+    $("#result-err").text('エラーなし'); //例：NOT FOUND
 
 
     // 3. キーを指定して値を表示 
-    $("#result-erea-field__name").text(res["form"]["field_name"]);
-    $("#result-erea-field__id").text(res["form"]["field_id"]);
+    $("#result-name").text(res["form"]["name"]);
+    $("#result-group").text(res["form"]["category"]);
 
 
     // 4. JavaScriptオブジェクトをJSONに変換
@@ -53,16 +109,16 @@ function fieldCreateAjax() {
 
     // 6. failは、通信に失敗した時に実行される
   }).fail(function (jqXHR, textStatus, errorThrown) {
-    $("#status-erea-code").text(jqXHR.status); //例：404
-    $("#result-res-txt").text(jqXHR.status); //例：Response
-    $("#status-erea-status").text(textStatus); //例：error
-    $("#result-err-txt").text(errorThrown); //例：NOT FOUND
+    $("#status-code").text(jqXHR.status); //例：404
+    $("#result-response").text(jqXHR.status); //例：Response
+    $("#status-mode").text(textStatus); //例：error
+    $("#result-err").text(errorThrown); //例：NOT FOUND
 
     console.log('失敗');
 
     // 7. alwaysは、成功/失敗に関わらず実行される
   }).always(function () {
     console.log('完了');
-    $("#result-cpl-txt").text("complete");
+    $("#result-cpl").text("complete");
   });
 }

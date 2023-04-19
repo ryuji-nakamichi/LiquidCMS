@@ -13,7 +13,14 @@ switch ($routeName) {
     ];
     break;
 
-  case 'contents':
+  case 'contents_list':
+    $pageInfoArr = [
+      'title' => 'コンテンツ一覧',
+      'description' => 'コンテンツ一覧画面です。',
+    ];
+    break;
+
+  case 'contents_create':
     $pageInfoArr = [
       'title' => 'コンテンツ新規登録',
       'description' => 'コンテンツ新規登録画面です。',

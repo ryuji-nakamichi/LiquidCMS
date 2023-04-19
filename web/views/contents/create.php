@@ -24,75 +24,113 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
           <div class="c-form-blk">
             <div class="g-contact-contents">
               <div class="g-contact-frame">
-                <div id="status-erea" class="status-erea g-contact-lead">
-                  <p id="status-erea-code" class="status-erea-txt g-contact-lead-txt"></p>
-                  <p id="status-erea-status" class="status-erea-txt g-contact-lead-txt"></p>
+                <div class="c-switch-contents --step-3">
+                  <div class="c-annouceList-wrapper">
+                    <div class="c-lead">
+                      <p class="c-lead-txt">以下が入力頂いた内容になります。</p>
+                    </div>
+                    <div class="c-annouceList-container">
+                      <ul class="c-annouceList">
+                        <li class="list__item">
+                          <p class="item__des">
+                            <span class="item__des-inner">コンテンツ名 : </span>
+                            <span id="result-name" class="item__des-inner"></span>
+                          </p>
+                        </li>
+                        <li class="list__item">
+                          <p class="item__des">
+                            <span class="item__des-inner">グループ設定 : </span>
+                            <span id="result-category" class="item__des-inner"></span>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
-                <div id="result-erea" class="result-erea g-contact-lead">
-                  <p id="result-erea-field__name" class="result-erea-txt g-contact-lead-txt"></p>
-                  <p id="result-erea-field__id" class="result-erea-txt g-contact-lead-txt"></p>
-                </div>
-                <div id="result-res" class="result-res g-contact-lead">
-                  <p id="result-res-txt" class="result-res-txt g-contact-lead-txt"></p>
-                </div>
-                <div id="result-host" class="result-host g-contact-lead">
-                  <p id="result-host-txt" class="result-host-txt g-contact-lead-txt"></p>
-                </div>
-                <div id="result-err" class="result-err g-contact-lead">
-                  <p id="result-err-txt" class="result-err-txt g-contact-lead-txt"></p>
-                </div>
-                <div id="result-cpl" class="result-cpl g-contact-lead">
-                  <p id="result-cpl-txt" class="result-cpl-txt g-contact-lead-txt"></p>
+                <div class="c-switch-contents --step-3">
+                  <div class="c-annouceList-wrapper">
+                    <div class="c-lead">
+                      <p class="c-lead-txt">以下が処理状況の内容になります。</p>
+                    </div>
+                    <div class="c-annouceList-container">
+                      <ul class="c-annouceList">
+                        <li class="list__item">
+                          <p class="item__des">
+                            <span class="item__des-inner">ステータス : </span>
+                            <span id="status-mode" class="item__des-inner"></span>
+                          </p>
+                        </li>
+                        <li class="list__item">
+                          <p class="item__des">
+                            <span class="item__des-inner">ステータスコード : </span>
+                            <span id="status-code" class="item__des-inner"></span>
+                          </p>
+                        </li>
+                        <li class="list__item">
+                          <p class="item__des">
+                            <span class="item__des-inner">Response : </span>
+                            <span id="result-response" class="item__des-inner"></span>
+                          </p>
+                        </li>
+                        <li class="list__item">
+                          <p class="item__des">
+                            <span class="item__des-inner">errorThrown : </span>
+                            <span id="result-err" class="item__des-inner"></span>
+                          </p>
+                        </li>
+                        <li class="list__item">
+                          <p class="item__des">
+                            <span class="item__des-inner">処理状況 : </span>
+                            <span id="result-cpl" class="item__des-inner"></span>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
                 </div>
               </div>
-              <div class="g-contact-frame --basic">
-                <div class="g-contact-lead --basic">
-                  <p class="g-contact-lead-txt">フィールドの基本情報を入力してください。</p>
+              <div class="g-contact-frame">
+                <div class="c-switch-contents --step-1" data-step="1">
+                  <div class="g-contact-lead --step-1">
+                    <p class="g-contact-lead-txt">コンテンツ名を入力してください。</p>
+                  </div>
                 </div>
-                <div class="g-contact-lead --detail">
-                  <p class="g-contact-lead-txt">フィールドの詳細情報を入力してください。</p>
+                <div class="c-switch-contents --step-2" data-step="2">
+                  <div class="g-contact-lead --step-2">
+                    <p class="g-contact-lead-txt">コンテンツ名の詳細情報を入力してください。</p>
+                  </div>
                 </div>
-                <div class="g-contact-lead --thanks">
-                  <p class="g-contact-lead-txt">登録完了致しました。</p>
+                <div class="c-switch-contents --step-3" data-step="3">
+                  <div class="g-contact-lead --step-3">
+                    <p class="g-contact-lead-txt">登録完了致しました。</p>
+                  </div>
                 </div>
             
+                
                 <div class="g-contact-form-container">
                   <form id="g-contact-form" class="g-contact-form" method="post">
                     <div class="g-contact-form-contents">
                       <!-- ステップ1 -->
-                      <div class="g-contact-form-contents__switch">
-                        <div class="g-contact-form-blk --field_name">
+                      <div class="c-switch-contents --step-1" data-step="1">
+                        <div class="g-contact-form-blk --name">
                           <div class="form-blk-lbl">
-                            <label class="form-blk-lbl-name" for="field_name">フィールド名</label>
+                            <label class="form-blk-lbl-name" for="name">コンテンツ名</label>
                             <span class="form-blk-lbl-status --required">必須</span>
                           </div>
-                          <div class="form-blk-input --basic">
-                            <input id="field_name" class="field_name form-blk-input-field js-post-field" type="text" name="field_name" value="" data-type="text">
+                          <div class="form-blk-input">
+                            <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" value="" data-type="text">
                             <p class="form-blk-input-err"></p>
                           </div>
-                          <div class="form-blk-input">
-                            <p class="form-blk-confirm">ここにタイトルが入ります。</p>
+                          <div class="form-blk-input --err">
+                            <p class="form-blk-confirm">ここにコンテンツ名が入ります。</p>
                           </div>
                         </div>
-                        <div class="g-contact-form-blk --field_id">
-                          <div class="form-blk-lbl">
-                            <label class="form-blk-lbl-name" for="field_id">フィールドID</label>
-                            <span class="form-blk-lbl-status --required">必須</span>
-                          </div>
-                          <div class="form-blk-input --basic">
-                            <input id="field_id" class="field_id form-blk-input-field js-post-field" type="text" name="field_id" value="" data-type="text">
-                            <p class="form-blk-input-err"></p>
-                          </div>
-                          <div class="form-blk-input">
-                            <p class="form-blk-confirm">ここにフィールドIDが入ります。</p>
-                          </div>
-                        </div>
-                        <div class="g-contact-form-blk --submit-area --basic">
+                        <div class="g-contact-form-blk --submit-area">
                           <div class="form-blk-input">
                             <div class="form-blk-input">
                               <div class="c-submit-btn-outer --col-1">
                                 <div class="c-submit-btn-container">
-                                  <button id="g-form-input" class="c-submit-btn" type="button">
+                                  <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next">
                                     <span class="c-submit-btn__lbl">次へ</span>
                                   </button>
                                 </div>
@@ -102,18 +140,55 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                         </div>
                       </div>
                       <!-- ステップ2 -->
-                      <div class="g-contact-form-contents__switch">
-                        <div class="g-contact-form-blk --submit-area --detail">
+                      <div class="c-switch-contents --step-2" data-step="2">
+                        <div class="g-contact-form-blk --category">
+                          <div class="form-blk-lbl">
+                            <label class="form-blk-lbl-name" for="category">グループ設定</label>
+                            <span class="form-blk-lbl-status --required">必須</span>
+                          </div>
+                          <div class="form-blk-input">
+                            <select id="category" name="category" class="category form-blk-input-field js-post-field" data-type="text">
+                              <option value="">なし</option>
+                              <option value="大カテゴリー">大カテゴリー</option>
+                            </select>
+                            <p class="form-blk-input-err"></p>
+                          </div>
+                          <div class="form-blk-input --err">
+                            <p class="form-blk-confirm">ここにコンテンツ名が入ります。</p>
+                          </div>
+                        </div>
+                        <div class="g-contact-form-blk --submit-area">
                           <div class="form-blk-input">
                             <div class="form-blk-input">
                               <div class="c-submit-btn-outer">
                                 <div class="c-submit-btn-container --prev">
-                                  <button id="g-form-back" class="c-submit-btn" type="button">
+                                  <button class="c-submit-btn" type="button" data-mode="prev">
                                     <span class="c-submit-btn__lbl">戻る</span>
                                   </button>
                                 </div>
                                 <div class="c-submit-btn-container">
-                                  <button id="g-form-submit" class="c-submit-btn" type="button">
+                                  <button id="g-form-confirm" class="c-submit-btn" type="button" data-mode="next">
+                                    <span class="c-submit-btn__lbl">確認する</span>
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- ステップ3 -->
+                      <div class="c-switch-contents --step-3" data-step="3">
+                        <div class="g-contact-form-blk --submit-area">
+                          <div class="form-blk-input">
+                            <div class="form-blk-input">
+                              <div class="c-submit-btn-outer">
+                                <div class="c-submit-btn-container --prev">
+                                  <button class="c-submit-btn" type="button" data-mode="prev">
+                                    <span class="c-submit-btn__lbl">戻る</span>
+                                  </button>
+                                </div>
+                                <div class="c-submit-btn-container">
+                                  <button id="g-form-submit" class="c-submit-btn" type="button" data-mode="submit">
                                     <span class="c-submit-btn__lbl">作成する</span>
                                   </button>
                                 </div>
