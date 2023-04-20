@@ -28,7 +28,8 @@ function getInputVal() {
   $('#g-form-confirm').on('click', function () {
     // ループ処理で入力済みの値を取得するjs-post-field
     $('.js-post-field').each(function (index, value) {
-      $('#result-' + $(value).attr('id')).text($(value).val());
+      let data = ($(value).val()) ? $(value).val() : 'なし';
+      $('#result-' + $(value).attr('id')).text(data);
     });
   });
 }
@@ -107,6 +108,10 @@ function contentsCreateAjax() {
 
     console.log('成功');
 
+    $('.c-switch-contents').removeClass('--current');
+    $('.c-switch-contents:last-child').addClass('--current');
+    $('.c-switch-contents:last-child .c-annouceList-wrapper.--suc').addClass('--current');
+
     // 6. failは、通信に失敗した時に実行される
   }).fail(function (jqXHR, textStatus, errorThrown) {
     $("#status-code").text(jqXHR.status); //例：404
@@ -115,6 +120,10 @@ function contentsCreateAjax() {
     $("#result-err").text(errorThrown); //例：NOT FOUND
 
     console.log('失敗');
+
+    $('.c-switch-contents').removeClass('--current');
+    $('.c-switch-contents:last-child').addClass('--current');
+    $('.c-switch-contents:last-child .c-annouceList-wrapper.--err').addClass('--current');
 
     // 7. alwaysは、成功/失敗に関わらず実行される
   }).always(function () {

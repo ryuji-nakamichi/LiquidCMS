@@ -135,18 +135,17 @@
 .g-contact-frame .--step-1,
 .g-contact-frame .--step-2,
 .g-contact-frame .--step-3,
+.g-contact-frame .--step-4,
 .g-contact-frame .--err
 {
 	display: none;
 }
 
-.g-contact-frame .--step-1.--current {
-	display: block;
-}
-.g-contact-frame .--step-2.--current {
-	display: block;
-}
-.g-contact-frame .--step-3.--current {
+.g-contact-frame .--step-1.--current,
+.g-contact-frame .--step-2.--current,
+.g-contact-frame .--step-3.--current,
+.g-contact-frame .--step-4.--current
+{
 	display: block;
 }
 @media all and (min-width: 768px) {
@@ -161,6 +160,15 @@
 	}
 }
 
+
+/* c-annouceList-wrapper
+**************************************************************/
+.g-contact-contents .c-switch-contents:last-child .c-annouceList-wrapper {
+  display: none;
+}
+.g-contact-contents .c-switch-contents:last-child .c-annouceList-wrapper.--current {
+  display: block;
+}
 
 /* g-contact-lead
 **************************************************************/
@@ -442,6 +450,9 @@
 	width: 100%;
   padding: 1rem;
   background-color: #F2F3F7;
+}
+.--des .form-blk-confirm {
+  background-color: transparent;
 }
 @media all and (min-width: 768px) {
 	.form-blk-confirm {

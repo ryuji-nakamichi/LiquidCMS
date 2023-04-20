@@ -27,7 +27,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                 <div class="c-switch-contents --step-3">
                   <div class="c-annouceList-wrapper">
                     <div class="c-lead">
-                      <p class="c-lead-txt">以下が入力頂いた内容になります。</p>
+                      <p class="c-lead-txt">以下が入力頂いた内容になります。<br>この内容で作成してもよろしいですか？</p>
                     </div>
                     <div class="c-annouceList-container">
                       <ul class="c-annouceList">
@@ -47,10 +47,10 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                     </div>
                   </div>
                 </div>
-                <div class="c-switch-contents --step-3">
-                  <div class="c-annouceList-wrapper">
+                <div class="c-switch-contents --step-4">
+                  <div class="c-annouceList-wrapper --err">
                     <div class="c-lead">
-                      <p class="c-lead-txt">以下が処理状況の内容になります。</p>
+                      <p class="c-lead-txt">処理が失敗しました。<br>以下が処理結果の内容になります。<br>お手数ですが、最初から操作をお願い致します。</p>
                     </div>
                     <div class="c-annouceList-container">
                       <ul class="c-annouceList">
@@ -87,6 +87,11 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                       </ul>
                     </div>
                   </div>
+                  <div class="c-annouceList-wrapper --suc">
+                    <div class="c-lead">
+                      <p class="c-lead-txt">完了致しました。<br>コンテンツ管理よりデータの登録をお願い致します。</p>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div class="g-contact-frame">
@@ -117,6 +122,9 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                             <label class="form-blk-lbl-name" for="name">コンテンツ名</label>
                             <span class="form-blk-lbl-status --required">必須</span>
                           </div>
+                          <div class="form-blk-input --des">
+                            <p class="form-blk-confirm">こちらに入力された名称が「コンテンツ管理」に登録されます。</p>
+                          </div>
                           <div class="form-blk-input">
                             <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" value="" data-type="text">
                             <p class="form-blk-input-err"></p>
@@ -145,6 +153,9 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                           <div class="form-blk-lbl">
                             <label class="form-blk-lbl-name" for="category">グループ設定</label>
                             <span class="form-blk-lbl-status --required">必須</span>
+                          </div>
+                          <div class="form-blk-input --des">
+                            <p class="form-blk-confirm">どのコンテンツ管理にグルーピングさせるか選択します。</p>
                           </div>
                           <div class="form-blk-input">
                             <select id="category" name="category" class="category form-blk-input-field js-post-field" data-type="text">
@@ -191,6 +202,22 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                                   <button id="g-form-submit" class="c-submit-btn" type="button" data-mode="submit">
                                     <span class="c-submit-btn__lbl">作成する</span>
                                   </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- ステップ4 -->
+                      <div class="c-switch-contents --step-4" data-step="4">
+                        <div class="g-contact-form-blk --submit-area">
+                          <div class="form-blk-input">
+                            <div class="form-blk-input">
+                              <div class="c-submit-btn-outer">
+                                <div class="c-submit-btn-container --prev">
+                                  <a class="c-submit-btn" href="/">
+                                    <span class="c-submit-btn__lbl">戻る</span>
+                                  </a>
                                 </div>
                               </div>
                             </div>
