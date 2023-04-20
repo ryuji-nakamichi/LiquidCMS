@@ -165,7 +165,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                             <p class="form-blk-input-err"></p>
                           </div>
                           <div class="form-blk-input --err">
-                            <p class="form-blk-confirm">ここにコンテンツ名が入ります。</p>
+                            <p class="form-blk-confirm">ここにグループ設定が入ります。</p>
                           </div>
                         </div>
                         <div class="g-contact-form-blk --submit-area">
