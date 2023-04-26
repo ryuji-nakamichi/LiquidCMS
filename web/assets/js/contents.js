@@ -1,16 +1,69 @@
 'use strict';
 
 window.addEventListener('load', () => {
-  initial();
-  moveContentsStep();
-  getInputVal();
-  contentsCreate();
+  // initial();
+  // moveContentsStep();
+  // getInputVal();
+  // contentsCreate();
+  stepVue();
 });
 
 document.addEventListener('DOMContentLoaded', () => {
   
 });
 
+/**
+ * フォームをVueで管理する
+ * @return {object} data
+ */
+function stepVue() {
+  const { createApp } = Vue;
+  createApp({
+    data() {
+      return {
+        currentStep: 1,
+        formData: {
+          'posts' :
+            [
+              { name: '' },
+              { category: '' }
+            ]
+        },
+        errData: {
+          'posts':
+            [
+              { name: false },
+              { category: false }
+            ]
+        }
+      }
+    },
+    created: function () {
+      console.log('created');
+      console.log(this.errData.posts);
+    },
+    methods: {
+      changeNextStep() {
+        this.currentStep++;
+      },
+      changeBackStep() {
+        this.currentStep--;
+      },
+      getContentsName() {
+        this.formData.posts.name = $('#name').val();
+      },
+      getCategory() {
+        this.formData.posts.category = $('#category').val();
+      },
+      checkContentsName(e) {
+        this.errData.posts.name = (this.formData.posts.name) ? true : false;
+      },
+      checkCategory(e) {
+        this.errData.posts.category = (this.formData.posts.category) ? true : false;
+      },
+    }
+  }).mount('#contents-app');
+}
 
 /**
  * 初期設定として、入力画面を表示する
