@@ -24,6 +24,30 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
           <div class="c-form-blk">
             <div class="g-contact-contents">
               <div id="contents-app">
+                <div class="c-step-list-container">
+                  <ol class="c-step-list">
+                    <li class="list__item" :class="[ currentStep === 1 ? '--current' : '' ]">
+                      <div class="item__contents">
+                        <p class="item__num">1</p>
+                      </div>
+                    </li>
+                    <li class="list__item" :class="[ currentStep === 2 ? '--current' : '' ]">
+                      <div class="item__contents">
+                        <p class="item__num">2</p>
+                      </div>
+                    </li>
+                    <li class="list__item" :class="[ currentStep === 3 ? '--current' : '' ]">
+                      <div class="item__contents">
+                        <p class="item__num">3</p>
+                      </div>
+                    </li>
+                    <li class="list__item" :class="[ currentStep === 4 ? '--current' : '' ]">
+                      <div class="item__contents">
+                        <p class="item__num">4</p>
+                      </div>
+                    </li>
+                  </ol>
+                </div>
                 <div class="g-contact-frame">
                   <div class="c-switch-contents --step-3" v-if="currentStep === 3">
                     <div class="c-annouceList-wrapper">

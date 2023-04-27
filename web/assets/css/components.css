@@ -613,3 +613,62 @@
 .c-annouceList .item__mark + .item__des-inner {
   padding-left: 2rem;
 }
+
+
+/**************************************************************
+* c-step-list-container
+**************************************************************/
+.c-step-list-container {
+  margin: 4rem 0 0;
+}
+
+
+/* c-step-list
+**************************************************************/
+.c-step-list {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+/* list__item
+**************************************************************/
+.c-step-list .list__item {
+  width: 6rem;
+  margin-right: 2rem;
+  background-color: var(--base-font-color);
+}
+.c-step-list .list__item.--current {
+  background-color: var(--main-01-bg-color);
+}
+
+
+/* item__contents
+**************************************************************/
+.c-step-list .item__contents {
+  width: 6rem;
+}
+
+/* item__num
+**************************************************************/
+.c-step-list .item__num {
+  padding: 2rem 0;
+  color: #fff;
+  font-size: 1.6rem;
+  text-align: center;
+}
+
+
+/**************************************************************
+* c-switch-contents
+**************************************************************/
+@media all and (min-width: 768px) {
+  .c-switch-contents {
+    padding: 4rem 0;
+  }
+}
+@media all and (max-width: 767px) {
+  .c-switch-contents {
+    padding: 4rem 2rem;
+  }
+}

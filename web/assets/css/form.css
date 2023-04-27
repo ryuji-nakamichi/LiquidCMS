@@ -151,12 +151,10 @@
 @media all and (min-width: 768px) {
 	.g-contact-frame {
     margin: 0 auto;
-    padding: 4rem 0;
 	}
 }
 @media all and (max-width: 767px) {
   .g-contact-frame {
-		padding: 4rem 2rem;
 	}
 }
 
@@ -221,6 +219,9 @@
 **************************************************************/
 .g-contact-frame.--step-2 .g-contact-form-blk.--privacy-policy {
 	margin-top: 0;
+}
+.g-contact-form-blk:nth-child(1) {
+  margin-top: 0;
 }
 @media all and (min-width: 768px) {
 	.g-contact-form-blk {
