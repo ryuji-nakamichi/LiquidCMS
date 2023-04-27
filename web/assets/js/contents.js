@@ -25,22 +25,38 @@ function stepVue() {
         formData: {
           'posts' :
             [
-              { name: '' },
-              { category: '' }
+              { val: { 'data': '' } },
+              { val: { 'data': '' } },
             ]
         },
         errData: {
           'posts':
             [
-              { name: false },
-              { category: false }
+              { val: { 'data': '' } },
+              { val: { 'data': '' } },
             ]
-        }
+        },
+        resJson: {
+          'res': [],
+          'status': '',
+        },
+        resFaildFlg: false,
+
+        // エラー内容表示用
+        errRes: {
+          'response': {
+            'data': '',
+            'status': '',
+            'headers': '',
+          },
+          'request': '',
+          'message': '',
+          'config': '',
+          'process': '',
+        },
       }
     },
     created: function () {
-      console.log('created');
-      console.log(this.errData.posts);
     },
     methods: {
       changeNextStep() {
@@ -50,16 +66,56 @@ function stepVue() {
         this.currentStep--;
       },
       getContentsName() {
-        this.formData.posts.name = $('#name').val();
+        this.formData.posts[0].val.data = $('#name').val();
       },
       getCategory() {
-        this.formData.posts.category = $('#category').val();
+        this.formData.posts[1].val.data = $('#category').val();
       },
       checkContentsName(e) {
-        this.errData.posts.name = (this.formData.posts.name) ? true : false;
+        this.errData.posts[0].val.data = (this.formData.posts[0].val.data) ? true : false;
       },
       checkCategory(e) {
-        this.errData.posts.category = (this.formData.posts.category) ? true : false;
+        this.errData.posts[1].val.data = (this.formData.posts[1].val.data) ? true : false;
+      },
+      jsonShow() {
+        let params = new URLSearchParams();
+        params.append('name', this.formData.posts[0].val.data);
+        params.append('category', this.formData.posts[1].val.data);
+        axios.post('/ajax/contents/', params, {
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+          .then((res) => {
+            this.resJson.res = res.data.res.posts; // POSTデータ
+            this.resJson.status = res.data.res.status; // statusコード
+            this.resFaildFlg = (this.resJson.status === 'ng') ? true: false;
+          })
+          .catch(error => {
+            this.resFaildFlg = true;
+            if (error.response) {
+              // リクエストが行われ、サーバーは 2xx の範囲から外れるステータスコードで応答しました
+              this.errRes.response.data = error.response.data;
+              this.errRes.response.status = error.response.status;
+              this.errRes.response.headers = error.response.headers;
+              // console.log(error.response.data);
+              // console.log(error.response.status);
+              // console.log(error.response.headers);
+            } else if (error.request) {
+              // リクエストは行われましたが、応答がありませんでした
+              // `error.request` は、ブラウザでは XMLHttpRequest のインスタンスになり、
+              // Node.js では http.ClientRequest のインスタンスになります。
+              this.errRes.request = error.request;
+              // console.log(error.request);
+            } else {
+              // エラーをトリガーしたリクエストの設定中に何かが発生しました
+              this.errRes.message = error.message;
+              // console.log('Error', error.message);
+            }
+            console.log(this.errRes);
+          }).finally(() => {
+            this.errRes.process = '完了';
+          });;
       },
     }
   }).mount('#contents-app');
