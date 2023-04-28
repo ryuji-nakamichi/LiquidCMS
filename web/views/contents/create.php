@@ -157,7 +157,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <p class="form-blk-confirm">こちらに入力された名称が「コンテンツ管理」に登録されます。</p>
                             </div>
                             <div class="form-blk-input">
-                              <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getContentsName(); checkContentsName();" data-type="text">
+                              <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getContentsName(); checkContentsName();" data-preg="text">
                               <p class="form-blk-input-err"></p>
                             </div>
                             <div class="form-blk-input --err" v-if="!errData.posts[0].val.data">
@@ -189,7 +189,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <p class="form-blk-confirm">どのコンテンツ管理にグルーピングさせるか選択します。</p>
                             </div>
                             <div class="form-blk-input">
-                              <select id="category" name="category" class="category form-blk-input-field js-post-field" data-type="text" v-model="selected" @change="getCategory(); checkCategory();">
+                              <select id="category" name="category" class="category form-blk-input-field js-post-field" data-preg="integer" v-model="selected" @change="getCategory(); checkCategory();">
                                 <option value="" disabled>以下からご選択ください</option>
                                 <option value="大カテゴリー">大カテゴリー</option>
                               </select>

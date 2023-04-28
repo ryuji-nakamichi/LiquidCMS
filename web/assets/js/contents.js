@@ -89,7 +89,9 @@ function stepVue() {
           .then((res) => {
             this.resJson.res = res.data.res.posts; // POSTデータ
             this.resJson.status = res.data.res.status; // statusコード
+            this.resJson.errFlg = res.data.res.errFlg; // 正規表現のフラグ
             this.resFaildFlg = (this.resJson.status === 'ng') ? true: false;
+            console.log(this.resJson.errFlg);
           })
           .catch(error => {
             this.resFaildFlg = true;

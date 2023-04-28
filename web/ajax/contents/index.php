@@ -3,6 +3,9 @@
 header('Content-Type: application/json; charset=utf-8');
 
 $data['res'] = [];
+$posts = [];
+$errFlg = [];
+$searchPattern = '';
 if ( // Ajax通信か判定
   isset($_SERVER['HTTP_X_REQUESTED_WITH'])
   && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
@@ -10,6 +13,20 @@ if ( // Ajax通信か判定
 
   $name = ($_POST['name']) ? $_POST['name']: '';
   $category = ($_POST['category']) ? $_POST['category']: '';
+
+
+  // 正規表現にて正しい値か検査する
+  $posts = $_POST;
+  $searchPattern = '#^[^a-z_]+$#'; // 半角英字以外をエラーとして判定する
+  foreach ((array)$posts AS $key => $val) {
+    if (preg_match($searchPattern, $val)) {
+      $errFlg[$key] = true;
+      // break;
+    } else {
+      $errFlg[$key] = false;
+    }
+  }
+  $data['res']['errFlg'] = $errFlg;
 
   $data['res']['posts'] = array(
     'name' => $name,
