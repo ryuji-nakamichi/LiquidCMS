@@ -24,30 +24,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
           <div class="c-form-blk">
             <div class="g-contact-contents">
               <div id="contents-app">
-                <div class="c-step-list-container">
-                  <ol class="c-step-list">
-                    <li class="list__item" :class="[ currentStep === 1 ? '--current' : '' ]">
-                      <div class="item__contents">
-                        <p class="item__num">1</p>
-                      </div>
-                    </li>
-                    <li class="list__item" :class="[ currentStep === 2 ? '--current' : '' ]">
-                      <div class="item__contents">
-                        <p class="item__num">2</p>
-                      </div>
-                    </li>
-                    <li class="list__item" :class="[ currentStep === 3 ? '--current' : '' ]">
-                      <div class="item__contents">
-                        <p class="item__num">3</p>
-                      </div>
-                    </li>
-                    <li class="list__item" :class="[ currentStep === 4 ? '--current' : '' ]">
-                      <div class="item__contents">
-                        <p class="item__num">4</p>
-                      </div>
-                    </li>
-                  </ol>
-                </div>
+                <?php require_once(INCLUDE_BLOCK_PATH . 'step.php'); ?>
                 <div class="g-contact-frame">
                   <div class="c-switch-contents --step-3" v-if="currentStep === 3">
                     <div class="c-annouceList-wrapper">
@@ -60,14 +37,14 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                             <p class="item__des">
                               <span class="item__des-inner">コンテンツ名 : </span>
                               <span id="result-name" class="item__des-inner">
-                                {{ formData.posts[0].val.data !== '' ? formData.posts[0].val.data : '入力なし' }}
+                                {{ formData.posts[0].val.data !== '' ? formData.posts[0].val.lbl : '入力なし' }}
                               </span>
                             </p>
                           </li>
                           <li class="list__item">
                             <p class="item__des">
                               <span class="item__des-inner">グループ設定 : </span>
-                              <span id="result-category" class="item__des-inner">{{ formData.posts[1].val.data !== '' ? formData.posts[1].val.data : '選択なし' }}</span>
+                              <span id="result-category" class="item__des-inner">{{ formData.posts[1].val.data !== '' ? formData.posts[1].val.lbl : '選択なし' }}</span>
                             </p>
                           </li>
                         </ul>
@@ -157,7 +134,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <p class="form-blk-confirm">こちらに入力された名称が「コンテンツ管理」に登録されます。</p>
                             </div>
                             <div class="form-blk-input">
-                              <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getContentsName(); checkContentsName();" data-preg="text">
+                              <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getContentsPosts('name'); checkContentsName(); " data-preg="text" data-num="1">
                               <p class="form-blk-input-err"></p>
                             </div>
                             <div class="form-blk-input --err" v-if="!errData.posts[0].val.data">
@@ -169,7 +146,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <div class="form-blk-input">
                                 <div class="c-submit-btn-outer --col-1">
                                   <div class="c-submit-btn-container">
-                                    <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep()" v-if="errData.posts[0].val.data">
+                                    <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep();" v-if="errData.posts[0].val.data">
                                       <span class="c-submit-btn__lbl">次へ</span>
                                     </button>
                                   </div>
@@ -189,9 +166,10 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <p class="form-blk-confirm">どのコンテンツ管理にグルーピングさせるか選択します。</p>
                             </div>
                             <div class="form-blk-input">
-                              <select id="category" name="category" class="category form-blk-input-field js-post-field" data-preg="integer" v-model="selected" @change="getCategory(); checkCategory();">
+                              <select id="category" name="category" class="category form-blk-input-field js-post-field" data-preg="integer" data-num="2" v-model="selected" @change="getContentsPosts('category'); checkCategory();">
                                 <option value="" disabled>以下からご選択ください</option>
-                                <option value="大カテゴリー">大カテゴリー</option>
+                                <option value="0">所属させない</option>
+                                <option value="1">大カテゴリー</option>
                               </select>
                               <p class="form-blk-input-err"></p>
                             </div>
@@ -209,7 +187,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                                     </button>
                                   </div>
                                   <div class="c-submit-btn-container">
-                                    <button id="g-form-confirm" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep()" v-if="errData.posts[1].val.data">
+                                    <button id="g-form-confirm" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep();" v-if="errData.posts[1].val.data">
                                       <span class="c-submit-btn__lbl">確認する</span>
                                     </button>
                                   </div>

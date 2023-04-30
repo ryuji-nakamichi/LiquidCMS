@@ -6,6 +6,20 @@ window.addEventListener('load', () => {
   // getInputVal();
   // contentsCreate();
   stepVue();
+  // let formData3 = { posts: [] };
+  // for (let i = 0; i < 3; i++) {
+
+  //   console.log(i);
+  //   formData3.posts[i] = {
+  //     val: {
+  //       data: 'あああ',
+  //       key: 'いいい',
+  //       lbl: 'いいい',
+  //       preg: 'あああ',
+  //     }
+  //   };
+  // }
+  // console.log(formData3);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -22,12 +36,20 @@ function stepVue() {
     data() {
       return {
         currentStep: 1,
+        currentStepPostsLen: 0,
+        formPostsData: {
+          posts: []
+        },
+        // formData: {
+        //   'posts' :
+        //     [
+        //       { val: { key: '', data: '', lbl: '', preg: '' } },
+        //       { val: { key: '', data: '', lbl: '', preg: '' } },
+        //     ]
+        // },
         formData: {
-          'posts' :
-            [
-              { val: { 'data': '' } },
-              { val: { 'data': '' } },
-            ]
+          posts:
+            []
         },
         errData: {
           'posts':
@@ -57,6 +79,7 @@ function stepVue() {
       }
     },
     created: function () {
+      this.setInitData(1);
     },
     methods: {
       changeNextStep() {
@@ -65,11 +88,39 @@ function stepVue() {
       changeBackStep() {
         this.currentStep--;
       },
-      getContentsName() {
-        this.formData.posts[0].val.data = $('#name').val();
+      setInitData(max) {
+        // 初期設定
+        for (let i = 0; i < max; i++) {
+          this.formData.posts[i] = {
+            val: {
+              data: '',
+              key: '',
+              lbl: '',
+              preg: '',
+            }
+          }
+        }
       },
-      getCategory() {
-        this.formData.posts[1].val.data = $('#category').val();
+      getContentsPosts(name) {
+        let $el = $('#' + name);
+        let elVal = $el.val();
+        let elPreg = $el.data('preg');
+        let elNum = Number($el.data('num')) - 1;
+        let max = $('.js-post-field').length;
+        
+        // 対応する添字部分にオブジェクトを格納
+        for (let i = 0; i < max; i++) {
+          this.formData.posts[elNum] = {
+            val: {
+              data: elVal,
+              key: name,
+              lbl: elVal,
+              preg: elPreg,
+            }
+          }
+          break;
+        }
+        
       },
       checkContentsName(e) {
         this.errData.posts[0].val.data = (this.formData.posts[0].val.data) ? true : false;
@@ -79,19 +130,23 @@ function stepVue() {
       },
       jsonShow() {
         let params = new URLSearchParams();
+        params.append('name_preg', this.formData.posts[0].val.preg);
+        params.append('category_preg', this.formData.posts[1].val.preg);
+
         params.append('name', this.formData.posts[0].val.data);
         params.append('category', this.formData.posts[1].val.data);
+
         axios.post('/ajax/contents/', params, {
           headers: {
             'X-Requested-With': 'XMLHttpRequest'
           }
         })
           .then((res) => {
+            console.log(res);
             this.resJson.res = res.data.res.posts; // POSTデータ
             this.resJson.status = res.data.res.status; // statusコード
             this.resJson.errFlg = res.data.res.errFlg; // 正規表現のフラグ
             this.resFaildFlg = (this.resJson.status === 'ng') ? true: false;
-            console.log(this.resJson.errFlg);
           })
           .catch(error => {
             this.resFaildFlg = true;
@@ -117,7 +172,7 @@ function stepVue() {
             console.log(this.errRes);
           }).finally(() => {
             this.errRes.process = '完了';
-          });;
+          });
       },
     }
   }).mount('#contents-app');
