@@ -1,25 +1,7 @@
 'use strict';
 
 window.addEventListener('load', () => {
-  // initial();
-  // moveContentsStep();
-  // getInputVal();
-  // contentsCreate();
   stepVue();
-  // let formData3 = { posts: [] };
-  // for (let i = 0; i < 3; i++) {
-
-  //   console.log(i);
-  //   formData3.posts[i] = {
-  //     val: {
-  //       data: 'あああ',
-  //       key: 'いいい',
-  //       lbl: 'いいい',
-  //       preg: 'あああ',
-  //     }
-  //   };
-  // }
-  // console.log(formData3);
 });
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -36,10 +18,6 @@ function stepVue() {
     data() {
       return {
         currentStep: 1,
-        currentStepPostsLen: 0,
-        formPostsData: {
-          posts: []
-        },
         // formData: {
         //   'posts' :
         //     [
@@ -88,6 +66,12 @@ function stepVue() {
       changeBackStep() {
         this.currentStep--;
       },
+      /**
+       * 初期設定として配列に値を格納しておく
+       * 何かしら設定しおかないと、Vue側でエラーが発生するため
+       * @param {integer} max
+       * @returns {void}
+       */
       setInitData(max) {
         // 初期設定
         for (let i = 0; i < max; i++) {
@@ -101,26 +85,50 @@ function stepVue() {
           }
         }
       },
-      getContentsPosts(name) {
+      /**
+       * 各inputやselectに入力された値を取得する
+       * 取得した値を配列に格納する
+       * ※対応する添字部分にオブジェクトを格納するので、
+       * 該当部分にてループ処理は途中で終了する
+       * @param {string} name 
+       * @returns {void}
+       */
+      getPosts(name) {
         let $el = $('#' + name);
         let elVal = $el.val();
         let elPreg = $el.data('preg');
+        let elTxt = this.getPostsLbl(name);
         let elNum = Number($el.data('num')) - 1;
         let max = $('.js-post-field').length;
         
-        // 対応する添字部分にオブジェクトを格納
         for (let i = 0; i < max; i++) {
           this.formData.posts[elNum] = {
             val: {
               data: elVal,
               key: name,
-              lbl: elVal,
+              lbl: elTxt,
               preg: elPreg,
             }
           }
           break;
         }
-        
+      },
+      /**
+       * 引数のHTMLタグに入力された値のテキストを取得する
+       * inputならvalue属性の値、sekectならtext部分を取得する
+       * @param {string} el 
+       * @returns {string} lbl
+       */
+      getPostsLbl(el) {
+        let $el = $('#' + el);
+        let lbl;
+        let elTag = $el.data('tag');
+        if (elTag === 'text') {
+          lbl = $el.val();
+        } else if (elTag === 'select') {
+          lbl = $('#' + el + ' option:selected').text();
+        }
+        return lbl;
       },
       checkContentsName(e) {
         this.errData.posts[0].val.data = (this.formData.posts[0].val.data) ? true : false;
@@ -128,13 +136,25 @@ function stepVue() {
       checkCategory(e) {
         this.errData.posts[1].val.data = (this.formData.posts[1].val.data) ? true : false;
       },
+      /**
+       * Ajaxで送信してPHP側で処理させた後に結果を返却させる
+       * 成功したか失敗したかをSTEPの最後にて表示させる
+       * @returns {void}
+       */
       jsonShow() {
         let params = new URLSearchParams();
-        params.append('name_preg', this.formData.posts[0].val.preg);
-        params.append('category_preg', this.formData.posts[1].val.preg);
+        let max = this.formData.posts.length;
 
-        params.append('name', this.formData.posts[0].val.data);
-        params.append('category', this.formData.posts[1].val.data);
+        for (let i = 0; i < max; i++) {
+          params.append(this.formData.posts[i].val.key, this.formData.posts[i].val.data);
+          params.append(this.formData.posts[i].val.key + '_preg', this.formData.posts[i].val.preg);
+        }
+
+        // params.append('name_preg', this.formData.posts[0].val.preg);
+        // params.append('category_preg', this.formData.posts[1].val.preg);
+
+        // params.append('name', this.formData.posts[0].val.data);
+        // params.append('category', this.formData.posts[1].val.data);
 
         axios.post('/ajax/contents/', params, {
           headers: {
@@ -142,7 +162,7 @@ function stepVue() {
           }
         })
           .then((res) => {
-            console.log(res);
+            console.log(res.data);
             this.resJson.res = res.data.res.posts; // POSTデータ
             this.resJson.status = res.data.res.status; // statusコード
             this.resJson.errFlg = res.data.res.errFlg; // 正規表現のフラグ

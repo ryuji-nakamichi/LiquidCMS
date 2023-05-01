@@ -44,7 +44,9 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                           <li class="list__item">
                             <p class="item__des">
                               <span class="item__des-inner">グループ設定 : </span>
-                              <span id="result-category" class="item__des-inner">{{ formData.posts[1].val.data !== '' ? formData.posts[1].val.lbl : '選択なし' }}</span>
+                              <span id="result-category" class="item__des-inner">
+                                {{ formData.posts[1].val.data !== 0 ? formData.posts[1].val.lbl : '選択なし' }}
+                              </span>
                             </p>
                           </li>
                         </ul>
@@ -134,7 +136,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <p class="form-blk-confirm">こちらに入力された名称が「コンテンツ管理」に登録されます。</p>
                             </div>
                             <div class="form-blk-input">
-                              <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getContentsPosts('name'); checkContentsName(); " data-preg="text" data-num="1">
+                              <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getPosts('name'); checkContentsName();" data-preg="text" data-num="1" data-tag="text">
                               <p class="form-blk-input-err"></p>
                             </div>
                             <div class="form-blk-input --err" v-if="!errData.posts[0].val.data">
@@ -166,9 +168,8 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <p class="form-blk-confirm">どのコンテンツ管理にグルーピングさせるか選択します。</p>
                             </div>
                             <div class="form-blk-input">
-                              <select id="category" name="category" class="category form-blk-input-field js-post-field" data-preg="integer" data-num="2" v-model="selected" @change="getContentsPosts('category'); checkCategory();">
-                                <option value="" disabled>以下からご選択ください</option>
-                                <option value="0">所属させない</option>
+                              <select id="category" name="category" class="category form-blk-input-field js-post-field" data-preg="integer" data-num="2" data-tag="select" v-model="selected" @change="getPosts('category'); checkCategory();">
+                                <option value="0">選択なし</option>
                                 <option value="1">大カテゴリー</option>
                               </select>
                               <p class="form-blk-input-err"></p>
