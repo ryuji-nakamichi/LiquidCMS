@@ -17,24 +17,15 @@ function stepVue() {
   createApp({
     data() {
       return {
+        formItemMax: 2,
         currentStep: 1,
-        // formData: {
-        //   'posts' :
-        //     [
-        //       { val: { key: '', data: '', lbl: '', preg: '' } },
-        //       { val: { key: '', data: '', lbl: '', preg: '' } },
-        //     ]
-        // },
         formData: {
           posts:
             []
         },
         errData: {
-          'posts':
-            [
-              { val: { 'data': '' } },
-              { val: { 'data': '' } },
-            ]
+          posts:
+            []
         },
         resJson: {
           'res': [],
@@ -57,7 +48,8 @@ function stepVue() {
       }
     },
     created: function () {
-      this.setInitData(1);
+      this.setInitPostsData(this.formItemMax);
+      this.setInitErrsData(this.formItemMax);
     },
     methods: {
       changeNextStep() {
@@ -72,7 +64,7 @@ function stepVue() {
        * @param {integer} max
        * @returns {void}
        */
-      setInitData(max) {
+      setInitPostsData(max) {
         // 初期設定
         for (let i = 0; i < max; i++) {
           this.formData.posts[i] = {
@@ -81,6 +73,26 @@ function stepVue() {
               key: '',
               lbl: '',
               preg: '',
+            }
+          }
+        }
+      },
+      /**
+       * 初期設定として配列に値を格納しておく
+       * 何かしら設定しおかないと、Vue側でエラーが発生するため
+       * @param {integer} max
+       * @returns {void}
+       */
+      setInitErrsData(max) {
+        // 初期設定
+        for (let i = 0; i < max; i++) {
+          this.errData.posts[i] = {
+            val: {
+              data: '',
+              key: '',
+              preg: '',
+              msg: '',
+              flg: true,
             }
           }
         }
@@ -130,11 +142,37 @@ function stepVue() {
         }
         return lbl;
       },
-      checkContentsName(e) {
-        this.errData.posts[0].val.data = (this.formData.posts[0].val.data) ? true : false;
-      },
-      checkCategory(e) {
-        this.errData.posts[1].val.data = (this.formData.posts[1].val.data) ? true : false;
+      /**
+       * 各inputやselectに入力された値を検査する
+       * 取得した値を配列に格納する
+       * ※対応する添字部分にオブジェクトを格納するので、
+       * 該当部分にてループ処理は途中で終了する
+       * @param {string} name 
+       * @returns {void}
+       */
+      checkErrPosts(name) {
+        let $el = $('#' + name);
+        let elVal = $el.val();
+        let elPreg = $el.data('preg');
+        let elNum = Number($el.data('num')) - 1;
+        let max = $('.js-post-field').length;
+        let flg = true;
+
+        for (let i = 0; i < max; i++) {
+          if (elVal) {
+            flg = false;
+          }
+          this.errData.posts[elNum] = {
+            val: {
+              data: elVal,
+              key: name,
+              preg: elPreg,
+              msg: name + 'は必ずご入力ください。',
+              flg: flg,
+            }
+          }
+          break;
+        }
       },
       /**
        * Ajaxで送信してPHP側で処理させた後に結果を返却させる
@@ -149,12 +187,6 @@ function stepVue() {
           params.append(this.formData.posts[i].val.key, this.formData.posts[i].val.data);
           params.append(this.formData.posts[i].val.key + '_preg', this.formData.posts[i].val.preg);
         }
-
-        // params.append('name_preg', this.formData.posts[0].val.preg);
-        // params.append('category_preg', this.formData.posts[1].val.preg);
-
-        // params.append('name', this.formData.posts[0].val.data);
-        // params.append('category', this.formData.posts[1].val.data);
 
         axios.post('/ajax/contents/', params, {
           headers: {

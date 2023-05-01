@@ -136,10 +136,10 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <p class="form-blk-confirm">こちらに入力された名称が「コンテンツ管理」に登録されます。</p>
                             </div>
                             <div class="form-blk-input">
-                              <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getPosts('name'); checkContentsName();" data-preg="text" data-num="1" data-tag="text">
+                              <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getPosts('name'); checkErrPosts('name');" data-preg="text" data-num="1" data-tag="text">
                               <p class="form-blk-input-err"></p>
                             </div>
-                            <div class="form-blk-input --err" v-if="!errData.posts[0].val.data">
+                            <div class="form-blk-input --err" v-if="errData.posts[0].val.flg">
                               <p class="form-blk-confirm">コンテンツ名は必ずご入力ください。</p>
                             </div>
                           </div>
@@ -148,7 +148,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <div class="form-blk-input">
                                 <div class="c-submit-btn-outer --col-1">
                                   <div class="c-submit-btn-container">
-                                    <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep();" v-if="errData.posts[0].val.data">
+                                    <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep();" v-if="!errData.posts[0].val.flg">
                                       <span class="c-submit-btn__lbl">次へ</span>
                                     </button>
                                   </div>
@@ -168,13 +168,13 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <p class="form-blk-confirm">どのコンテンツ管理にグルーピングさせるか選択します。</p>
                             </div>
                             <div class="form-blk-input">
-                              <select id="category" name="category" class="category form-blk-input-field js-post-field" data-preg="integer" data-num="2" data-tag="select" v-model="selected" @change="getPosts('category'); checkCategory();">
+                              <select id="category" name="category" class="category form-blk-input-field js-post-field" data-preg="integer" data-num="2" data-tag="select" v-model="selected" @change="getPosts('category'); checkErrPosts('category');">
                                 <option value="0">選択なし</option>
                                 <option value="1">大カテゴリー</option>
                               </select>
                               <p class="form-blk-input-err"></p>
                             </div>
-                            <div class="form-blk-input --err" v-if="!errData.posts[1].val.data">
+                            <div class="form-blk-input --err" v-if="errData.posts[1].val.flg">
                               <p class="form-blk-confirm">グループ設定は必ずご選択ください。</p>
                             </div>
                           </div>
@@ -188,7 +188,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                                     </button>
                                   </div>
                                   <div class="c-submit-btn-container">
-                                    <button id="g-form-confirm" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep();" v-if="errData.posts[1].val.data">
+                                    <button id="g-form-confirm" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep();" v-if="!errData.posts[1].val.flg">
                                       <span class="c-submit-btn__lbl">確認する</span>
                                     </button>
                                   </div>
