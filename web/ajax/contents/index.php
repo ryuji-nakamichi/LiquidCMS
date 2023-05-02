@@ -4,6 +4,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 require_once(INCLUDE_AJAX_PATH . 'contents/function.php');
 use Liqsyst\ajax as ajax;
 
+require_once(INCLUDE_REQUESTS_PATH . 'contents/index.php');
+use Liqsyst\Requests\Contents\ContentsRegexClass as Requests;
+
 header('Content-Type: application/json; charset=utf-8');
 
 $data['res'] = [];
@@ -12,48 +15,26 @@ $postsData = [];
 $postsPreg = [];
 $errFlg = [];
 $searchPattern = [];
+$regexFlg = 1;
 if ( // Ajax通信か判定
   isset($_SERVER['HTTP_X_REQUESTED_WITH'])
   && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
 ) {
 
   
-  $posts = $_POST;
-
-  // jsから送られた値をグループ別に分類する
-  $setPostsdata = ajax\setPostsdata($posts);
-  $data['res']['posts'] = $setPostsdata['posts'];
-  $data['res']['preg'] = $setPostsdata['preg'];
+  $posts = $_POST; // jsから送られた値を格納する
+  $setPostsdata = ajax\setPostsdata($posts); // jsから送られた値をグループ別に分類する
 
   // 正規表現にて正しい値か検査する
-  // $searchPattern = $posts[''];
-  // $searchPattern = '#^[^a-z_]+$#'; // 半角英字以外をエラーとして判定する
-  // foreach ((array)$posts AS $key => $val) {
-  //   if (preg_match($searchPattern, $val)) {
-  //     $errFlg[$key] = true;
-  //     // break;
-  //   } else {
-  //     $errFlg[$key] = false;
-  //   }
-  // }
+  $RequestsObj = new Requests();
+  $regexFlg = $RequestsObj->run($setPostsdata['preg'], $setPostsdata['posts']);
 
-  // エラーフラグをセットする
-  $data['res']['errFlg'] = $errFlg;
-
-  // foreach ($postsData AS $key => $val) {
-  //   $data['res']['posts'][$key] = $val;
-  // }
-
-  // $data['res']['posts'] = array(
-  //   'name' => $posts['name'],
-  //   'name_preg' => $posts['name_preg'],
-  //   'category' => $posts['category'],
-  //   'category_preg' => $posts['category_preg'],
-  // );
-  $data['res']['status'] = 'ok';
+  $data['res']['posts'] = $setPostsdata['posts']; // それぞれの値をセットする
+  $data['res']['preg'] = $setPostsdata['preg']; // 正規表現の種類をセットする
+  $data['res']['errFlg'] = $regexFlg; // 正規表現の結果フラグをセットする
+  $data['res']['status'] = 'ok'; // PHP処理が問題ない場合の文字列をセットする
 } else {
-  $data['res']['status'] = 'ng';
+  $data['res']['status'] = 'ng'; // PHP処理が問題ありの場合の文字列をセットする
 }
 
 echo json_encode($data);
-//echo $posts['name'];

@@ -356,6 +356,9 @@
   left: 0;
   right: auto;
 }
+.c-submit-btn:disabled {
+  opacity: .5;
+}
 @media all and (min-width: 768px) {
   .c-submit-btn {
     padding: 2rem 0;
@@ -389,14 +392,14 @@
   }
 }
 @media (hover: hover) {
-  .c-submit-btn:hover {
+  .c-submit-btn:not(:disabled):hover {
     border-color: #6C6C6C;
     background-color: #6C6C6C;
   }
-  .c-submit-btn:hover::before {
+  .c-submit-btn:not(:disabled):hover::before {
     width: 0;
   }
-  .c-submit-btn:hover::after {
+  .c-submit-btn:not(:disabled):hover::after {
     width: 0;
   }
 }

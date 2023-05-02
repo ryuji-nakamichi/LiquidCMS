@@ -136,7 +136,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                               <p class="form-blk-confirm">こちらに入力された名称が「コンテンツ管理」に登録されます。</p>
                             </div>
                             <div class="form-blk-input">
-                              <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getPosts('name'); checkErrPosts('name');" data-preg="text" data-num="1" data-tag="text">
+                              <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getPosts('name'); checkErrPosts('name');" data-preg="alpha" data-num="1" data-tag="text">
                               <p class="form-blk-input-err"></p>
                             </div>
                             <div class="form-blk-input --err" v-if="errData.posts[0].val.flg">
@@ -149,6 +149,9 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                                 <div class="c-submit-btn-outer --col-1">
                                   <div class="c-submit-btn-container">
                                     <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep();" v-if="!errData.posts[0].val.flg">
+                                      <span class="c-submit-btn__lbl">次へ</span>
+                                    </button>
+                                    <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" v-else="errData.posts[0].val.flg" disabled>
                                       <span class="c-submit-btn__lbl">次へ</span>
                                     </button>
                                   </div>
@@ -191,6 +194,9 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                                     <button id="g-form-confirm" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep();" v-if="!errData.posts[1].val.flg">
                                       <span class="c-submit-btn__lbl">確認する</span>
                                     </button>
+                                    <button id="g-form-confirm" class="c-submit-btn" type="button" data-mode="next" v-else="errData.posts[1].val.flg" disabled>
+                                      <span class="c-submit-btn__lbl">確認する</span>
+                                    </button>
                                   </div>
                                 </div>
                               </div>
@@ -209,7 +215,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                                     </button>
                                   </div>
                                   <div class="c-submit-btn-container">
-                                    <button id="g-form-submit" class="c-submit-btn" type="button" data-mode="submit" @click="changeNextStep(); jsonShow();">
+                                    <button id="g-form-submit" class="c-submit-btn" type="button" data-mode="submit" @click="changeNextStep(); postsAjaxWithParamsRun();">
                                       <span class="c-submit-btn__lbl">作成する</span>
                                     </button>
                                   </div>
