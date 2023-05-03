@@ -1,11 +1,11 @@
 <?php
 
-$dsn = 'mysql:dbname=liquidsystem;host=mysql';
-$user = 'root';
-$password = 'password';
+$dsn = DB_DSH;
+$user = DB_USER;
+$password = DB_PASSWORD;
 
 // DBへ接続
-try{
+try {
   $dbh = new PDO($dsn, $user, $password);
 
   // クエリの実行
@@ -17,7 +17,7 @@ try{
   //     echo $row["name"];
   // }
 
-}catch(PDOException $e){
+} catch (PDOException $e) {
   print("データベースの接続に失敗しました".$e->getMessage());
   die();
 }

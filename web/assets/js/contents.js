@@ -19,7 +19,7 @@ function stepVue() {
   createApp({
     data() {
       return {
-        formItemMax: 2,
+        formItemMax: 3,
         currentStep: 1,
         formData: {
           posts:
@@ -155,6 +155,8 @@ function stepVue() {
           regExp = /^[1-9]{1}[0-9]*$/;
         } else if (str === 'integer') {
           regExp = /^[0-9]+$/;
+        } else if (str === 'text') {
+          regExp = /^[^\s\t<>＜＞=\'\"”’^]+$/;
         }
         return regExp;
       },
@@ -266,7 +268,7 @@ function stepVue() {
        * 成功したか失敗したかをSTEPの最後にて表示させる
        * @returns {void}
        */
-      postsAjaxWithParamsRun() {
+      postsAjaxWithParamsRun(e) {
         const params = this.setParams();
         this.postsAjaxWithParams(params, '/ajax/contents/');
       },

@@ -5,7 +5,7 @@
         <div class="g-header-contents">
           <div class="g-header-head">
             <div class="c-home-icon">
-              <a class="c-home-icon__icon" href="/">
+              <a class="c-home-icon__icon" href="<?=DOMAIN_URI?>">
                 <svg xmlns="http://www.w3.org/2000/svg" width="402" height="402" viewBox="0 0 402 402">
                   <g transform="translate(-12 -30)">
                     <g transform="translate(12 30)">

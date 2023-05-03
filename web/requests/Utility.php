@@ -24,6 +24,8 @@ class RegexUtilityClass {
         $regexNames[$key] = "/^[1-9]{1}[0-9]*$/";
       } else if ($val === 'integer') {
         $regexNames[$key] = "/^[0-9]+$/";
+      } else if ($val === 'text') {
+        $regexNames[$key] = "/^[^\s\t<>＜＞=\'\"”’^]+$/";
       }
     }
     return $regexNames;

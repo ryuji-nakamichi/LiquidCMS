@@ -8,3 +8,6 @@ define("INCLUDE_CONFIG_PATH", $_SERVER['DOCUMENT_ROOT'] . '/config/');
 define("INCLUDE_AJAX_PATH", $_SERVER['DOCUMENT_ROOT'] . '/ajax/');
 define("INCLUDE_REQUESTS_PATH", $_SERVER['DOCUMENT_ROOT'] . '/requests/');
 define("INCLUDE_BLOCK_PATH", $_SERVER['DOCUMENT_ROOT'] . '/views/inc/');
+define("DB_DSH", 'mysql:dbname=liquidsystem;host=mysql');
+define("DB_USER", 'root');
+define("DB_PASSWORD", 'password');

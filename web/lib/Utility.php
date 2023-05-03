@@ -44,10 +44,24 @@ class UtilityClass {
     return $mapSearchResult;
   }
 
-  public function setRouteCurrentMap($routeMap) {
+
+  /**
+   * Setter
+   *
+   * @param array $routeMap
+   * @return void
+   */
+  public function setRouteCurrentMap($routeMap): void {
     $this->data = $routeMap;
   }
-  public function getRouteCurrentMap() {
+
+
+  /**
+   * Getter
+   *
+   * @return array $this->data
+   */
+  public function getRouteCurrentMap(): array {
     return $this->data;
   }
 
