@@ -1,7 +1,40 @@
 'use strict';
 
+import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+
 window.addEventListener('load', () => {
-  stepVue();
+  stepVue(createApp);
+
+  // const app3 = createApp({
+  //   data() {
+  //     return {
+  //       message: 'これと？'
+  //     }
+  //   },
+  //   props: ['foo'],
+  //   methods: {
+  //     test() {
+  //       console.log(this.message + app4.message);
+  //       // app4.test();
+  //     },
+  //   }
+  // })
+  // app3.mount('#contents-app')
+
+  // const app4 = createApp({
+  //   data() {
+  //     return {
+  //       message: 'これか？'
+  //     }
+  //   },
+  //   methods: {
+  //     test() {
+  //       console.log('tes2t');
+  //     },
+  //   }
+  // })
+  // app4.mount('#nav-app')
+
   // console.log(/^[1-9]{1}[0-9]*$/.test(0));
   // console.log(/^[a-zA-Z]+[_]?[a-zA-Z]+$/.test('s_aCC1'));
 });
@@ -14,9 +47,8 @@ document.addEventListener('DOMContentLoaded', () => {
  * フォームをVueで管理する
  * @return {object} data
  */
-function stepVue() {
-  const { createApp } = Vue;
-  createApp({
+function stepVue(createApp) {
+  const app1 = createApp({
     data() {
       return {
         formItemMax: 3,
@@ -33,7 +65,11 @@ function stepVue() {
           'res': [],
           'status': '',
         },
+        resGetJson: {
+          'res': [],
+        },
         resFaildFlg: false,
+        resFinishedFlg: false,
 
         // エラー内容表示用
         errRes: {
@@ -203,7 +239,7 @@ function stepVue() {
       /**
        * Ajax送信用処理
        * 各inputやselectに入力された値をセットする
-       * @param {string} name 
+       * 
        * @returns {object} params
        */
       setParams() {
@@ -218,7 +254,7 @@ function stepVue() {
         return params;
       },
       /**
-       * Ajax送信用処理
+       * Ajax送信用処理（登録用）
        * 各inputやselectに入力された値をPHP側に送信する
        * @param {object} params 
        * @param {string} url 
@@ -261,7 +297,13 @@ function stepVue() {
           console.log(this.errRes);
         }).finally(() => {
           this.errRes.process = '完了';
+
+          if (!this.resFaildFlg) {
+            this.getsAjaxContentsRun();
+            this.resFinishedFlg = true;
+          }
         });
+
       },
       /**
        * Ajaxで送信してPHP側で処理させた後に結果を返却させる
@@ -272,6 +314,41 @@ function stepVue() {
         const params = this.setParams();
         this.postsAjaxWithParams(params, '/ajax/contents/');
       },
+      /**
+       * Ajax送信用処理（取得用）
+       * コンテンツ管理のデータを取得して表示する
+       * @returns {void}
+       */
+      getsAjaxContents(url) {
+        const reqParams = new URLSearchParams();
+        reqParams.append('mode', 'select');
+        axios.post(url, reqParams, {
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+          .then((res) => {
+            this.resJson.res = res.data.res.posts;
+            this.resGetJson.res = res.data.res.query;
+          })
+          .catch(error => {
+            if (error.response) {
+            } else if (error.request) {
+
+            } else {
+            }
+          }).finally(() => {
+            this.errRes.process = '完了';
+          });
+      },
+      /**
+       * Ajaxで送信してPHP側で取得したデータを表示させる
+       * @returns {void}
+       */
+      getsAjaxContentsRun() {
+        this.getsAjaxContents('/ajax/contents/');
+      },
     }
-  }).mount('#contents-app');
+  });
+  app1.mount('#contents-app');
 }
