@@ -200,7 +200,7 @@ img {
   bottom: 0;
   z-index: 0;
   width: 100%;
-  padding: 0 3rem;
+  padding: 0 3rem 9rem;
   background-color: #F2F3F7;
 }
 
@@ -215,6 +215,12 @@ img {
 ********************************/
 .g-menu .list__item {
   margin-top: 3rem;
+}
+
+/* item__blk-container
+********************************/
+.g-menu .item__blk-container + .item__blk-container {
+  margin-top: 2rem;
 }
 
 /* item__blk

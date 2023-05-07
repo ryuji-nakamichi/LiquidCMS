@@ -28,3 +28,14 @@ $ docker-compose stop
 id : root
 password : password
 ```
+
+
+## ■サーバー情報
+
+### ▼DB情報
+
+```bash
+DB名: xs770977_liquidsystem
+ユーザー : xs770977_liquid
+パスワード : kVkpV6EBXedx
+'''

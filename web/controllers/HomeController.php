@@ -2,10 +2,14 @@
 
 namespace Liqsyst\Controllers;
 
-require_once('controllers/BaseController.php');
-use Liqsyst\Controllers\BaseController as Base;
+require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
-class HomeController extends Base {
+require_once(INCLUDE_AJAX_PATH . 'contents/ContentsDB.php');
+use Liqsyst\Ajax\Contents\ContentsDBClass as ContentsDB;
+
+require_once('controllers/BaseController.php');
+
+class HomeController extends BaseController {
 
   // プロパティ
   public $routeMap = '';
@@ -16,7 +20,19 @@ class HomeController extends Base {
    *
    */
   function __construct($routeMap) {
-    parent::__construct($routeMap);
+    $this->routeMap = $routeMap;
+  }
+
+
+  /**
+   * コンテンツ管理のViewデータ取得
+   *
+   * @return array $navView
+   */
+  private function getContentsNavView(): array {
+    $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
+    $navView = $ContentsDBObj->getContentsData(); // DBからコンテンツ管理のデータを取得する
+    return $navView;
   }
 
 
@@ -25,8 +41,9 @@ class HomeController extends Base {
    *
    * @return void
    */
-  public function show() {
+  public function show(): void {
     $routeMap = $this->routeMap;
+    $navView = $this->getContentsNavView(); // DBからコンテンツ管理のデータを取得する
     require_once "views/dashboard/index.php";
   }
 
@@ -36,7 +53,7 @@ class HomeController extends Base {
    *
    * @return void
    */
-  public function run() {
+  public function run(): void {
     $this->show();
   }
 }

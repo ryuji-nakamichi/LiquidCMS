@@ -23,18 +23,6 @@ class ControllerClass {
   }
 
 
-  /**
-   * 共通変数をセットする
-   *
-   * @return array $view
-   */
-  private function setCommonView (): array {
-    $view = [];
-
-
-    return $view;
-  }
-
   
   /**
    * ルーティングマップ配列を引数に渡して指定されたコントローラーを実行する
@@ -47,7 +35,6 @@ class ControllerClass {
    */
   public function run(array $routeMap): void {
     $controllerName = $this->setControllerName($routeMap);
-    $view = $this->setCommonView();
     require_once($controllerName);
   }
 

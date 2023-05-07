@@ -33,7 +33,7 @@ if ( // Ajax通信か判定
 
   if (isset($posts['mode']) && $posts['mode'] === 'select') {
     $mode = $posts['mode'];
-    $query = $ContentsDBObj->getContentsdata(); // DBからデータを取得する
+    $query = $ContentsDBObj->getContentsData(); // DBからデータを取得する
 
     $data['res']['posts'] = [];
     $data['res']['preg'] = [];

@@ -1,47 +1,12 @@
 'use strict';
 
-import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js'
+import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
 
 window.addEventListener('load', () => {
   stepVue(createApp);
-
-  // const app3 = createApp({
-  //   data() {
-  //     return {
-  //       message: 'これと？'
-  //     }
-  //   },
-  //   props: ['foo'],
-  //   methods: {
-  //     test() {
-  //       console.log(this.message + app4.message);
-  //       // app4.test();
-  //     },
-  //   }
-  // })
-  // app3.mount('#contents-app')
-
-  // const app4 = createApp({
-  //   data() {
-  //     return {
-  //       message: 'これか？'
-  //     }
-  //   },
-  //   methods: {
-  //     test() {
-  //       console.log('tes2t');
-  //     },
-  //   }
-  // })
-  // app4.mount('#nav-app')
-
-  // console.log(/^[1-9]{1}[0-9]*$/.test(0));
-  // console.log(/^[a-zA-Z]+[_]?[a-zA-Z]+$/.test('s_aCC1'));
 });
 
-document.addEventListener('DOMContentLoaded', () => {
-  
-});
+document.addEventListener('DOMContentLoaded', () => {});
 
 /**
  * フォームをVueで管理する
@@ -267,7 +232,7 @@ function stepVue(createApp) {
           }
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           this.resJson.res = res.data.res.posts; // POSTデータ
           this.resJson.status = res.data.res.status; // statusコード
           this.resJson.errFlg = res.data.res.errFlg; // 正規表現のフラグ
@@ -330,6 +295,7 @@ function stepVue(createApp) {
           .then((res) => {
             this.resJson.res = res.data.res.posts;
             this.resGetJson.res = res.data.res.query;
+            console.log(this.resGetJson.res);
           })
           .catch(error => {
             if (error.response) {

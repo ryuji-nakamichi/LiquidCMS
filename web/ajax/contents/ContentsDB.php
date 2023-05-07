@@ -79,9 +79,9 @@ class ContentsDBClass {
   /**
    * コンテンツ管理のデータをDB側から取得する
    *
-   * @return array $data
+   * @return array $category
    */
-  public function getContentsdata(): array {
+  public function getContentsData(): array {
     $mode = 'select';
     $posts = [];
     $query = "
@@ -89,7 +89,14 @@ class ContentsDBClass {
     ";
     $DBObj = new DB($this->dsn, $this->user, $this->password);
     $data = $DBObj->run($DBObj->dbData, $query, $mode, $posts);
-    return $data;
+
+    $category = [];
+    foreach((array)$data AS $key => $val) {
+      $cate = ($val['category'] > 0) ? $val['category']: $val['id'];
+      $category['category'][$cate][] = $val;
+    }
+
+    return $category;
   }
 
 }
