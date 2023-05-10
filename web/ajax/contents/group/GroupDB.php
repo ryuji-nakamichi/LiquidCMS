@@ -1,15 +1,15 @@
 <?php
 
-namespace Liqsyst\Ajax\Contents;
+namespace Liqsyst\Ajax\Contents\Group;
 
 require_once(INCLUDE_LIB_PATH . 'DB.php');
 use Liqsyst\Lib\DB\DBClass as DB;
 
 
 /**
- * ContentsDBClass
+ * GroupDBClass
  */
-class ContentsDBClass {
+class GroupDBClass {
 
   private $dsn;
   private $user;
@@ -60,10 +60,7 @@ class ContentsDBClass {
    */
   public function createTableWithPostsdata(array $posts, string $mode): array {
     $query = "
-      INSERT INTO contents (user_id, name, label, category, created_at, updated_at) VALUES (
-        1,
-        \"{$posts['name']}\",
-        \"{$posts['label']}\",
+      INSERT INTO contents_group (category, created_at, updated_at) VALUES (
         {$posts['category']},
         default,
         default
@@ -109,9 +106,12 @@ class ContentsDBClass {
     $mode = 'select';
     $posts = [];
     $query = "
-      SELECT C.id AS id, C.name AS name, C.label AS label 
-      FROM contents AS C
-      INNER JOIN contents_group AS CG ON C.id = CG.category;
+      SELECT 
+        id, name, label
+      FROM contents AS C 
+      WHERE NOT EXISTS (
+        SELECT 1 FROM contents_group WHERE C.id = category
+      );
     ";
     $DBObj = new DB($this->dsn, $this->user, $this->password);
     $view = $DBObj->run($DBObj->dbData, $query, $mode, $posts);

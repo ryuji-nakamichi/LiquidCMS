@@ -4,15 +4,15 @@ namespace Liqsyst\Controllers;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
-require_once(INCLUDE_AJAX_PATH . 'contents/ContentsDB.php');
-use Liqsyst\Ajax\Contents\ContentsDBClass as ContentsDB;
+require_once(INCLUDE_AJAX_PATH . 'contents/group/GroupDB.php');
+use Liqsyst\Ajax\Contents\Group\GroupDBClass as GroupDB;
 
 require_once(INCLUDE_LIB_PATH . 'DB.php');
 use Liqsyst\Lib\DB\DBClass as DB;
 
 require_once('controllers/BaseController.php');
 
-class ContentsListController extends BaseController {
+class ContentsGroupListController extends BaseController {
 
   // プロパティ
   public $routeMap = '';
@@ -33,8 +33,8 @@ class ContentsListController extends BaseController {
    * @return array $navView
    */
   private function getContentsNavView(): array {
-    $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
-    $navView = $ContentsDBObj->getContentsData(); // DBからコンテンツ管理のデータを取得する
+    $GroupDBObj = new GroupDB(DB_DSH, DB_USER, DB_PASSWORD);
+    $navView = $GroupDBObj->getContentsData(); // DBからコンテンツ管理のデータを取得する
     return $navView;
   }
 
@@ -42,11 +42,11 @@ class ContentsListController extends BaseController {
   /**
    * グループ設定のViewデータ取得
    *
-   * @return array $view
+   * @return array $navView
    */
   private function getGroupView(): array {
-    $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
-    $view = $ContentsDBObj->getGroupData(); // DBからコンテンツ管理のデータを取得する
+    $GroupDBObj = new GroupDB(DB_DSH, DB_USER, DB_PASSWORD);
+    $view = $GroupDBObj->getGroupData(); // DBからコンテンツ管理のデータを取得する
     return $view;
   }
 
@@ -56,10 +56,12 @@ class ContentsListController extends BaseController {
    *
    * @return array $view
    */
-  private function getContentsListView(): array {
+  private function getGroupListView(): array {
     $mode = 'select';
     $query = "
-      SELECT id, name, label, updated_at FROM contents;
+      SELECT C.id AS id, C.name AS name, C.label AS label, C.updated_at AS updated_at
+      FROM contents AS C
+      INNER JOIN contents_group AS CG ON C.id = CG.category;
     ";
     $DBObj = new DB(DB_DSH, DB_USER, DB_PASSWORD);
     $view = $DBObj->run($DBObj->dbData, $query, $mode, []);
@@ -72,12 +74,12 @@ class ContentsListController extends BaseController {
    *
    * @return void
    */
-  public function show() {
+  private function show(): void {
     $routeMap = $this->routeMap;
     $navView = $this->getContentsNavView(); // DBからコンテンツ管理のデータを取得する
     $groupView = $this->getGroupView(); // DBからグループ設定のデータを取得する
-    $contentsListView = $this->getContentsListView(); // DBからコンテンツ管理のデータを取得する（一覧用）
-    require_once "views/contents/index.php";
+    $groupListView = $this->getGroupListView(); // DBからグループ一覧のデータを取得する
+    require_once "views/contents/group/index.php";
   }
 
     
@@ -86,10 +88,10 @@ class ContentsListController extends BaseController {
    *
    * @return void
    */
-  public function run() {
+  public function run(): void {
     $this->show();
   }
 }
 
-$contentsObj = new ContentsListController($routeMap);
+$contentsObj = new ContentsGroupListController($routeMap);
 $contentsObj->run();

@@ -62,7 +62,9 @@
     <div class="form-blk-input">
       <select id="category" name="category" class="category form-blk-input-field js-post-field" data-preg="integer" data-num="3" data-tag="select" v-model="selected" @change="getPosts('category'); checkErrPosts('category');">
         <option value="0">選択なし</option>
-        <option value="1">大カテゴリー</option>
+        <?php foreach ((array)$groupView AS $key => $val) { ?>
+        <option value="<?=$val['id']?>"><?=$val['label']?>(<?=$val['name']?>)</option>
+        <?php } ?>
       </select>
       <p class="form-blk-input-err"></p>
     </div>

@@ -25,7 +25,23 @@ switch ($routeName) {
   case 'contents_create':
     $metaArr = [
       'title' => 'コンテンツ追加｜LiquidCMS',
-      'description' => 'LiquidCMSのコンテンツ追加です。新らしいコンテンツを追加してからフィールド追加をしてください。',
+      'description' => 'LiquidCMSのコンテンツ追加です。新しいコンテンツを追加してからフィールド追加をしてください。',
+      'keywords' => 'LiquidCMS,ヘッドレスCMS,安い,使いやすい,マルチプラットフォーム対応',
+    ];
+    break;
+
+  case 'contents_group_list':
+    $metaArr = [
+      'title' => 'グループ一覧｜LiquidCMS',
+      'description' => 'LiquidCMSのグループ一覧です。編集したいグループを選択してください。',
+      'keywords' => 'LiquidCMS,ヘッドレスCMS,安い,使いやすい,マルチプラットフォーム対応',
+    ];
+    break;
+
+  case 'contents_group_create':
+    $metaArr = [
+      'title' => 'グループ追加｜LiquidCMS',
+      'description' => 'LiquidCMSのグループ追加です。新しいグループを追加すると、コンテンツ管理の「グループ設定」より選択が可能になります。',
       'keywords' => 'LiquidCMS,ヘッドレスCMS,安い,使いやすい,マルチプラットフォーム対応',
     ];
     break;

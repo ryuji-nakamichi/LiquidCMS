@@ -11,7 +11,7 @@
     <li class="list__item">
       <div class="item__contents">
         <p class="item__num">
-          <span class="item__num-num">4</span>
+          <span class="item__num-num">{{ stepMax }}</span>
         </p>
       </div>
     </li>

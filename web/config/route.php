@@ -26,6 +26,22 @@ $routeMap = [
     ]
   ],
   [
+    'path' => '/contents/group/list',
+    'info' => [
+      'name' => 'contents_group_list',
+      'controller' => 'Contents/ContentsGroupListController',
+      'params' => 'ContentsGroupListController',
+    ]
+  ],
+  [
+    'path' => '/contents/group/create',
+    'info' => [
+      'name' => 'contents_group_create',
+      'controller' => 'Contents/ContentsGroupCreateController',
+      'params' => 'ContentsGroupCreateController',
+    ]
+  ],
+  [
     'path' => '/field/create',
     'info' => [
       'name' => 'field',

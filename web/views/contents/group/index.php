@@ -31,7 +31,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                   <div class="c-recordList-container">
                     <div class="c-recordList-icon-list">
                       <span class="list__item">
-                        <a class="item__link" href="/contents/create">
+                        <a class="item__link" href="/contents/group/create">
                           <span class="item__icon --plus">
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 20 20">
                               <g transform="translate(-227 -70.5)">
@@ -44,7 +44,7 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                       </span>
                     </div>
                     <ul class="c-recordList">
-                      <?php foreach ((array) $contentsListView AS $key => $val) { ?>
+                      <?php foreach ((array) $groupListView AS $key => $val) { ?>
                       <li class="list__item --public">
                         <a class="item__link" href="/contents/edit/<?=$val['id']?>">
                           <div class="item__contents">

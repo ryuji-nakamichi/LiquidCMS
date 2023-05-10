@@ -16,8 +16,8 @@ function stepVue(createApp) {
   const app1 = createApp({
     data() {
       return {
-        stepMax: 4,
-        formItemMax: 3,
+        stepMax: 3,
+        formItemMax: 1,
         currentStep: 1,
         formData: {
           posts:
@@ -264,10 +264,10 @@ function stepVue(createApp) {
         }).finally(() => {
           this.errRes.process = '完了';
 
-          if (!this.resFaildFlg) {
-            this.getsAjaxContentsRun();
-            this.resFinishedFlg = true;
-          }
+          // if (!this.resFaildFlg) {
+          //   this.getsAjaxContentsRun();
+          //   this.resFinishedFlg = true;
+          // }
         });
 
       },
@@ -278,7 +278,7 @@ function stepVue(createApp) {
        */
       postsAjaxWithParamsRun(e) {
         const params = this.setParams();
-        this.postsAjaxWithParams(params, '/ajax/contents/');
+        this.postsAjaxWithParams(params, '/ajax/contents/group/');
       },
       /**
        * Ajax送信用処理（取得用）
@@ -313,7 +313,7 @@ function stepVue(createApp) {
        * @returns {void}
        */
       getsAjaxContentsRun() {
-        this.getsAjaxContents('/ajax/contents/');
+        this.getsAjaxContents('/ajax/contents/group/');
       },
     }
   });

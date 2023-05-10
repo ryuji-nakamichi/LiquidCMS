@@ -4,12 +4,12 @@ namespace Liqsyst\Controllers;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
-require_once(INCLUDE_AJAX_PATH . 'contents/ContentsDB.php');
-use Liqsyst\Ajax\Contents\ContentsDBClass as ContentsDB;
+require_once(INCLUDE_AJAX_PATH . 'contents/group/GroupDB.php');
+use Liqsyst\Ajax\Contents\Group\GroupDBClass as GroupDB;
 
 require_once('controllers/BaseController.php');
 
-class ContentsCreateController extends BaseController {
+class ContentsGroupCreateController extends BaseController {
 
   // プロパティ
   public $routeMap = '';
@@ -30,8 +30,8 @@ class ContentsCreateController extends BaseController {
    * @return array $navView
    */
   private function getContentsNavView(): array {
-    $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
-    $navView = $ContentsDBObj->getContentsData(); // DBからコンテンツ管理のデータを取得する
+    $GroupDBObj = new GroupDB(DB_DSH, DB_USER, DB_PASSWORD);
+    $navView = $GroupDBObj->getContentsData(); // DBからコンテンツ管理のデータを取得する
     return $navView;
   }
 
@@ -42,8 +42,8 @@ class ContentsCreateController extends BaseController {
    * @return array $navView
    */
   private function getGroupView(): array {
-    $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
-    $view = $ContentsDBObj->getGroupData(); // DBからコンテンツ管理のデータを取得する
+    $GroupDBObj = new GroupDB(DB_DSH, DB_USER, DB_PASSWORD);
+    $view = $GroupDBObj->getGroupData(); // DBからコンテンツ管理のデータを取得する
     return $view;
   }
 
@@ -57,7 +57,7 @@ class ContentsCreateController extends BaseController {
     $routeMap = $this->routeMap;
     $navView = $this->getContentsNavView(); // DBからコンテンツ管理のデータを取得する
     $groupView = $this->getGroupView(); // DBからグループ設定のデータを取得する
-    require_once "views/contents/create.php";
+    require_once "views/contents/group/create.php";
   }
 
     
@@ -71,5 +71,5 @@ class ContentsCreateController extends BaseController {
   }
 }
 
-$contentsObj = new ContentsCreateController($routeMap);
+$contentsObj = new ContentsGroupCreateController($routeMap);
 $contentsObj->run();

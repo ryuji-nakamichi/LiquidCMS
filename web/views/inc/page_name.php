@@ -27,6 +27,20 @@ switch ($routeName) {
     ];
     break;
 
+  case 'contents_group_list':
+    $pageInfoArr = [
+      'title' => 'グループ一覧',
+      'description' => 'グループ一覧画面です。',
+    ];
+    break;
+
+  case 'contents_group_create':
+    $pageInfoArr = [
+      'title' => 'グループ新規登録',
+      'description' => 'グループ新規登録画面です。',
+    ];
+    break;
+
   case 'field':
     $pageInfoArr = [
       'title' => 'フィールド新規登録',

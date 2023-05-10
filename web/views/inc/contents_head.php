@@ -24,6 +24,18 @@ switch ($routeName) {
     ];
     break;
 
+  case 'contents_group_list':
+    $contentsHeadInfoArr = [
+      'title' => 'グループ一覧',
+    ];
+    break;
+
+  case 'contents_group_create':
+    $contentsHeadInfoArr = [
+      'title' => 'グループ登録',
+    ];
+    break;
+
   case 'field':
     $contentsHeadInfoArr = [
       'title' => '新規登録',
