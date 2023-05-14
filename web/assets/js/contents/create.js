@@ -1,9 +1,9 @@
 'use strict';
 
-import { createApp } from 'https://unpkg.com/vue@3/dist/vue.esm-browser.js';
+const { createApp } = Vue;
 
 window.addEventListener('load', () => {
-  stepVue(createApp);
+  stepVue();
 });
 
 document.addEventListener('DOMContentLoaded', () => {});
@@ -12,12 +12,12 @@ document.addEventListener('DOMContentLoaded', () => {});
  * フォームをVueで管理する
  * @return {object} data
  */
-function stepVue(createApp) {
+function stepVue() {
   const app1 = createApp({
     data() {
       return {
-        stepMax: 3,
-        formItemMax: 1,
+        stepMax: 4,
+        formItemMax: 3,
         currentStep: 1,
         formData: {
           posts:
@@ -264,10 +264,10 @@ function stepVue(createApp) {
         }).finally(() => {
           this.errRes.process = '完了';
 
-          // if (!this.resFaildFlg) {
-          //   this.getsAjaxContentsRun();
-          //   this.resFinishedFlg = true;
-          // }
+          if (!this.resFaildFlg) {
+            this.getsAjaxContentsRun();
+            this.resFinishedFlg = true;
+          }
         });
 
       },
@@ -278,7 +278,7 @@ function stepVue(createApp) {
        */
       postsAjaxWithParamsRun(e) {
         const params = this.setParams();
-        this.postsAjaxWithParams(params, '/ajax/contents/group/');
+        this.postsAjaxWithParams(params, '/ajax/contents/common.php');
       },
       /**
        * Ajax送信用処理（取得用）
@@ -313,7 +313,7 @@ function stepVue(createApp) {
        * @returns {void}
        */
       getsAjaxContentsRun() {
-        this.getsAjaxContents('/ajax/contents/group/');
+        this.getsAjaxContents('/ajax/contents/common.php');
       },
     }
   });

@@ -59,7 +59,14 @@ class ContentsListController extends BaseController {
   private function getContentsListView(): array {
     $mode = 'select';
     $query = "
-      SELECT id, name, label, updated_at FROM contents;
+      SELECT 
+        id, name, label, category, 
+        (CASE
+          WHEN category > 0 THEN 1 ELSE 0
+        END) AS category_flg,
+        DATE_FORMAT(updated_at, '%Y.%m.%d %k:%i:%s') AS updated_at 
+      FROM contents 
+      ORDER BY id;
     ";
     $DBObj = new DB(DB_DSH, DB_USER, DB_PASSWORD);
     $view = $DBObj->run($DBObj->dbData, $query, $mode, []);

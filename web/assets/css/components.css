@@ -254,6 +254,9 @@
   margin-left: auto;
   margin-right: auto;
 }
+.--small .c-btn {
+  width: 10rem;
+}
 
 /* c-btn__link
 ********************************/
@@ -265,11 +268,30 @@
   background-color: #007E66;
   transition: all var(--transition-speed);
 }
+.--danger .c-btn .c-btn__link {
+  border-color: #AD2D27;
+  background-color: #AD2D27;
+}
+.--small .c-btn .c-btn__link {
+  padding: 1rem;
+}
+.--disabled .c-btn .c-btn__link {
+  border-color: #404040;
+  background-color: #404040;
+}
 @media (hover: hover) {
-  .c-btn__link:hover {
+  .c-btn__link:hover,
+  .--small .c-btn__link:hover,
+  .--danger .c-btn__link:hover
+  {
+    cursor: pointer;
     border-color: #404040;
     background-color: #404040;
   }
+  .--disabled .c-btn__link:hover {
+    cursor: initial;
+  }
+  
 }
 
 
@@ -280,6 +302,9 @@
   font-size: 1.6rem;
   font-weight: bold;
   transition: color var(--transition-speed);
+}
+.--small .c-btn .c-btn__lbl {
+  font-size: 1.4rem;
 }
 
 
@@ -425,6 +450,22 @@
   margin-top: 2rem;
 }
 
+/* c-recordList-blk
+**************************************************************/
+.c-recordList-container .c-recordList-blk + .c-recordList-blk {
+  margin-top: 4rem;
+}
+
+/* c-recordList-ttl
+**************************************************************/
+.c-recordList-ttl {
+  padding: 2rem;
+  color: #fff;
+  font-size: 2rem;
+  font-weight: bold;
+  background-color: #007E66;
+}
+
 /* list__item
 **************************************************************/
 .c-recordList .list__item {
@@ -434,7 +475,10 @@
 /* item__link
 **************************************************************/
 .c-recordList .item__link {
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  width: calc(100% - 10rem - 2rem);
+  padding: 4rem 2rem;
   transition: background-color var(--transition-speed);
 }
 @media (hover: hover) {
@@ -452,7 +496,8 @@
 .c-recordList .item__contents {
   display: flex;
   flex-wrap: wrap;
-  padding: 2rem;
+  justify-content: space-between;
+  align-items: center;
 }
 
 /* item__status
@@ -508,6 +553,14 @@
 }
 .c-recordList .item__row-txt {
   font-size: 1.4rem;
+}
+
+
+/* item__btn
+**************************************************************/
+.c-recordList .item__btn {
+  width: 10rem;
+  margin-left: 2rem;
 }
 
 

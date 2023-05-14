@@ -8,15 +8,27 @@ switch ($routeName) {
     ];
     break;
 
+  case 'contents_list':
+    $jsArr = [
+      '<script src="/assets/js/contents/list.js"></script>'
+    ];
+    break;
+
   case 'contents_create':
     $jsArr = [
-      '<script src="/assets/js/contents.js" type="module"></script>'
+      '<script src="/assets/js/contents/create.js"></script>'
+    ];
+    break;
+
+  case 'contents_group_list':
+    $jsArr = [
+      '<script src="/assets/js/contents/group/list.js"></script>'
     ];
     break;
 
   case 'contents_group_create':
     $jsArr = [
-      '<script src="/assets/js/contents_group.js" type="module"></script>'
+      '<script src="/assets/js/contents/group/create.js"></script>'
     ];
     break;
 
@@ -32,7 +44,7 @@ switch ($routeName) {
     ];
 }
 ?>
-<!-- <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script> -->
+<script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ="
 crossorigin="anonymous"></script>

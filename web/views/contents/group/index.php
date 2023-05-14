@@ -43,31 +43,103 @@ require_once(INCLUDE_BLOCK_PATH . 'start.php');
                         </a>
                       </span>
                     </div>
-                    <ul class="c-recordList">
-                      <?php foreach ((array) $groupListView AS $key => $val) { ?>
-                      <li class="list__item --public">
-                        <a class="item__link" href="/contents/edit/<?=$val['id']?>">
-                          <div class="item__contents">
-                            <div class="item__status">
-                              <span class="item__status-icon --public"></span>
-                              <p class="item__status-txt">公開中</p>
-                            </div>
-                            <div class="item__rows">
-                              <div class="item__row">
-                                <p class="item__row-txt"><?=date('Y.m.d', strtotime($val['updated_at']))?></p>
+                    <div id="js-contents-list">
+                      <div v-if="resFinishedFlg">
+                        <div class="c-recordList-blk">
+                          <ul class="c-recordList">
+                            <li class="list__item --public" v-for="item in resGetJson.groupListView">
+                              <div class="item__contents" :data-id="`${item.id}`">
+                                <div class="item__link">
+                                  <div class="item__status">
+                                    <span class="item__status-icon --public"></span>
+                                    <p class="item__status-txt">公開中</p>
+                                  </div>
+                                  <div class="item__rows">
+                                    <div class="item__row">
+                                      <p class="item__row-txt">{{ item.updated_at }}</p>
+                                    </div>
+                                    <div class="item__row">
+                                      <p class="item__row-txt">{{ item.name }}</p>
+                                    </div>
+                                    <div class="item__row">
+                                      <p class="item__row-txt">{{ item.label }}</p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="item__btn" v-if="item.child_max === '0'">
+                                  <div class="c-btn-container js-delete-contents --danger --small" @click="postsAjaxWithParamsRun($event);">
+                                    <div class="c-btn">
+                                      <span class="c-btn__link">
+                                        <span class="c-btn__lbl">削除</span>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="item__btn" v-else>
+                                  <div class="c-btn-container js-delete-contents --small --disabled">
+                                    <div class="c-btn">
+                                      <span class="c-btn__link">
+                                        <span class="c-btn__lbl">削除不可</span>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
                               </div>
-                              <div class="item__row">
-                                <p class="item__row-txt"><?=$val['name']?></p>
+                            </li>
+                          </ul>
+                        </div>
+                      </div>
+                      <div v-else>
+                        <div class="c-recordList-blk">
+                          <ul class="c-recordList">
+                            <?php foreach ((array) $groupListView AS $key => $val) { ?>
+                            <li class="list__item --public">
+                              <div class="item__contents" data-id="<?=$val['id']?>">
+                                <div class="item__link">
+                                  <div class="item__status">
+                                    <span class="item__status-icon --public"></span>
+                                    <p class="item__status-txt">公開中</p>
+                                  </div>
+                                  <div class="item__rows">
+                                    <div class="item__row">
+                                      <p class="item__row-txt"><?=$val['updated_at']?></p>
+                                    </div>
+                                    <div class="item__row">
+                                      <p class="item__row-txt"><?=$val['name']?></p>
+                                    </div>
+                                    <div class="item__row">
+                                      <p class="item__row-txt"><?=$val['label']?></p>
+                                    </div>
+                                  </div>
+                                </div>
+                                <?php if (intval($val['child_max']) === 0) { ?>
+                                <div class="item__btn">
+                                  <div class="c-btn-container js-delete-contents --danger --small" @click="postsAjaxWithParamsRun($event);">
+                                    <div class="c-btn">
+                                      <span class="c-btn__link">
+                                        <span class="c-btn__lbl">削除</span>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <?php } else { ?>
+                                <div class="item__btn">
+                                  <div class="c-btn-container js-delete-contents --small --disabled">
+                                    <div class="c-btn">
+                                      <span class="c-btn__link">
+                                        <span class="c-btn__lbl">削除不可</span>
+                                      </span>
+                                    </div>
+                                  </div>
+                                </div>
+                                <?php } ?>
                               </div>
-                              <div class="item__row">
-                                <p class="item__row-txt"><?=$val['label']?></p>
-                              </div>
-                            </div>
-                          </div>
-                        </a>
-                      </li>
-                      <?php } ?>
-                    </ul>
+                            </li>
+                            <?php } ?>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>

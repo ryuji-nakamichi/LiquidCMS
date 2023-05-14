@@ -1,4 +1,10 @@
-<?php if ($routeMap['info']['name'] === 'contents_create' || $routeMap['info']['name'] === 'contents_group_create') { ?>
+<?php 
+if (
+  $routeMap['info']['name'] === 'contents_create' 
+|| $routeMap['info']['name'] === 'contents_list' 
+|| $routeMap['info']['name'] === 'contents_group_list'
+|| $routeMap['info']['name'] === 'contents_group_create'
+) { ?>
 <div class="item__blk-container" v-if="resFinishedFlg">
   <div class="item__blk" v-for="items in resGetJson.res.category">
     <ul class="g-menu-sub-list">

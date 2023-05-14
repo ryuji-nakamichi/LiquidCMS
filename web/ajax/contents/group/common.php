@@ -15,12 +15,14 @@ header('Content-Type: application/json; charset=utf-8');
 
 $data['res'] = [];
 $posts = [];
+$updatePosts = [];
 $postsData = [];
 $postsPreg = [];
 $errFlg = [];
 $searchPattern = [];
 $regexFlg = 1;
 $query;
+$groupListView;
 $mode = 'insert';
 if ( // Ajax通信か判定
   isset($_SERVER['HTTP_X_REQUESTED_WITH'])
@@ -36,7 +38,13 @@ if ( // Ajax通信か判定
     $query = $GroupDBObj->getContentsData(); // DBからデータを取得する
 
     $data['res']['posts'] = [];
-    $data['res']['preg'] = [];
+  } else if (isset($posts['mode']) && $posts['mode'] === 'delete') {
+
+    $GroupDBObj->delContentsData($posts); // DBからデータを削除する
+    $query = $GroupDBObj->getContentsData(); // DBからデータを取得する（Ajax後の「#nav-app」に表示するデータ）
+    
+    $data['res']['posts'] = $posts;
+
   } else {
     $setPostsdata = $GroupDBObj->setPostsdata($posts); // jsから送られた値をグループ別に分類する
 
@@ -46,14 +54,23 @@ if ( // Ajax通信か判定
 
     $query = $GroupDBObj->createTableWithPostsdata($setPostsdata['posts'], $mode); // jsから送られた値をDBに登録する
 
+    $updatePosts = [
+      'id' => $setPostsdata['posts']['category'],
+      'category' => 0,
+    ];
+    $query = $GroupDBObj->updateTableWithPostsdata($updatePosts); // createTableWithPostsdataと連動して更新する
+
     $data['res']['posts'] = $setPostsdata['posts']; // それぞれの値をセットする
-    $data['res']['preg'] = $setPostsdata['preg']; // 正規表現の種類をセットする
+    $data['res']['preg'] = $setPostsdata['preg']; // 正規表現の種類をセットする    
   }
-  
-  
+
+  $groupListView = $GroupDBObj->getGroupListView(); // DBからデータを取得する（Ajax後の「#js-contents-list」に表示するデータ）
+
+  $data['res']['preg'] = [];
   $data['res']['errFlg'] = $regexFlg; // 正規表現の結果フラグをセットする
   $data['res']['status'] = 'ok'; // PHP処理が問題ない場合の文字列をセットする
   $data['res']['query'] = $query; // DB処理の結果をセットする
+  $data['res']['groupListView'] = $groupListView; // DB処理の結果をセットする
 } else {
   $data['res']['status'] = 'ng'; // PHP処理が問題ありの場合の文字列をセットする
 }

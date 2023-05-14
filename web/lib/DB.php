@@ -79,6 +79,10 @@ class DBClass {
       while($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
         $data[] = $row;
       }
+    } else if ($mode === 'update') {
+      $data = ['results' => 'success'];
+    } else if ($mode === 'delete') {
+      $data = ['results' => 'success'];
     }
     
     return $data;

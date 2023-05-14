@@ -85,7 +85,14 @@ class ContentsDBClass {
     $mode = 'select';
     $posts = [];
     $query = "
-      SELECT * FROM contents;
+      SELECT 
+        id, name, label, category, 
+        (CASE
+          WHEN category > 0 THEN 1 ELSE 0
+        END) AS category_flg,
+        DATE_FORMAT(updated_at, '%Y.%m.%d %k:%i:%s') AS updated_at 
+      FROM contents 
+      ORDER BY id;
     ";
     $DBObj = new DB($this->dsn, $this->user, $this->password);
     $data = $DBObj->run($DBObj->dbData, $query, $mode, $posts);
@@ -111,7 +118,27 @@ class ContentsDBClass {
     $query = "
       SELECT C.id AS id, C.name AS name, C.label AS label 
       FROM contents AS C
-      INNER JOIN contents_group AS CG ON C.id = CG.category;
+      INNER JOIN contents_group AS CG ON C.id = CG.category 
+      ORDER BY C.id;
+    ";
+    $DBObj = new DB($this->dsn, $this->user, $this->password);
+    $view = $DBObj->run($DBObj->dbData, $query, $mode, $posts);
+
+    return $view;
+  }
+
+
+  /**
+   * コンテンツを削除する
+   *
+   * @param array $ids
+   * @return array $flg
+   */
+  public function delContentsData(array $ids): array {
+    $mode = 'delete';
+    $posts = [];
+    $query = "
+      DELETE FROM contents WHERE id IN ({$ids['id']});
     ";
     $DBObj = new DB($this->dsn, $this->user, $this->password);
     $view = $DBObj->run($DBObj->dbData, $query, $mode, $posts);
