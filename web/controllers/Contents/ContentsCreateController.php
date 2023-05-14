@@ -1,6 +1,6 @@
 <?php
 
-namespace Liqsyst\Controllers;
+namespace Liqsyst\Controllers\Contents;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
@@ -8,6 +8,7 @@ require_once(INCLUDE_AJAX_PATH . 'contents/ContentsDB.php');
 use Liqsyst\Ajax\Contents\ContentsDBClass as ContentsDB;
 
 require_once('controllers/BaseController.php');
+use Liqsyst\Controllers\BaseController as BaseController;
 
 class ContentsCreateController extends BaseController {
 
@@ -57,7 +58,7 @@ class ContentsCreateController extends BaseController {
     $routeMap = $this->routeMap;
     $navView = $this->getContentsNavView(); // DBからコンテンツ管理のデータを取得する
     $groupView = $this->getGroupView(); // DBからグループ設定のデータを取得する
-    require_once "views/contents/create.php";
+    require_once "views/contents/create/index.php";
   }
 
     

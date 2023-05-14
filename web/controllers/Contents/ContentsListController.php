@@ -1,6 +1,6 @@
 <?php
 
-namespace Liqsyst\Controllers;
+namespace Liqsyst\Controllers\Contents;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
@@ -11,6 +11,7 @@ require_once(INCLUDE_LIB_PATH . 'DB.php');
 use Liqsyst\Lib\DB\DBClass as DB;
 
 require_once('controllers/BaseController.php');
+use Liqsyst\Controllers\BaseController as BaseController;
 
 class ContentsListController extends BaseController {
 
@@ -84,7 +85,7 @@ class ContentsListController extends BaseController {
     $navView = $this->getContentsNavView(); // DBからコンテンツ管理のデータを取得する
     $groupView = $this->getGroupView(); // DBからグループ設定のデータを取得する
     $contentsListView = $this->getContentsListView(); // DBからコンテンツ管理のデータを取得する（一覧用）
-    require_once "views/contents/index.php";
+    require_once "views/contents/list/index.php";
   }
 
     
