@@ -77,37 +77,6 @@ class ContentsDBClass {
 
 
   /**
-   * コンテンツ管理のデータをDB側から取得する
-   *
-   * @return array $category
-   */
-  public function getContentsData(): array {
-    $mode = 'select';
-    $posts = [];
-    $query = "
-      SELECT 
-        id, name, label, category, 
-        (CASE
-          WHEN category > 0 THEN 1 ELSE 0
-        END) AS category_flg,
-        DATE_FORMAT(updated_at, '%Y.%m.%d %k:%i:%s') AS updated_at 
-      FROM contents 
-      ORDER BY id;
-    ";
-    $DBObj = new DB($this->dsn, $this->user, $this->password);
-    $data = $DBObj->run($DBObj->dbData, $query, $mode, $posts);
-
-    $category = [];
-    foreach((array)$data AS $key => $val) {
-      $cate = ($val['category'] > 0) ? $val['category']: $val['id'];
-      $category['category'][$cate][] = $val;
-    }
-
-    return $category;
-  }
-
-
-  /**
    * グループ設定のデータをDB側から取得する
    *
    * @return array $view

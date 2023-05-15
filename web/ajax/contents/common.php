@@ -37,7 +37,6 @@ if ( // Ajax通信か判定
   $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
 
   if (isset($mode) && $mode === 'select') {
-    // $query = $ContentsDBObj->getContentsData(); // DBからデータを取得する
     $query = $QueryObj->setContentsNavView(); // DBからデータを取得する
 
     $data['res']['posts'] = [];
@@ -55,7 +54,6 @@ if ( // Ajax通信か判定
     $data['res']['preg'] = $setPostsdata['preg']; // 正規表現の種類をセットする
   } else if (isset($mode) && $mode === 'delete') {
     $ContentsDBObj->delContentsData($posts); // DBからデータを削除する
-    // $query = $ContentsDBObj->getContentsData(); // DBからデータを取得する
     $query = $QueryObj->setContentsNavView(); // DBからデータを取得する
 
     $data['res']['posts'] = $posts;
