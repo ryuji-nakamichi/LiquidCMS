@@ -37,11 +37,20 @@
                   </div>
                 </div>
               </a>
-              <div class="item__btn" v-if="item.category_flg === '1'">
+              <div class="item__btn" v-if="item.group_flg === '0'">
                 <div class="c-btn-container js-delete-contents --danger --small" @click="postsAjaxWithParamsRun($event);">
                   <div class="c-btn">
                     <span class="c-btn__link">
                       <span class="c-btn__lbl">削除</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+              <div class="item__btn" v-else>
+                <div class="c-btn-container js-delete-contents --small --disabled">
+                  <div class="c-btn">
+                    <span class="c-btn__link">
+                      <span class="c-btn__lbl">削除不可</span>
                     </span>
                   </div>
                 </div>
@@ -76,7 +85,7 @@
                   </div>
                 </div>
               </a>
-              <?php if ($item['category_flg']) { ?>
+              <?php if ($item['group_flg'] === '0') { ?>
               <div class="item__btn">
                 <div class="c-btn-container js-delete-contents --danger --small" @click="postsAjaxWithParamsRun($event);">
                   <div class="c-btn">
