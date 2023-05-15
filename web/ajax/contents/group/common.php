@@ -23,7 +23,7 @@ $searchPattern = [];
 $regexFlg = 1;
 $query;
 $groupListView;
-$mode = 'insert';
+$mode = '';
 if ( // Ajax通信か判定
   isset($_SERVER['HTTP_X_REQUESTED_WITH'])
   && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
@@ -31,10 +31,10 @@ if ( // Ajax通信か判定
 
   
   $posts = $_POST; // jsから送られた値を格納する
+  $mode = ($posts['mode']) ? $posts['mode']: '';
   $GroupDBObj = new GroupDB(DB_DSH, DB_USER, DB_PASSWORD);
 
   if (isset($posts['mode']) && $posts['mode'] === 'select') {
-    $mode = $posts['mode'];
     $query = $GroupDBObj->getContentsData(); // DBからデータを取得する
 
     $data['res']['posts'] = [];

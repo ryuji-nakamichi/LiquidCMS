@@ -4,11 +4,8 @@ namespace Liqsyst\Controllers\Contents;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
-require_once(INCLUDE_AJAX_PATH . 'contents/group/GroupDB.php');
-use Liqsyst\Ajax\Contents\Group\GroupDBClass as GroupDB;
-
-require_once(INCLUDE_LIB_PATH . 'DB.php');
-use Liqsyst\Lib\DB\DBClass as DB;
+require_once(INCLUDE_LIB_PATH . 'Query.php');
+use Liqsyst\Lib\Query\QueryClass as Query;
 
 require_once('controllers/BaseController.php');
 use Liqsyst\Controllers\BaseController as BaseController;
@@ -33,9 +30,9 @@ class ContentsGroupListController extends BaseController {
    *
    * @return array $navView
    */
-  private function getContentsNavView(): array {
-    $GroupDBObj = new GroupDB(DB_DSH, DB_USER, DB_PASSWORD);
-    $navView = $GroupDBObj->getContentsData(); // DBからコンテンツ管理のデータを取得する
+  private function setContentsNavView(): array {
+    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+    $navView = $QueryObj->setContentsNavView(); // DBからコンテンツ管理のデータを取得する
     return $navView;
   }
 
@@ -43,11 +40,23 @@ class ContentsGroupListController extends BaseController {
   /**
    * グループ設定のViewデータ取得
    *
-   * @return array $navView
+   * @return array $view
    */
-  private function getGroupView(): array {
-    $GroupDBObj = new GroupDB(DB_DSH, DB_USER, DB_PASSWORD);
-    $view = $GroupDBObj->getGroupData(); // DBからコンテンツ管理のデータを取得する
+  private function setGroupView(): array {
+    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+    $view = $QueryObj->setGroupView(); // DBからコンテンツ管理のデータを取得する
+    return $view;
+  }
+
+
+  /**
+   * コンテンツ管理のデータ取得（一覧用）
+   *
+   * @return array $view
+   */
+  private function setContentsListView(): array {
+    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+    $view = $QueryObj->setContentsListView();
     return $view;
   }
 
@@ -58,57 +67,9 @@ class ContentsGroupListController extends BaseController {
    *
    * @return array $view
    */
-  private function getGroupListView(): array {
-    $mode = 'select';
-
-    $allData = "
-      SELECT
-        C.id,
-        C.name,
-        C.category AS C_category,
-        CG.category CG_category,
-        (CASE
-          WHEN C.category = 0 THEN 0 ELSE COUNT(C.category) OVER (PARTITION BY C.category)
-        END) AS child_max,
-        (CASE
-          WHEN CG.category IS NOT NULL THEN 0 ELSE 1
-        END) AS belong_flg
-      FROM contents AS C
-      LEFT JOIN contents_group AS CG ON C.id = CG.category";
-
-    $query = "
-      SELECT 
-        C.id AS id,
-        C.name AS name,
-        C.label AS label,
-        DATE_FORMAT(C.updated_at, '%Y.%m.%d %k:%i:%s') AS updated_at,
-        (CASE
-          WHEN allGroup.child_max > 0 THEN allGroup.child_max ELSE 0
-        END) AS child_max
-      FROM contents AS C
-      LEFT JOIN(
-        SELECT 
-          C1.id,
-          C1.name,
-          hasChildren.C_category,
-          hasChildren.child_max
-        FROM(
-          SELECT 
-            AllData.C_category,
-            AllData.child_max
-          FROM (
-            {$allData}
-          ) AS AllData
-          GROUP BY AllData.C_category, AllData.child_max
-        ) AS hasChildren
-        LEFT JOIN contents AS C1 ON hasChildren.C_category = C1.id
-        WHERE hasChildren.child_max > 0
-      ) AS allGroup ON allGroup.C_category = C.id
-      LEFT JOIN contents_group AS CG2 ON C.id = CG2.category
-      WHERE CG2.category IS NOT NULL;
-    ";
-    $DBObj = new DB(DB_DSH, DB_USER, DB_PASSWORD);
-    $view = $DBObj->run($DBObj->dbData, $query, $mode, []);
+  private function setGroupListView(): array {
+    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+    $view = $QueryObj->setGroupListView();
     return $view;
   }
 
@@ -120,9 +81,10 @@ class ContentsGroupListController extends BaseController {
    */
   private function show(): void {
     $routeMap = $this->routeMap;
-    $navView = $this->getContentsNavView(); // DBからコンテンツ管理のデータを取得する
-    $groupView = $this->getGroupView(); // DBからグループ設定のデータを取得する
-    $groupListView = $this->getGroupListView(); // DBからグループ一覧のデータを取得する
+    $navView = $this->setContentsNavView();
+    $groupView = $this->setGroupView();
+    $groupListView = $this->setGroupListView();
+    // $contentsListView = $this->setContentsListView();
     require_once "views/contents/group/list/index.php";
   }
 

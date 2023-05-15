@@ -246,6 +246,7 @@ function stepVue() {
       getsAjaxContents(url) {
         const reqParams = new URLSearchParams();
         reqParams.append('mode', 'select');
+        reqParams.append('mode_preg', 'alpha');
         axios.post(url, reqParams, {
           headers: {
             'X-Requested-With': 'XMLHttpRequest'

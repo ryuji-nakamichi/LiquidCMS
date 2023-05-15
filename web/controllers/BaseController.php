@@ -3,6 +3,8 @@
 namespace Liqsyst\Controllers;
 
 abstract class BaseController {
-  // プロパティ
-  // public $view = [];
+
+  // 全てのクラスで使用するプロパティを設定したい場合はここで設定する。　
+  // public $testtest = ['test' => 'testです'];
+
 }

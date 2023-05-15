@@ -4,8 +4,8 @@ namespace Liqsyst\Controllers;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
-require_once(INCLUDE_AJAX_PATH . 'contents/ContentsDB.php');
-use Liqsyst\Ajax\Contents\ContentsDBClass as ContentsDB;
+require_once(INCLUDE_LIB_PATH . 'Query.php');
+use Liqsyst\Lib\Query\QueryClass as Query;
 
 require_once('controllers/BaseController.php');
 
@@ -29,10 +29,34 @@ class HomeController extends BaseController {
    *
    * @return array $navView
    */
-  private function getContentsNavView(): array {
-    $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
-    $navView = $ContentsDBObj->getContentsData(); // DBからコンテンツ管理のデータを取得する
+  private function setContentsNavView(): array {
+    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+    $navView = $QueryObj->setContentsNavView(); // DBからコンテンツ管理のデータを取得する
     return $navView;
+  }
+
+
+  /**
+   * グループ設定のViewデータ取得
+   *
+   * @return array $view
+   */
+  private function setGroupView(): array {
+    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+    $view = $QueryObj->setGroupView(); // DBからコンテンツ管理のデータを取得する
+    return $view;
+  }
+
+
+  /**
+   * コンテンツ管理のデータ取得（一覧用）
+   *
+   * @return array $view
+   */
+  private function setContentsListView(): array {
+    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+    $view = $QueryObj->setContentsListView();
+    return $view;
   }
 
 
@@ -43,7 +67,9 @@ class HomeController extends BaseController {
    */
   public function show(): void {
     $routeMap = $this->routeMap;
-    $navView = $this->getContentsNavView(); // DBからコンテンツ管理のデータを取得する
+    $navView = $this->setContentsNavView();
+    // $groupView = $this->setGroupView();
+    // $contentsListView = $this->setContentsListView();
     require_once "views/dashboard/index.php";
   }
 

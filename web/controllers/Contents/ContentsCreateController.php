@@ -4,8 +4,8 @@ namespace Liqsyst\Controllers\Contents;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
-require_once(INCLUDE_AJAX_PATH . 'contents/ContentsDB.php');
-use Liqsyst\Ajax\Contents\ContentsDBClass as ContentsDB;
+require_once(INCLUDE_LIB_PATH . 'Query.php');
+use Liqsyst\Lib\Query\QueryClass as Query;
 
 require_once('controllers/BaseController.php');
 use Liqsyst\Controllers\BaseController as BaseController;
@@ -30,9 +30,9 @@ class ContentsCreateController extends BaseController {
    *
    * @return array $navView
    */
-  private function getContentsNavView(): array {
-    $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
-    $navView = $ContentsDBObj->getContentsData(); // DBからコンテンツ管理のデータを取得する
+  private function setContentsNavView(): array {
+    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+    $navView = $QueryObj->setContentsNavView(); // DBからコンテンツ管理のデータを取得する
     return $navView;
   }
 
@@ -40,11 +40,23 @@ class ContentsCreateController extends BaseController {
   /**
    * グループ設定のViewデータ取得
    *
-   * @return array $navView
+   * @return array $view
    */
-  private function getGroupView(): array {
-    $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
-    $view = $ContentsDBObj->getGroupData(); // DBからコンテンツ管理のデータを取得する
+  private function setGroupView(): array {
+    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+    $view = $QueryObj->setGroupView(); // DBからコンテンツ管理のデータを取得する
+    return $view;
+  }
+
+
+  /**
+   * コンテンツ管理のデータ取得（一覧用）
+   *
+   * @return array $view
+   */
+  private function setContentsListView(): array {
+    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+    $view = $QueryObj->setContentsListView();
     return $view;
   }
 
@@ -56,8 +68,9 @@ class ContentsCreateController extends BaseController {
    */
   private function showCreate(): void {
     $routeMap = $this->routeMap;
-    $navView = $this->getContentsNavView(); // DBからコンテンツ管理のデータを取得する
-    $groupView = $this->getGroupView(); // DBからグループ設定のデータを取得する
+    $navView = $this->setContentsNavView();
+    $groupView = $this->setGroupView();
+    // $contentsListView = $this->setContentsListView();
     require_once "views/contents/create/index.php";
   }
 

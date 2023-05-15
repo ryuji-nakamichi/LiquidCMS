@@ -7,6 +7,9 @@ require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 require_once(INCLUDE_AJAX_PATH . 'contents/ContentsDB.php');
 use Liqsyst\Ajax\Contents\ContentsDBClass as ContentsDB;
 
+require_once(INCLUDE_LIB_PATH . 'Query.php');
+use Liqsyst\Lib\Query\QueryClass as Query;
+
 require_once(INCLUDE_REQUESTS_PATH . 'contents/index.php');
 use Liqsyst\Requests\Contents\ContentsRegexClass as Requests;
 
@@ -21,7 +24,7 @@ $errFlg = [];
 $searchPattern = [];
 $regexFlg = 1;
 $query;
-$mode = 'insert';
+$mode = '';
 if ( // Ajax通信か判定
   isset($_SERVER['HTTP_X_REQUESTED_WITH'])
   && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
@@ -29,15 +32,17 @@ if ( // Ajax通信か判定
 
   
   $posts = $_POST; // jsから送られた値を格納する
+  $mode = ($posts['mode']) ? $posts['mode']: '';
   $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
+  $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
 
-  if (isset($posts['mode']) && $posts['mode'] === 'select') {
-    $mode = $posts['mode'];
-    $query = $ContentsDBObj->getContentsData(); // DBからデータを取得する
+  if (isset($mode) && $mode === 'select') {
+    // $query = $ContentsDBObj->getContentsData(); // DBからデータを取得する
+    $query = $QueryObj->setContentsNavView(); // DBからデータを取得する
 
     $data['res']['posts'] = [];
     $data['res']['preg'] = [];
-  } else {
+  } else if (isset($mode) && $mode === 'insert') {
     $setPostsdata = $ContentsDBObj->setPostsdata($posts); // jsから送られた値をグループ別に分類する
 
     // 正規表現にて正しい値か検査する
@@ -48,6 +53,13 @@ if ( // Ajax通信か判定
 
     $data['res']['posts'] = $setPostsdata['posts']; // それぞれの値をセットする
     $data['res']['preg'] = $setPostsdata['preg']; // 正規表現の種類をセットする
+  } else if (isset($mode) && $mode === 'delete') {
+    $ContentsDBObj->delContentsData($posts); // DBからデータを削除する
+    // $query = $ContentsDBObj->getContentsData(); // DBからデータを取得する
+    $query = $QueryObj->setContentsNavView(); // DBからデータを取得する
+
+    $data['res']['posts'] = $posts;
+    $data['res']['preg'] = [];
   }
   
   

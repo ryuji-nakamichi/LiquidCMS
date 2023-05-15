@@ -171,6 +171,7 @@ function stepVue() {
           params.append(column + '_preg', preg);
         }
         params.append('mode', 'delete');
+        params.append('mode_preg', 'alpha');
 
         return params;
       },
@@ -235,7 +236,7 @@ function stepVue() {
         const $el = $(e.target);
         const id = $el.parents('.item__contents').attr('data-id');
         const params = this.setParams(id);
-        this.postsAjaxWithParams(params, '/ajax/contents/list/');
+        this.postsAjaxWithParams(params, '/ajax/contents/common.php');
       },
       /**
        * Ajax送信用処理（取得用）
@@ -245,6 +246,7 @@ function stepVue() {
       getsAjaxContents(url) {
         const reqParams = new URLSearchParams();
         reqParams.append('mode', 'select');
+        reqParams.append('mode_preg', 'alpha');
         axios.post(url, reqParams, {
           headers: {
             'X-Requested-With': 'XMLHttpRequest'

@@ -211,6 +211,8 @@ function stepVue() {
       setParams() {
         const params = new URLSearchParams();
         const max = this.formData.posts.length;
+        params.append('mode', 'insert');
+        params.append('mode_preg', 'alpha');
 
         for (let i = 0; i < max; i++) {
           params.append(this.formData.posts[i].val.key, this.formData.posts[i].val.data);
@@ -288,6 +290,7 @@ function stepVue() {
       getsAjaxContents(url) {
         const reqParams = new URLSearchParams();
         reqParams.append('mode', 'select');
+        reqParams.append('mode_preg', 'alpha');
         axios.post(url, reqParams, {
           headers: {
             'X-Requested-With': 'XMLHttpRequest'
