@@ -155,11 +155,11 @@ function stepVue() {
       /**
        * Ajax送信用処理
        * 各inputやselectに入力された値をセットする
-       * @param {object} id 
+       * @param {string} id 
        * @returns {object} params
        */
       setParams(id) {
-        const params = new URLSearchParams(id);
+        const params = new URLSearchParams();
         // const max = this.formData.posts.length;
         const max = 1;
         const dataId = id;

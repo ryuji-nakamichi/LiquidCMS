@@ -50,4 +50,26 @@ class RegexUtilityClass {
     return $flgs;
   }
 
+
+  /**
+   * チェックしエラーが一つでもあればfalseを返す
+   *
+   * @param  array $regexs
+   * @return bool $flg
+   */
+  public function checkExistsErr (array $regexs): bool {
+    $flg = false;
+
+    if (count($regexs)) {
+      foreach ((array)$regexs AS $key => $val) {
+        if ($val === 1) {
+          $flg = true;
+          break;
+        }
+      }
+    }
+    
+    return $flg;
+  }
+
 }

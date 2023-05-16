@@ -22,8 +22,8 @@ $postsData = [];
 $postsPreg = [];
 $errFlg = [];
 $searchPattern = [];
-$regexFlg = 1;
-$query;
+$regexFlg = 0;
+$query = [];
 $mode = '';
 if ( // Ajax通信か判定
   isset($_SERVER['HTTP_X_REQUESTED_WITH'])
@@ -35,6 +35,7 @@ if ( // Ajax通信か判定
   $mode = ($posts['mode']) ? $posts['mode']: '';
   $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
   $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+  $RequestsObj = new Requests();
 
   if (isset($mode) && $mode === 'select') {
     $query = $QueryObj->setContentsNavView(); // DBからデータを取得する
@@ -45,15 +46,24 @@ if ( // Ajax通信か判定
     $setPostsdata = $ContentsDBObj->setPostsdata($posts); // jsから送られた値をグループ別に分類する
 
     // 正規表現にて正しい値か検査する
-    $RequestsObj = new Requests();
     $regexFlg = $RequestsObj->run($setPostsdata['preg'], $setPostsdata['posts']);
 
-    $query = $ContentsDBObj->createTableWithPostsdata($setPostsdata['posts'], $mode); // jsから送られた値をDBに登録する
-
+    if (!$regexFlg) {
+      $query = $ContentsDBObj->createTableWithPostsdata($setPostsdata['posts'], $mode); // jsから送られた値をDBに登録する
+    }
+    
     $data['res']['posts'] = $setPostsdata['posts']; // それぞれの値をセットする
     $data['res']['preg'] = $setPostsdata['preg']; // 正規表現の種類をセットする
   } else if (isset($mode) && $mode === 'delete') {
-    $ContentsDBObj->delContentsData($posts); // DBからデータを削除する
+
+    $setPostsdata = $ContentsDBObj->setPostsdata($posts); // jsから送られた値をグループ別に分類する
+
+    // 正規表現にて正しい値か検査する
+    $regexFlg = $RequestsObj->run($setPostsdata['preg'], $setPostsdata['posts']);
+
+    if (!$regexFlg) {
+      $ContentsDBObj->delContentsData($posts); // DBからデータを削除する
+    }
     $query = $QueryObj->setContentsNavView(); // DBからデータを取得する
 
     $data['res']['posts'] = $posts;

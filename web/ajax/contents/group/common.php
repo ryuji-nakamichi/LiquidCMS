@@ -24,7 +24,7 @@ $postsPreg = [];
 $errFlg = [];
 $searchPattern = [];
 $regexFlg = 1;
-$query;
+$query = [];
 $groupListView;
 $mode = '';
 if ( // Ajax通信か判定
@@ -37,32 +37,44 @@ if ( // Ajax通信か判定
   $mode = ($posts['mode']) ? $posts['mode']: '';
   $GroupDBObj = new GroupDB(DB_DSH, DB_USER, DB_PASSWORD);
   $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
+  $RequestsObj = new Requests();
 
-  if (isset($posts['mode']) && $posts['mode'] === 'select') {
+  if (isset($mode) && $mode === 'select') {
     $query = $GroupDBObj->getContentsData(); // DBからデータを取得する
 
     $data['res']['posts'] = [];
-  } else if (isset($posts['mode']) && $posts['mode'] === 'delete') {
+  } else if (isset($mode) && $mode === 'delete') {
 
-    $GroupDBObj->delContentsData($posts); // DBからデータを削除する
+    $setPostsdata = $GroupDBObj->setPostsdata($posts); // jsから送られた値をグループ別に分類する
+
+    // 正規表現にて正しい値か検査する
+    $regexFlg = $RequestsObj->run($setPostsdata['preg'], $setPostsdata['posts']);
+
+    if (!$regexFlg) {
+      $GroupDBObj->delContentsData($posts); // DBからデータを削除する
+    }
+
     $query = $GroupDBObj->getContentsData(); // DBからデータを取得する（Ajax後の「#nav-app」に表示するデータ）
     
     $data['res']['posts'] = $posts;
 
-  } else if (isset($posts['mode']) && $posts['mode'] === 'insert') {
+  } else if (isset($mode) && $mode === 'insert') {
     $setPostsdata = $GroupDBObj->setPostsdata($posts); // jsから送られた値をグループ別に分類する
 
     // 正規表現にて正しい値か検査する
     $RequestsObj = new Requests();
     $regexFlg = $RequestsObj->run($setPostsdata['preg'], $setPostsdata['posts']);
 
-    $query = $GroupDBObj->createTableWithPostsdata($setPostsdata['posts'], $mode); // jsから送られた値をDBに登録する
+    if (!$regexFlg) {
+      $query = $GroupDBObj->createTableWithPostsdata($setPostsdata['posts'], $mode); // jsから送られた値をDBに登録する
 
-    $updatePosts = [
-      'id' => $setPostsdata['posts']['category'],
-      'category' => 0,
-    ];
-    $query = $GroupDBObj->updateTableWithPostsdata($updatePosts); // createTableWithPostsdataと連動して更新する
+      $updatePosts = [
+        'id' => $setPostsdata['posts']['category'],
+        'category' => 0,
+      ];
+      $query = $GroupDBObj->updateTableWithPostsdata($updatePosts); // createTableWithPostsdataと連動して更新する
+    }
+    
 
     $data['res']['posts'] = $setPostsdata['posts']; // それぞれの値をセットする
     $data['res']['preg'] = $setPostsdata['preg']; // 正規表現の種類をセットする    

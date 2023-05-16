@@ -172,7 +172,7 @@ function stepVue() {
           params.append(column + '_preg', preg);
         }
         params.append('mode', 'delete');
-        params.append('mode_preg', 'delete');
+        params.append('mode_preg', 'alpha');
 
         return params;
       },

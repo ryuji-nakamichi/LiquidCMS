@@ -19,13 +19,14 @@ class ContentsRegexClass {
   *
   * @param  array $regexs
   * @param  array $values
-  * @return array $flgs
+  * @return bool $flg
   */
-  public function run(array $regexs, array $values): array {
+  public function run(array $regexs, array $values): bool {
     $RegexUtilityObj = new Requests();
     $regexNames = $RegexUtilityObj->setRegexName($regexs);
     $flgs = $RegexUtilityObj->checkPostValues($regexNames, $values);
-    return $flgs;
+    $flg = $RegexUtilityObj->checkExistsErr($flgs);
+    return $flg;
   }
 
 }
