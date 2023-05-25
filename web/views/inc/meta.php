@@ -30,6 +30,14 @@ switch ($routeName) {
     ];
     break;
 
+  case 'contents_edit':
+    $metaArr = [
+      'title' => 'コンテンツ編集｜LiquidCMS',
+      'description' => 'LiquidCMSのコンテンツ編集です。現在のコンテンツを編集をすることができます。',
+      'keywords' => 'LiquidCMS,ヘッドレスCMS,安い,使いやすい,マルチプラットフォーム対応',
+    ];
+    break;
+
   case 'contents_group_list':
     $metaArr = [
       'title' => 'グループ一覧｜LiquidCMS',

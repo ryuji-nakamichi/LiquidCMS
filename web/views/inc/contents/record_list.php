@@ -68,7 +68,7 @@
           <?php foreach((array)$items AS $itemKey => $item) { ?>
           <li class="list__item --public">
             <div class="item__contents" data-id="<?=$item['id']?>">
-              <a class="item__link" href="/contents/edit/<?=$item['id']?>">
+              <a class="item__link" href="/contents/<?=$item['id']?>">
                 <div class="item__status">
                   <span class="item__status-icon --public"></span>
                   <p class="item__status-txt">公開中</p>

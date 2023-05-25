@@ -66,5 +66,23 @@ class UtilityClass {
   }
 
 
+  /**
+   * 現在アクセス中の任意のパラメータを一つ取得する
+   *
+   * @param int $index 添字
+   * @return string $parameter
+   */
+  public function getUriOneParameter($index): string {
+    $parameter = '';
+    $parameterStrArr = [];
+    $uriWithParameter = $_SERVER['REQUEST_URI'];
+    if (strpos($uriWithParameter, '/') !== false) { // 「/」が含まれていれば
+      $parameterStrArr = explode('/', $uriWithParameter);
+      $parameter = $parameterStrArr[$index];
+    }
+    return $parameter;
+  }
+
+
 }
 

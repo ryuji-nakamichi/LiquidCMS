@@ -3,6 +3,7 @@ if (isset($routeMap['info']['name'])) {
   if (
     $routeMap['info']['name'] === 'contents_create' 
   || $routeMap['info']['name'] === 'contents_list' 
+  || $routeMap['info']['name'] === 'contents_edit' 
   || $routeMap['info']['name'] === 'contents_group_list'
   || $routeMap['info']['name'] === 'contents_group_create'
   ) { ?>

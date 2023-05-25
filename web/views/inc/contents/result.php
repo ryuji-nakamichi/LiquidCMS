@@ -8,7 +8,8 @@
         <li class="list__item">
           <p class="item__des">
             <span class="item__des-inner">コンテンツデータ名 : </span>
-            <span id="result-name" class="item__des-inner">
+            <span id="result-name" class="item__des-inner" v-if="pageName == 'contents_edit'">変更不可なので変更なし</span>
+            <span id="result-name" class="item__des-inner" v-else>
               {{ formData.posts[0].val.data !== '' ? formData.posts[0].val.lbl : '入力なし' }}
             </span>
           </p>

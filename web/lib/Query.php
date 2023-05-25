@@ -218,6 +218,84 @@ class QueryClass {
 
 
   /**
+   * コンテンツ管理のデータ取得（formに表示する用）
+   * Getter
+   *
+   * @param int $id レコードID
+   * @return array $view
+   */
+  private function getContentsEditView($id): array {
+    $mode = 'select';
+    $dataId = $id;
+
+    $allData = "
+      SELECT
+        C.id,
+        C.name,
+        C.category AS C_category,
+        CG.category CG_category,
+        (CASE
+          WHEN C.category = 0 THEN 0 ELSE COUNT(C.category) OVER (PARTITION BY C.category)
+        END) AS child_max,
+        (CASE
+          WHEN CG.category IS NOT NULL THEN 0 ELSE 1
+        END) AS belong_flg
+      FROM contents AS C
+      LEFT JOIN contents_group AS CG ON C.id = CG.category";
+
+    $query = "
+      SELECT 
+        C.id AS id,
+        C.name AS name,
+        C.label AS label,
+        C.category AS category,
+        (CASE
+          WHEN C.category > 0
+          THEN (
+            SELECT label FROM contents WHERE id = C.category
+          )
+          ELSE 'なし'
+        END) AS category_label,
+        (CASE
+          WHEN CG.id IS NOT NULL THEN 1 ELSE 0
+        END) AS group_flg,
+        DATE_FORMAT(C.updated_at, '%Y.%m.%d %k:%i:%s') AS updated_at,
+        (CASE
+          WHEN C.category > 0 THEN 1 ELSE 0
+        END) AS category_flg,
+        (CASE
+          WHEN allGroup.child_max > 0 THEN allGroup.child_max ELSE 0
+        END) AS child_max
+      FROM contents AS C
+      LEFT JOIN(
+        SELECT 
+          C1.id,
+          C1.name,
+          hasChildren.C_category,
+          hasChildren.child_max
+        FROM(
+          SELECT 
+            AllData.C_category,
+            AllData.child_max
+          FROM (
+            {$allData}
+          ) AS AllData
+          GROUP BY AllData.C_category, AllData.child_max
+        ) AS hasChildren
+        LEFT JOIN contents AS C1 ON hasChildren.C_category = C1.id
+        WHERE hasChildren.child_max > 0
+      ) AS allGroup ON allGroup.C_category = C.id
+      LEFT JOIN contents_group AS CG ON C.id = CG.category
+      WHERE C.id = {$dataId};
+    ";
+
+    $DBObj = new DB($this->dsn, $this->user, $this->password);
+    $view = $DBObj->run($DBObj->dbData, $query, $mode, []);
+    return $view;
+  }
+
+
+  /**
    * グループ管理のViewデータ取得
    * Setter
    *
@@ -261,6 +339,19 @@ class QueryClass {
    */
   public function setContentsListView(): array {
     $view = $this->getContentsListView(); // DBからコンテンツ管理のデータ取得（一覧用）を取得する
+    return $view;
+  }
+
+
+  /**
+   * コンテンツ管理の編集用データ取得（formに表示する用）
+   * Setter
+   *
+   * @param int $id レコードID
+   * @return array $view
+   */
+  public function setContentsEditView($id): array {
+    $view = $this->getContentsEditView($id); // DBからコンテンツ管理のデータ取得（formに表示する用）を取得する
     return $view;
   }
 

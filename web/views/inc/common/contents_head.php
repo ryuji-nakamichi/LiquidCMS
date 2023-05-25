@@ -24,6 +24,12 @@ switch ($routeName) {
     ];
     break;
 
+  case 'contents_edit':
+    $contentsHeadInfoArr = [
+      'title' => 'コンテンツ編集',
+    ];
+    break;
+
   case 'contents_group_list':
     $contentsHeadInfoArr = [
       'title' => 'グループ一覧',

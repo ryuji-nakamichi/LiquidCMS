@@ -6,7 +6,7 @@ $routeMap = [
     'info' => [
       'name' => 'home',
       'controller' => 'HomeController',
-      'params' => 'test',
+      'params' => 'HomeController',
     ]
   ],
   [
@@ -23,6 +23,14 @@ $routeMap = [
       'name' => 'contents_create',
       'controller' => 'Contents/ContentsCreateController',
       'params' => 'ContentsCreateController',
+    ]
+  ],
+  [
+    'path' => '/contents/{id}',
+    'info' => [
+      'name' => 'contents_edit',
+      'controller' => 'Contents/ContentsEditController',
+      'params' => 'ContentsEditController',
     ]
   ],
   [
