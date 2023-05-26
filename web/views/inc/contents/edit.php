@@ -1,3 +1,4 @@
+<input id="data-id" type="hidden" value="<?=$contentsEditView[0]['id']?>">
 <input id="category-id" type="hidden" value="<?=$contentsEditView[0]['category']?>">
 <input id="label-name" type="hidden" value="<?=$contentsEditView[0]['label']?>">
 <?php /* ステップ1 */ ?>
@@ -30,7 +31,7 @@
       <input id="label" class="label form-blk-input-field js-post-field" type="text" name="label" v-model="label" @input="getPosts('label'); checkErrPosts('label');" data-preg="text" data-num="2" data-tag="text">
       <p class="form-blk-input-err"></p>
     </div>
-    <div class="form-blk-input --err" v-if="errData.posts[1].val.flg && label === ''">
+    <div class="form-blk-input --err" v-if="errData.posts[0].val.flg && label === ''">
       <p class="form-blk-confirm">コンテンツラベル名は必ずご入力ください。<br>また、空白文字（半角・全角スペースなど）は使用致しかねますますのでご注意ください。</p>
     </div>
   </div>
@@ -39,7 +40,7 @@
       <div class="form-blk-input">
         <div class="c-submit-btn-outer --col-1">
           <div class="c-submit-btn-container">
-            <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" @click="getPosts('label'); changeNextStep();" v-if="!errData.posts[1].val.flg || label !== ''">
+            <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" @click="getPosts('label'); changeNextStep();" v-if="!errData.posts[0].val.flg || label !== ''">
               <span class="c-submit-btn__lbl">次へ</span>
             </button>
             <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" v-else disabled>
@@ -73,7 +74,7 @@
       <p class="form-blk-input-err"></p>
     </div>
     <?php if ($contentsEditView[0]['child_max'] === '0' && $contentsEditView[0]['group_flg'] === '0') { ?>
-    <div class="form-blk-input --err" v-if="errData.posts[2].val.flg">
+    <div class="form-blk-input --err" v-if="errData.posts[1].val.flg">
       <p class="form-blk-confirm">グループ設定は必ずご選択ください。</p>
     </div>
     <?php } else { ?>
@@ -92,7 +93,7 @@
             </button>
           </div>
           <div class="c-submit-btn-container">
-            <button id="g-form-confirm" class="c-submit-btn" type="button" data-mode="next" @click="getPosts('category'); changeNextStep();" v-if="!errData.posts[2].val.flg || selected !== ''">
+            <button id="g-form-confirm" class="c-submit-btn" type="button" data-mode="next" @click="getPosts('category'); changeNextStep();" v-if="!errData.posts[1].val.flg || selected !== ''">
               <span class="c-submit-btn__lbl">確認する</span>
             </button>
             <button id="g-form-confirm" class="c-submit-btn" type="button" data-mode="next" v-else disabled>

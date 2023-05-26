@@ -17,7 +17,7 @@ function stepVue() {
     data() {
       return {
         stepMax: 4,
-        formItemMax: 3,
+        formItemMax: 2,
         currentStep: 1,
         formData: {
           posts:
@@ -51,6 +51,7 @@ function stepVue() {
         },
         editFlg: true,
         pageName: 'contents_edit',
+        id: '', // データID
         selected: '', // グループ設定の初期値になる
         label: '', // コンテンツラベル名の初期値になる
       }
@@ -60,6 +61,7 @@ function stepVue() {
       this.setInitErrsData(this.formItemMax);
     },
     mounted: function () {
+      this.getIdData('data-id');
       this.getSelectData('category-id');
       this.getLabelData('label-name');
     },
@@ -211,7 +213,7 @@ function stepVue() {
         }
       },
       /**
-       * Ajax送信用処理
+       * Ajax送信用処理（更新用）
        * 各inputやselectに入力された値をセットする
        * 
        * @returns {object} params
@@ -219,12 +221,17 @@ function stepVue() {
       setParams() {
         const params = new URLSearchParams();
         const max = this.formData.posts.length;
-        params.append('mode', 'insert');
+        params.append('mode', 'update');
         params.append('mode_preg', 'alpha');
+        params.append('id', this.id);
+        params.append('id_preg', 'integerNotZero');
+        console.log(params);
 
         for (let i = 0; i < max; i++) {
-          params.append(this.formData.posts[i].val.key, this.formData.posts[i].val.data);
-          params.append(this.formData.posts[i].val.key + '_preg', this.formData.posts[i].val.preg);
+          if (this.formData.posts[i].val.key) {
+            params.append(this.formData.posts[i].val.key, this.formData.posts[i].val.data);
+            params.append(this.formData.posts[i].val.key + '_preg', this.formData.posts[i].val.preg);
+          }
         }
 
         return params;
@@ -325,6 +332,14 @@ function stepVue() {
        */
       getsAjaxContentsRun() {
         this.getsAjaxContents('/ajax/contents/common.php');
+      },
+      /**
+       * IDの値を取得する
+       * @param {string} name
+       * @returns {void}
+       */
+      getIdData(name) {
+        this.id = document.getElementById(name) ? document.getElementById(name).value : ''
       },
       /**
        * セレクトボックスの値を取得する

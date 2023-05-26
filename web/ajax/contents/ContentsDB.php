@@ -77,6 +77,30 @@ class ContentsDBClass {
 
 
   /**
+   * Ajax経由で送られてきたデータでDBのデータを更新する
+   *
+   * @param array $posts
+   * @param string $mode
+   * @return array $data
+   */
+  public function updateTableWithPostsdata(array $posts, string $mode): array {
+    $query = "
+      UPDATE 
+        contents 
+      SET 
+        label = \"{$posts['label']}\",
+        category = \"{$posts['category']}\",
+        updated_at = default
+      WHERE id = \"{$posts['id']}\";
+    ";
+    $DBObj = new DB($this->dsn, $this->user, $this->password);
+    $data = $DBObj->run($DBObj->dbData, $query, $mode, $posts);
+
+    return $data;
+  }
+
+
+  /**
    * グループ設定のデータをDB側から取得する
    *
    * @return array $view

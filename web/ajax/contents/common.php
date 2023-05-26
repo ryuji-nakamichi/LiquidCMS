@@ -54,6 +54,18 @@ if ( // Ajax通信か判定
     
     $data['res']['posts'] = $setPostsdata['posts']; // それぞれの値をセットする
     $data['res']['preg'] = $setPostsdata['preg']; // 正規表現の種類をセットする
+  } else if (isset($mode) && $mode === 'update') {
+    $setPostsdata = $ContentsDBObj->setPostsdata($posts); // jsから送られた値をグループ別に分類する
+
+    // 正規表現にて正しい値か検査する
+    $regexFlg = $RequestsObj->run($setPostsdata['preg'], $setPostsdata['posts']);
+
+    if (!$regexFlg) {
+      $query = $ContentsDBObj->updateTableWithPostsdata($setPostsdata['posts'], $mode); // jsから送られた値をDBに登録する
+    }
+    
+    $data['res']['posts'] = $setPostsdata['posts']; // それぞれの値をセットする
+    $data['res']['preg'] = $setPostsdata['preg']; // 正規表現の種類をセットする
   } else if (isset($mode) && $mode === 'delete') {
 
     $setPostsdata = $ContentsDBObj->setPostsdata($posts); // jsから送られた値をグループ別に分類する
