@@ -70,7 +70,8 @@ class RouteClass {
       }
       if ($pregKey > 0) { // 最初以外のループ
         if (strpos($pregVal, $parameterStatStr) !== false) { // パラメータの場合
-          $searchPattern .= "/[a-zA-Z0-9]+";
+          // $searchPattern .= "/[a-zA-Z0-9]+";
+          $searchPattern .= "/[1-9]{1}[0-9]*";
         } else { // パラメータではない場合
           $searchPattern .= "/{$pregVal}";
         }
