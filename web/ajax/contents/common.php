@@ -25,6 +25,8 @@ $searchPattern = [];
 $regexFlg = 0;
 $query = [];
 $mode = '';
+$method = '';
+$name = '';
 if ( // Ajax通信か判定
   isset($_SERVER['HTTP_X_REQUESTED_WITH'])
   && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest'
@@ -33,12 +35,21 @@ if ( // Ajax通信か判定
   
   $posts = $_POST; // jsから送られた値を格納する
   $mode = ($posts['mode']) ? $posts['mode']: '';
+  $method = ($posts['method']) ? $posts['method']: '';
+  $name = ($posts['name']) ? $posts['name']: '';
   $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
   $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
   $RequestsObj = new Requests();
 
   if (isset($mode) && $mode === 'select') {
-    $query = $QueryObj->setContentsNavView(); // DBからデータを取得する
+
+    if ($method === 'exists') {
+      $query = $QueryObj->contentsNameExists($name); // DBからデータを取得する
+
+      $data['res']['existsFlg'] = (count($query)) ? true: false;
+    } else {
+      $query = $QueryObj->setContentsNavView(); // DBからデータを取得する
+    }
 
     $data['res']['posts'] = [];
     $data['res']['preg'] = [];

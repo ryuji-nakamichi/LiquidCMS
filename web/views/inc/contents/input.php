@@ -9,11 +9,14 @@
       <p class="form-blk-confirm">こちらに入力された名称でデータを管理します。</p>
     </div>
     <div class="form-blk-input">
-      <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getPosts('name'); checkErrPosts('name');" data-preg="alpha" data-num="1" data-tag="text">
+      <input id="name" class="name form-blk-input-field js-post-field" type="text" name="name" v-model="formData.posts[0].val.data" @input="getPosts('name'); checkErrPosts('name');" @change="checkContentsExists('name');" data-preg="alpha" data-num="1" data-tag="text">
       <p class="form-blk-input-err"></p>
     </div>
     <div class="form-blk-input --err" v-if="errData.posts[0].val.flg">
       <p class="form-blk-confirm">コンテンツデータ名は必ずご入力ください。<br>また、アルファベットとアンダースコア（_）以外は使用致しかねますますのでご注意ください。</p>
+    </div>
+    <div class="form-blk-input --err" v-if="contentsNameExistsFlg">
+      <p class="form-blk-confirm">すでに登録済なので違う名称してください。</p>
     </div>
   </div>
   <div class="g-contact-form-blk --label">
@@ -37,10 +40,10 @@
       <div class="form-blk-input">
         <div class="c-submit-btn-outer --col-1">
           <div class="c-submit-btn-container">
-            <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep();" v-if="!errData.posts[0].val.flg && !errData.posts[1].val.flg">
+            <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" @click="changeNextStep();" v-if="!errData.posts[0].val.flg && !errData.posts[1].val.flg && !contentsNameExistsFlg">
               <span class="c-submit-btn__lbl">次へ</span>
             </button>
-            <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" v-else="errData.posts[0].val.flg && errData.posts[1].val.flg" disabled>
+            <button id="g-form-input" class="c-submit-btn" type="button" data-mode="next" v-else="errData.posts[0].val.flg && errData.posts[1].val.flg & contentsNameExistsFlg" disabled>
               <span class="c-submit-btn__lbl">次へ</span>
             </button>
           </div>

@@ -296,6 +296,23 @@ class QueryClass {
 
 
   /**
+   * コンテンツ管理のデータ取得（確認用）
+   * Getter
+   *
+   * @param string $name チェックしたいコンテンツ名の値
+   * @return array $view
+   */
+  public function contentsNameExists($name): array {
+    $flg = false;
+    $mode = 'select';
+    $query = "SHOW TABLES LIKE \"{$name}\";";
+    $DBObj = new DB($this->dsn, $this->user, $this->password);
+    $view = $DBObj->run($DBObj->dbData, $query, $mode, []);
+    return $view;
+  }
+
+
+  /**
    * グループ管理のViewデータ取得
    * Setter
    *

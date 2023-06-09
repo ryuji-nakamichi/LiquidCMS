@@ -36,6 +36,7 @@ function stepVue() {
         },
         resFaildFlg: false,
         resFinishedFlg: false,
+        contentsNameExistsFlg: false,
 
         // エラー内容表示用
         errRes: {
@@ -130,6 +131,7 @@ function stepVue() {
       /**
        * 引数のHTMLタグに入力された値のテキストを取得する
        * inputならvalue属性の値、sekectならtext部分を取得する
+       * ※inputの場合、valueと同じ値で設定されるが、使用しない
        * @param {string} el 
        * @returns {string} lbl
        */
@@ -317,6 +319,65 @@ function stepVue() {
        */
       getsAjaxContentsRun() {
         this.getsAjaxContents('/ajax/contents/common.php');
+      },
+      /**
+       * コンテンツ管理名を検査する
+       * @param {string} name 
+       * @returns {void}
+       */
+      checkContentsExists(name) {
+        
+        let flg = false;
+        const $el = $('#' + name);
+        const elVal = $el.val();
+        const elPreg = $el.data('preg');
+        const pregMatchPattern = this.setRegExp(elPreg);
+
+        if (pregMatchPattern === void 0) {
+          // throw new Error("適切でない値が混入された可能性があります。お手数ですが最初から入力をお願い致します。");
+          flg = true;
+        }
+
+        const pregMatchResult = pregMatchPattern.test(elVal);
+        if (!pregMatchResult) {
+          flg = true;
+        }
+
+        if (!flg) {
+          this.getsAjaxContentsExists('/ajax/contents/common.php');
+        }
+
+      },
+      /**
+       * Ajax送信用処理（コンテンツ管理名検査用）
+       * コンテンツ管理のデータがすでに存在しているか取得する
+       * @returns {void}
+       */
+      getsAjaxContentsExists(url) {
+        const params = new URLSearchParams();
+        params.append('mode', 'select');
+        params.append('mode_preg', 'alpha');
+        params.append('method', 'exists'); // 存在チェック用
+        params.append('name', this.formData.posts[0].val.data);
+        
+        axios.post(url, params, {
+          headers: {
+            'X-Requested-With': 'XMLHttpRequest'
+          }
+        })
+          .then((res) => {
+            this.contentsNameExistsFlg = res.data.res.existsFlg;
+            console.log(this.contentsNameExistsFlg);
+          })
+          .catch(error => {
+            if (error.response) {
+            } else if (error.request) {
+
+            } else {
+            }
+          }).finally(() => {
+            this.errRes.process = '完了';
+          });
       },
     }
   });
