@@ -61,6 +61,7 @@
       </div>
     </div>
     <div v-else>
+      <?php if (array_key_exists('category', $navView)) { ?>
       <?php foreach((array)$navView['category'] AS $key => $items) { ?>
       <div class="c-recordList-blk">
         <p class="c-recordList-ttl"><?=$items[0]['name']?></p>
@@ -111,6 +112,7 @@
           <?php } ?>
         </ul>
       </div>
+      <?php } ?>
       <?php } ?>
     </div>
   </div>

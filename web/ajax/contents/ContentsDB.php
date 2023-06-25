@@ -58,7 +58,7 @@ class ContentsDBClass {
    * @param string $mode
    * @return array $data
    */
-  public function createTableWithPostsdata(array $posts, string $mode): array {
+  public function createTableWithPostsData(array $posts, string $mode): array {
     $query = "
       INSERT INTO contents (user_id, name, label, category, created_at, updated_at) VALUES (
         1,
@@ -67,6 +67,32 @@ class ContentsDBClass {
         {$posts['category']},
         default,
         default
+      );
+    ";
+    $DBObj = new DB($this->dsn, $this->user, $this->password);
+    $data = $DBObj->run($DBObj->dbData, $query, $mode, $posts);
+
+    return $data;
+  }
+
+
+  /**
+   * Ajax経由で送られてきたデータのテーブルをDB側に作成する
+   *
+   * @param array $posts
+   * @param string $mode
+   * @return array $data
+   */
+  public function createTable(array $posts, string $mode): array {
+    $query = "
+      CREATE TABLE {$posts['name']} (
+        id INT NOT NULL PRIMARY KEY AUTO_INCREMENT,
+        user_id INT NOT NULL,
+        name TEXT NOT NULL,
+        label TEXT NOT NULL,
+        category INT NOT NULL,
+        created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+        updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
       );
     ";
     $DBObj = new DB($this->dsn, $this->user, $this->password);

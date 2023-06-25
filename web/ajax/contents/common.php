@@ -35,8 +35,8 @@ if ( // Ajax通信か判定
   
   $posts = $_POST; // jsから送られた値を格納する
   $mode = ($posts['mode']) ? $posts['mode']: '';
-  $method = ($posts['method']) ? $posts['method']: '';
-  $name = ($posts['name']) ? $posts['name']: '';
+  $method = (isset($posts['method'])) ? $posts['method']: '';
+  $name = (isset($posts['name'])) ? $posts['name']: '';
   $ContentsDBObj = new ContentsDB(DB_DSH, DB_USER, DB_PASSWORD);
   $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
   $RequestsObj = new Requests();
@@ -60,7 +60,11 @@ if ( // Ajax通信か判定
     $regexFlg = $RequestsObj->run($setPostsdata['preg'], $setPostsdata['posts']);
 
     if (!$regexFlg) {
-      $query = $ContentsDBObj->createTableWithPostsdata($setPostsdata['posts'], $mode); // jsから送られた値をDBに登録する
+      $query = $ContentsDBObj->createTableWithPostsData($setPostsdata['posts'], $mode); // jsから送られた値をDBに登録する
+      $query_create = $ContentsDBObj->createTable($setPostsdata['posts'], $mode); // jsから送られた値でテーブルをDBに作成する
+      $data['res']['query_create'] = $query_create;
+    } else {
+      $data['res']['query_create'] = '鼻くそ';
     }
     
     $data['res']['posts'] = $setPostsdata['posts']; // それぞれの値をセットする

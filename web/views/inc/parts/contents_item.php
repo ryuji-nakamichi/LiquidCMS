@@ -44,6 +44,7 @@ if (isset($routeMap['info']['name'])) {
 <?php } ?>
 
 <div class="item__blk-container" v-else>
+  <?php if (array_key_exists('category', $navView)) { ?>
   <?php foreach((array)$navView['category'] AS $key => $items) { ?>
   <div class="item__blk">
     <ul class="g-menu-sub-list">
@@ -78,6 +79,7 @@ if (isset($routeMap['info']['name'])) {
       <?php } ?>
     </ul>
   </div>
+  <?php } ?>
   <?php } ?>
 </div>
 <!-- <div class="item__blk">
