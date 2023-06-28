@@ -63,8 +63,6 @@ if ( // Ajax通信か判定
       $query = $ContentsDBObj->createTableWithPostsData($setPostsdata['posts'], $mode); // jsから送られた値をDBに登録する
       $query_create = $ContentsDBObj->createTable($setPostsdata['posts'], $mode); // jsから送られた値でテーブルをDBに作成する
       $data['res']['query_create'] = $query_create;
-    } else {
-      $data['res']['query_create'] = '鼻くそ';
     }
     
     $data['res']['posts'] = $setPostsdata['posts']; // それぞれの値をセットする
@@ -89,6 +87,7 @@ if ( // Ajax通信か判定
     $regexFlg = $RequestsObj->run($setPostsdata['preg'], $setPostsdata['posts']);
 
     if (!$regexFlg) {
+      $ContentsDBObj->delContentsTable($posts); // DBからテーブルを削除する
       $ContentsDBObj->delContentsData($posts); // DBからデータを削除する
     }
     $query = $QueryObj->setContentsNavView(); // DBからデータを取得する

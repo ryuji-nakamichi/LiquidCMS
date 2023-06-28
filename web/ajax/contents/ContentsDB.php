@@ -151,7 +151,7 @@ class ContentsDBClass {
    * コンテンツを削除する
    *
    * @param array $ids
-   * @return array $flg
+   * @return array $view
    */
   public function delContentsData(array $ids): array {
     $mode = 'delete';
@@ -161,6 +161,36 @@ class ContentsDBClass {
     ";
     $DBObj = new DB($this->dsn, $this->user, $this->password);
     $view = $DBObj->run($DBObj->dbData, $query, $mode, $posts);
+
+    return $view;
+  }
+
+
+  /**
+   * テーブルを削除する
+   *
+   * @param array $ids
+   * @return array $view
+   */
+  public function delContentsTable(array $ids): array {
+    $mode = 'delete';
+    $posts = [];
+    $tableName = '';
+
+    $DBObj = new DB($this->dsn, $this->user, $this->password);
+
+    // テーブル名をcontentsテーブルから取得
+    $tableNameQuery = "
+      SELECT name FROM contents WHERE id = {$ids['id']};
+    ";
+    $tableNameView = $DBObj->run($DBObj->dbData, $tableNameQuery, 'select', $posts);
+    $tableName = ($tableNameView[0]['name']) ? $tableNameView[0]['name']: '';
+
+    // テーブルを削除する
+    $tableQuery = "
+      DROP TABLE IF EXISTS {$tableName};
+    ";
+    $view = $DBObj->run($DBObj->dbData, $tableQuery, $mode, $posts);
 
     return $view;
   }
