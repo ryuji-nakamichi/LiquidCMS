@@ -2,6 +2,12 @@
 $cssArr = [];
 $routeName = (isset($routeMap['info']['name'])) ? $routeMap['info']['name']: '';
 switch ($routeName) {
+  case 'login':
+    $cssArr = [
+      '<link rel="stylesheet" href="/assets/css/login.css">'
+    ];
+    break;
+
   case 'home':
     $cssArr = [
       '<link rel="stylesheet" href="/assets/css/home.css">'

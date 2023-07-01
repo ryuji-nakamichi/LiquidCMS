@@ -1,0 +1,161 @@
+@charset "utf-8";
+
+
+/************************************************************************************************
+* login-container
+************************************************************************************************/
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/**************************************************************
+* login-frame
+**************************************************************/
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/**************************************************************
+* login-wrapper
+**************************************************************/
+.login-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 auto;
+  transform: translate(-50%, -50%);
+}
+@media all and (min-width: 768px) {
+  .login-wrapper {
+    width: 60rem;
+  }
+}
+@media all and (max-width: 767px) {
+  .login-wrapper {
+    width: 92%;
+  }
+}
+
+
+/**************************************************************
+* login-logo
+**************************************************************/
+
+/* login-logo__logo
+**************************************************************/
+.login-logo__logo {
+  margin: 0 auto;
+}
+@media all and (min-width: 768px) {
+  .login-logo__logo {
+    width: 30rem;
+  }
+}
+@media all and (max-width: 767px) {
+  .login-logo__logo {
+    width: 80%;
+  }
+}
+
+/* login-lead__txt-link
+********************************/
+.login-lead__txt-link {
+  color: var(--main-02-bg-color);
+}
+@media (hover: hover) {
+  .login-lead__txt-link:hover {
+    text-decoration: underline;
+  }
+}
+
+
+/**************************************************************
+* login-lead
+**************************************************************/
+.login-lead {
+  margin: 3rem 0;
+}
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/* login-logo__logo
+**************************************************************/
+.login-lead__txt {
+  text-align: center;
+  line-height: 1.6;
+}
+@media all and (min-width: 768px) {
+  .login-lead__txt {
+    font-size: 1.6rem;
+  }
+}
+@media all and (max-width: 767px) {
+  .login-lead__txt {
+    font-size: 1.5rem;
+  }
+}
+
+
+/**************************************************************
+* login-contents
+**************************************************************/
+.login-contents {
+  background-color: #F2F3F7;
+}
+@media all and (min-width: 768px) {
+  .login-contents {
+    padding: 6rem;
+  }
+}
+@media all and (max-width: 767px) {
+  .login-contents {
+    padding: 4rem;
+  }
+}
+
+
+/**************************************************************
+* login-inner
+**************************************************************/
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+
+
+/**************************************************************
+* フォームパーツ
+**************************************************************/
+
+
+/* g-contact-form-blk
+**************************************************************/
+
+/* form-blk-input-field
+********************************/
+.form-blk-input-field {
+  background-color: #fff;
+}
+
+
+/* c-submit-btn-container
+**************************************************************/
+.c-submit-btn-container {
+  margin-left: auto;
+  margin-right: auto;
+}
+.--col-1 .c-submit-btn-container {
+  width: 100%;
+}
+@media all and (min-width: 768px) {
+  .c-submit-btn-container {
+    width: 41.198%;
+    max-width: 33rem;
+  }
+}
+@media all and (max-width: 767px) {
+  .c-submit-btn-container {
+    width: 45.198%;
+  }
+}

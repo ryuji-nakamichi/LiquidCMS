@@ -6,6 +6,14 @@
 $metaArr = [];
 $routeName = (isset($routeMap['info']['name'])) ? $routeMap['info']['name']: '';
 switch ($routeName) {
+  case 'login':
+    $metaArr = [
+      'title' => 'ユーザーログイン｜LiquidCMS',
+      'description' => 'LiquidCMSのユーザーログイン画面です。LiquidCMSアカウント情報を入力し、ログインしてください。アカウントをお持ちでない方は、新規会員登録画面よりユーザー登録お願いします。',
+      'keywords' => 'LiquidCMS,ヘッドレスCMS,安い,使いやすい,マルチプラットフォーム対応',
+    ];
+    break;
+
   case 'home':
     $metaArr = [
       'title' => 'LiquidCMS',
