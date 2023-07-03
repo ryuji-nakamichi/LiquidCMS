@@ -2,6 +2,12 @@
 $jsArr = [];
 $routeName = (isset($routeMap['info']['name'])) ? $routeMap['info']['name']: '';
 switch ($routeName) {
+  case 'login':
+    $jsArr = [
+      '<script src="/assets/js/login.js"></script>'
+    ];
+    break;
+
   case 'home':
     $jsArr = [
       '<script src="/assets/js/home.js"></script>'

@@ -756,3 +756,108 @@
     padding: 4rem 2rem;
   }
 }
+
+
+
+/************************************************************************************************
+* c-popup-container
+************************************************************************************************/
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/**************************************************************
+* c-popup-frame
+**************************************************************/
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/**************************************************************
+* c-popup-wrapper
+**************************************************************/
+.c-popup-wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  margin: 0 auto;
+  transform: translate(-50%, -50%);
+}
+@media all and (min-width: 768px) {
+  .c-popup-wrapper {
+    width: 60rem;
+  }
+}
+@media all and (max-width: 767px) {
+  .c-popup-wrapper {
+    width: 92%;
+  }
+}
+
+
+/**************************************************************
+* c-popup-login-lead
+**************************************************************/
+.c-popup-login-lead {
+  margin: 3rem 0;
+}
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/* c-popup-login-lead__txt
+**************************************************************/
+.c-popup-login-lead__txt {
+  text-align: center;
+  line-height: 1.6;
+}
+@media all and (min-width: 768px) {
+  .c-popup-login-lead__txt {
+    font-size: 1.6rem;
+  }
+}
+@media all and (max-width: 767px) {
+  .c-popup-login-lead__txt {
+    font-size: 1.5rem;
+  }
+}
+
+
+/**************************************************************
+* c-popup-annotation
+**************************************************************/
+.c-popup-annotation {
+  margin: 3rem 0 0;
+}
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/* c-popup-annotation__txt
+**************************************************************/
+.c-popup-annotation__txt {
+  text-align: center;
+  line-height: 1.6;
+}
+@media all and (min-width: 768px) {
+  .c-popup-annotation__txt {
+    font-size: 1.4rem;
+  }
+}
+@media all and (max-width: 767px) {
+  .c-popup-annotation__txt {
+    font-size: 1.3rem;
+  }
+}
+
+
+/* c-popup-annotation__txt-link
+********************************/
+.c-popup-annotation__txt-link {
+  color: var(--main-02-bg-color);
+}
+@media (hover: hover) {
+  .c-popup-annotation__txt-link:hover {
+    text-decoration: underline;
+  }
+}

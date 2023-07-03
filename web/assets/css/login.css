@@ -18,23 +18,8 @@
 /**************************************************************
 * login-wrapper
 **************************************************************/
-.login-wrapper {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  margin: 0 auto;
-  transform: translate(-50%, -50%);
-}
-@media all and (min-width: 768px) {
-  .login-wrapper {
-    width: 60rem;
-  }
-}
-@media all and (max-width: 767px) {
-  .login-wrapper {
-    width: 92%;
-  }
-}
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
 
 
 /**************************************************************
@@ -72,29 +57,14 @@
 /**************************************************************
 * login-lead
 **************************************************************/
-.login-lead {
-  margin: 3rem 0;
-}
 @media all and (min-width: 768px) {}
 @media all and (max-width: 767px) {}
 
 
-/* login-logo__logo
+/* login-lead__txt
 **************************************************************/
-.login-lead__txt {
-  text-align: center;
-  line-height: 1.6;
-}
-@media all and (min-width: 768px) {
-  .login-lead__txt {
-    font-size: 1.6rem;
-  }
-}
-@media all and (max-width: 767px) {
-  .login-lead__txt {
-    font-size: 1.5rem;
-  }
-}
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
 
 
 /**************************************************************
@@ -122,6 +92,22 @@
 @media all and (max-width: 767px) {}
 
 
+/**************************************************************
+* login-annotation
+**************************************************************/
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/* login-annotation__txt
+**************************************************************/
+@media all and (min-width: 768px) {}
+@media all and (max-width: 767px) {}
+
+
+/* login-annotation__txt-link
+********************************/
+@media (hover: hover) {}
 
 
 /**************************************************************

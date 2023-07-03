@@ -26,6 +26,10 @@ class RegexUtilityClass {
         $regexNames[$key] = "/^[0-9]+$/";
       } else if ($val === 'text') {
         $regexNames[$key] = "/^[^\s\t<>=\'\"”’^]+$/";
+      } else if ($val === 'mailaddress') {
+        $regexNames[$key] = "/^[a-zA-Z0-9\-]+@[a-zA-Z0-9\-.]+[.]{1}[a-zA-Z]+$/";
+      } else if ($val === 'alpha-8') {
+        $regexNames[$key] = "/^[a-zA-Z0-9]{8,}$/";
       }
     }
     return $regexNames;
