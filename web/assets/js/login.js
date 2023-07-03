@@ -58,11 +58,8 @@ function loginVue() {
       this.setInitErrsData(this.formItemMax);
     },
     methods: {
-      changeNextStep() {
-        this.currentStep++;
-      },
-      changeBackStep() {
-        this.currentStep--;
+      delToastr() {
+        this.lginFailPopUpFlg = false;
       },
       /**
        * 初期設定として配列に値を格納しておく
@@ -223,8 +220,6 @@ function loginVue() {
           params.append(this.formData.posts[i].val.key + '_preg', this.formData.posts[i].val.preg);
         }
 
-        console.log(params);
-
         return params;
       },
       /**
@@ -250,6 +245,7 @@ function loginVue() {
           } else {
             this.lginFailPopUpFlg = true;
           }
+          console.log(res.data.res.user);
           this.resJson.res = res.data.res.posts; // POSTデータ
           this.resJson.status = res.data.res.status; // statusコード
           this.resJson.errFlg = res.data.res.errFlg; // 正規表現のフラグ
@@ -281,11 +277,10 @@ function loginVue() {
           this.errRes.process = '完了';
 
           if (this.lginFlg) {
-            this.getsAjaxContentsRun();
-            this.resFinishedFlg = true;
+            // this.resFinishedFlg = true;
+            location.href = '/';
           }
         });
-
       },
       /**
        * Ajaxで送信してPHP側で処理させた後に結果を返却させる

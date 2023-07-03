@@ -84,5 +84,31 @@ class UtilityClass {
   }
 
 
+  /**
+   * ログインユーザーのデータをセッションにセットする
+   * 
+   * @param array $data
+   * @param string $key
+   * @return array
+   */
+  public function setLoginUserSession($data, $key): array {
+    $sessions = [];
+    $sessions[$key] = $data;
+    return $sessions;
+  }
+
+
+  /**
+   * ログイン中か判定する
+   * 
+   * @return bool
+   */
+  public function isLogin(): bool {
+    $flg = false;
+    $flg = ($_SESSION['user']) ? true: false;
+    return $flg;
+  }
+
+
 }
 

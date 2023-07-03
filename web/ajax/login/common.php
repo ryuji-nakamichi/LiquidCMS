@@ -2,10 +2,15 @@
 
 namespace Liqsyst\Ajax\Login;
 
+require_once($_SERVER['DOCUMENT_ROOT'] . '/config/session.php');
+
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
 require_once(INCLUDE_AJAX_PATH . 'login/loginDB.php');
 use Liqsyst\Ajax\Login\LoginDBClass as LoginDB;
+
+require_once(INCLUDE_LIB_PATH . 'Utility.php');
+use Liqsyst\Lib\Utility\UtilityClass as Utility;
 
 require_once(INCLUDE_LIB_PATH . 'Query.php');
 use Liqsyst\Lib\Query\QueryClass as Query;
@@ -37,6 +42,7 @@ if ( // Ajax通信か判定
   $mode = ($posts['mode']) ? $posts['mode']: '';
   $method = (isset($posts['method'])) ? $posts['method']: '';
   $name = (isset($posts['name'])) ? $posts['name']: '';
+  $UtilityObj = new Utility();
   $LoginDB = new LoginDB(DB_DSH, DB_USER, DB_PASSWORD);
   $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
   $RequestsObj = new Requests();
@@ -52,6 +58,14 @@ if ( // Ajax通信か判定
 
       if ($method === 'exists') {
         $query = $QueryObj->usersExists($setPostsdata['posts']); // DBからユーザーデータを取得する
+
+        if (count($query)) {
+          // セッションに代入する
+          $key = 'user';
+          $loginUser = $UtilityObj->setLoginUserSession($query, $key);
+          $data['res'][$key] = (isset($loginUser[$key][0])) ? $loginUser[$key][0]: NULL;
+          $_SESSION[$key] = (isset($loginUser[$key][0])) ? $loginUser[$key][0]: NULL;
+        }
 
         $data['res']['existsFlg'] = (count($query)) ? true: false;
       } else {

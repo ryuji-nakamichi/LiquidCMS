@@ -4,6 +4,9 @@ namespace Liqsyst\Controllers;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
+require_once(INCLUDE_LIB_PATH . 'Utility.php');
+use Liqsyst\Lib\Utility\UtilityClass as Utility;
+
 require_once(INCLUDE_LIB_PATH . 'Query.php');
 use Liqsyst\Lib\Query\QueryClass as Query;
 
@@ -41,7 +44,15 @@ class LoginController extends BaseController {
    * @return void
    */
   public function run(): void {
-    $this->show();
+    // $_SESSION['user'] = array();
+    $UtilityObj = new Utility();
+    $flg = $UtilityObj->isLogin();
+    if (!$flg) {
+      $this->show();
+    } else {
+      header('Location: /');
+      exit();
+    }
   }
 }
 
