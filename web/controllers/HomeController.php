@@ -73,7 +73,16 @@ class HomeController extends BaseController {
     $navView = $this->setContentsNavView();
     // $groupView = $this->setGroupView();
     // $contentsListView = $this->setContentsListView();
-    require_once "views/dashboard/index.php";
+
+    // $_SESSION['user'] = array();
+    $UtilityObj = new Utility();
+    $flg = $UtilityObj->isLogin();
+    if ($flg) {
+      require_once "views/dashboard/index.php";
+    } else {
+      header('Location: /login/');
+      exit();
+    }
   }
 
     
@@ -83,16 +92,7 @@ class HomeController extends BaseController {
    * @return void
    */
   public function run(): void {
-    // $_SESSION['user'] = array();
-    $UtilityObj = new Utility();
-    $flg = $UtilityObj->isLogin();
-    if ($flg) {
-      $this->show();
-    } else {
-      header('Location: /login/');
-      exit();
-    }
-    
+    $this->show();
   }
 }
 

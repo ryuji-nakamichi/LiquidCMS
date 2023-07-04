@@ -4,6 +4,9 @@ namespace Liqsyst\Controllers\Contents;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
+require_once(INCLUDE_LIB_PATH . 'Utility.php');
+use Liqsyst\Lib\Utility\UtilityClass as Utility;
+
 require_once(INCLUDE_LIB_PATH . 'Query.php');
 use Liqsyst\Lib\Query\QueryClass as Query;
 
@@ -66,12 +69,21 @@ class ContentsCreateController extends BaseController {
    *
    * @return void
    */
-  private function showCreate(): void {
+  private function show(): void {
     $routeMap = $this->routeMap;
     $navView = $this->setContentsNavView();
     $groupView = $this->setGroupView();
     // $contentsListView = $this->setContentsListView();
-    require_once "views/contents/create/index.php";
+    
+    // $_SESSION['user'] = array();
+    $UtilityObj = new Utility();
+    $flg = $UtilityObj->isLogin();
+    if ($flg) {
+      require_once "views/contents/create/index.php";
+    } else {
+      header('Location: /login/');
+      exit();
+    }
   }
 
     
@@ -81,7 +93,7 @@ class ContentsCreateController extends BaseController {
    * @return void
    */
   public function run(): void {
-    $this->showCreate();
+    $this->show();
   }
 }
 

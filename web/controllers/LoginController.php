@@ -34,7 +34,16 @@ class LoginController extends BaseController {
    */
   public function show(): void {
     $routeMap = $this->routeMap;
-    require_once "views/login/index.php";
+    
+    // $_SESSION['user'] = array();
+    $UtilityObj = new Utility();
+    $flg = $UtilityObj->isLogin();
+    if (!$flg) {
+      require_once "views/login/index.php";
+    } else {
+      header('Location: /');
+      exit();
+    }
   }
 
     
@@ -44,17 +53,9 @@ class LoginController extends BaseController {
    * @return void
    */
   public function run(): void {
-    // $_SESSION['user'] = array();
-    $UtilityObj = new Utility();
-    $flg = $UtilityObj->isLogin();
-    if (!$flg) {
-      $this->show();
-    } else {
-      header('Location: /');
-      exit();
-    }
+    $this->show();
   }
 }
 
-$homeObj = new LoginController($routeMap);
-$homeObj->run();
+$loginObj = new LoginController($routeMap);
+$loginObj->run();

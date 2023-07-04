@@ -91,7 +91,16 @@ class ContentsEditController extends BaseController {
     $groupView = $this->setGroupView();
     // $contentsListView = $this->setContentsListView();
     $contentsEditView = $this->setContentsEditView();
-    require_once "views/contents/edit/index.php";
+    
+     // $_SESSION['user'] = array();
+    $UtilityObj = new Utility();
+    $flg = $UtilityObj->isLogin();
+    if ($flg) {
+      require_once "views/contents/edit/index.php";
+    } else {
+      header('Location: /login/');
+      exit();
+    }
   }
 
     

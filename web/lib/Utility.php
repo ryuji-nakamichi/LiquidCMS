@@ -105,7 +105,27 @@ class UtilityClass {
    */
   public function isLogin(): bool {
     $flg = false;
-    $flg = ($_SESSION['user']) ? true: false;
+    $flg = (isset($_SESSION['user']) && $_SESSION['user']) ? true: false;
+    return $flg;
+  }
+
+
+  /**
+   * ログアウトする
+   * 
+   * @param bool $loginFlg
+   * @return bool
+   */
+  public function logout($loginFlg): bool {
+    $flg = false;
+    if ($loginFlg) {
+      $_SESSION['user'] = array();
+      if (isset($_COOKIE["PHPSESSID"])) {
+        setcookie("PHPSESSID", '', 0, '/'); // ブラウザを閉じるとログアウト扱いにする
+      }
+      session_destroy();
+      $flg = true;
+    }
     return $flg;
   }
 

@@ -4,6 +4,9 @@ namespace Liqsyst\Controllers\Contents;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
+require_once(INCLUDE_LIB_PATH . 'Utility.php');
+use Liqsyst\Lib\Utility\UtilityClass as Utility;
+
 require_once(INCLUDE_LIB_PATH . 'Query.php');
 use Liqsyst\Lib\Query\QueryClass as Query;
 
@@ -85,7 +88,16 @@ class ContentsGroupListController extends BaseController {
     $groupView = $this->setGroupView();
     $groupListView = $this->setGroupListView();
     // $contentsListView = $this->setContentsListView();
-    require_once "views/contents/group/list/index.php";
+    
+    // $_SESSION['user'] = array();
+    $UtilityObj = new Utility();
+    $flg = $UtilityObj->isLogin();
+    if ($flg) {
+      require_once "views/contents/group/list/index.php";
+    } else {
+      header('Location: /login/');
+      exit();
+    }
   }
 
     

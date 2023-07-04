@@ -4,6 +4,9 @@ namespace Liqsyst\Controllers\Contents;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
+require_once(INCLUDE_LIB_PATH . 'Utility.php');
+use Liqsyst\Lib\Utility\UtilityClass as Utility;
+
 require_once(INCLUDE_AJAX_PATH . 'contents/group/GroupDB.php');
 use Liqsyst\Ajax\Contents\Group\GroupDBClass as GroupDB;
 
@@ -54,11 +57,20 @@ class ContentsGroupCreateController extends BaseController {
    *
    * @return void
    */
-  private function showCreate(): void {
+  private function show(): void {
     $routeMap = $this->routeMap;
     $navView = $this->getContentsNavView(); // DBからコンテンツ管理のデータを取得する
     $groupView = $this->getGroupView(); // DBからグループ設定のデータを取得する
-    require_once "views/contents/group/create/index.php";
+    
+    // $_SESSION['user'] = array();
+    $UtilityObj = new Utility();
+    $flg = $UtilityObj->isLogin();
+    if ($flg) {
+      require_once "views/contents/group/create/index.php";
+    } else {
+      header('Location: /login/');
+      exit();
+    }
   }
 
     
@@ -68,7 +80,7 @@ class ContentsGroupCreateController extends BaseController {
    * @return void
    */
   public function run(): void {
-    $this->showCreate();
+    $this->show();
   }
 }
 

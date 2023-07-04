@@ -106,7 +106,7 @@
                   </a>
                 </li>
                 <li class="list__item --user">
-                  <a class="item__link" href="#">
+                  <span class="item__link">
                     <span class="item__icon">
                       <svg xmlns="http://www.w3.org/2000/svg" width="14" height="25" viewBox="0 0 14 25">
                         <g id="user-icon" transform="translate(-115.615)">
@@ -118,7 +118,7 @@
                       </svg>
                     </span>
                     <span class="item__lbl"></span>
-                  </a>
+                  </span>
                 </li>
                 <li class="list__item --company">
                   <a class="item__link" href="#">
