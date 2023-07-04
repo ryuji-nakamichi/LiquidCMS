@@ -10,11 +10,19 @@ $routeMap = [
     ]
   ],
   [
-    'path' => '/login/',
+    'path' => '/login',
     'info' => [
       'name' => 'login',
       'controller' => 'LoginController',
       'params' => 'LoginController',
+    ]
+  ],
+  [
+    'path' => '/profile/edit',
+    'info' => [
+      'name' => 'profile_edit',
+      'controller' => 'Profile/ProfileEditController',
+      'params' => 'ProfileEditController',
     ]
   ],
   [

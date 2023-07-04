@@ -11,6 +11,7 @@ require_once(INCLUDE_LIB_PATH . 'Query.php');
 use Liqsyst\Lib\Query\QueryClass as Query;
 
 require_once('controllers/BaseController.php');
+use Liqsyst\Controllers\BaseController as BaseController;
 
 class HomeController extends BaseController {
 
@@ -80,7 +81,7 @@ class HomeController extends BaseController {
     if ($flg) {
       require_once "views/dashboard/index.php";
     } else {
-      header('Location: /login/');
+      header('Location: /login');
       exit();
     }
   }

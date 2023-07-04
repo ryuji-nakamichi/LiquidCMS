@@ -1,10 +1,10 @@
 <?php
 
-namespace Liqsyst\Controllers\Contents;
+namespace Liqsyst\Controllers\Profile;
 
 require_once($_SERVER['DOCUMENT_ROOT'] . '/config/define.php');
 
-require_once('lib/Utility.php');
+require_once(INCLUDE_LIB_PATH . 'Utility.php');
 use Liqsyst\Lib\Utility\UtilityClass as Utility;
 
 require_once(INCLUDE_LIB_PATH . 'Query.php');
@@ -13,7 +13,7 @@ use Liqsyst\Lib\Query\QueryClass as Query;
 require_once('controllers/BaseController.php');
 use Liqsyst\Controllers\BaseController as BaseController;
 
-class ContentsEditController extends BaseController {
+class ProfileEditController extends BaseController {
 
   // プロパティ
   public $routeMap = '';
@@ -65,38 +65,21 @@ class ContentsEditController extends BaseController {
 
 
   /**
-   * コンテンツ管理の編集用データ取得（formに表示する用）
-   *
-   * @return array $view
-   */
-  private function setContentsEditView(): array {
-    $index = 2;
-    $UtilityObj = new Utility();
-    $id = $UtilityObj->getUriOneParameter($index);
-
-    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
-    $view = $QueryObj->setContentsEditView($id);
-    return $view;
-  }
-
-
-  /**
    * viewファイルレンダリング読み込み
    *
    * @return void
    */
-  private function show(): void {
+  public function show(): void {
     $routeMap = $this->routeMap;
     $navView = $this->setContentsNavView();
-    $groupView = $this->setGroupView();
+    // $groupView = $this->setGroupView();
     // $contentsListView = $this->setContentsListView();
-    $contentsEditView = $this->setContentsEditView();
-    
-     // $_SESSION['user'] = array();
+
+    // $_SESSION['user'] = array();
     $UtilityObj = new Utility();
     $flg = $UtilityObj->isLogin();
     if ($flg) {
-      require_once "views/contents/edit/index.php";
+      require_once "views/profile/index.php";
     } else {
       header('Location: /login');
       exit();
@@ -114,5 +97,5 @@ class ContentsEditController extends BaseController {
   }
 }
 
-$contentsObj = new ContentsEditController($routeMap);
-$contentsObj->run();
+$profileObj = new ProfileEditController($routeMap);
+$profileObj->run();

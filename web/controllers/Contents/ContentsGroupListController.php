@@ -95,7 +95,7 @@ class ContentsGroupListController extends BaseController {
     if ($flg) {
       require_once "views/contents/group/list/index.php";
     } else {
-      header('Location: /login/');
+      header('Location: /login');
       exit();
     }
   }

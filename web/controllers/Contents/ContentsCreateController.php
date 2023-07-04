@@ -81,7 +81,7 @@ class ContentsCreateController extends BaseController {
     if ($flg) {
       require_once "views/contents/create/index.php";
     } else {
-      header('Location: /login/');
+      header('Location: /login');
       exit();
     }
   }

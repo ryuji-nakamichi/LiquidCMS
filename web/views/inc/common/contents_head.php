@@ -12,6 +12,12 @@ switch ($routeName) {
     ];
     break;
 
+  case 'profile_edit':
+    $contentsHeadInfoArr = [
+      'title' => 'プロフィール',
+    ];
+    break;
+
   case 'contents_list':
     $contentsHeadInfoArr = [
       'title' => 'コンテンツ一覧',

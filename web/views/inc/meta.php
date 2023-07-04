@@ -22,6 +22,14 @@ switch ($routeName) {
     ];
     break;
 
+  case 'profile_edit':
+    $metaArr = [
+      'title' => 'プロフィール｜LiquidCMS',
+      'description' => 'LiquidCMSのプロフィール編集画面です。LiquidCMSアカウント情報を編集可能です。また、この画面からログアウトすることができます。',
+      'keywords' => 'LiquidCMS,ヘッドレスCMS,安い,使いやすい,マルチプラットフォーム対応',
+    ];
+    break;
+
   case 'contents_list':
     $metaArr = [
       'title' => 'コンテンツ一覧｜LiquidCMS',

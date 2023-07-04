@@ -13,6 +13,13 @@ switch ($routeName) {
     ];
     break;
 
+  case 'profile_edit':
+    $pageInfoArr = [
+      'title' => 'プロフィール',
+      'description' => 'プロフィールの編集画面です。',
+    ];
+    break;
+
   case 'contents_list':
     $pageInfoArr = [
       'title' => 'コンテンツ一覧',

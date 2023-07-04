@@ -14,6 +14,13 @@ switch ($routeName) {
     ];
     break;
 
+  case 'profile_edit':
+    $jsArr = [
+      '<link rel="stylesheet" href="/assets/css/profile/index.css">'
+    ];
+    break;
+
+
   case 'field':
     $cssArr = [
       ''
