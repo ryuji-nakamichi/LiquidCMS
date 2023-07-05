@@ -337,7 +337,7 @@ function stepVue() {
             this.errRes.process = '完了';
 
             if (this.logoutFlg) {
-              location.href = '/login/';
+              location.href = '/login';
             }
           });
       },

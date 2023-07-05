@@ -285,6 +285,9 @@ img {
 
 /* sub-list__item
 ********************************/
+.g-menu-sub-list .sub-list__item {
+  cursor: pointer;
+}
 .g-menu-sub-list .sub-list__item:nth-child(n + 2) {
   position: relative;
   padding-top: 2rem;
