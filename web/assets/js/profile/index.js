@@ -16,8 +16,8 @@ function stepVue() {
   const app1 = createApp({
     data() {
       return {
-        stepMax: 4,
-        formItemMax: 3,
+        stepMax: 3,
+        formItemMax: 2,
         currentStep: 1,
         formData: {
           posts:
@@ -49,6 +49,11 @@ function stepVue() {
           'config': '',
           'process': '',
         },
+        editFlg: true,
+        pageName: 'contents_edit',
+        id: '', // データID
+        name: '', // 名前の初期値になる
+        mail: '', // メールアドレスの初期値になる
 
         logoutFlg: false, // ログアウト用
       }
@@ -56,6 +61,11 @@ function stepVue() {
     created: function () {
       this.setInitPostsData(this.formItemMax);
       this.setInitErrsData(this.formItemMax);
+    },
+    mounted: function () {
+      this.getIdData('data-id');
+      this.getNameData('name');
+      this.getMailData('mail');
     },
     methods: {
       changeNextStep() {
@@ -101,6 +111,56 @@ function stepVue() {
           }
         }
       },
+      /**
+       * 各inputやselectに入力された値を取得する
+       * 取得した値を配列に格納する
+       * ※対応する添字部分にオブジェクトを格納するので、
+       * 該当部分にてループ処理は途中で終了する
+       * @param {string} name 
+       * @returns {void}
+       */
+      getPosts(name) {
+        const $el = $('#' + name);
+        const elVal = $el.val();
+        const elPreg = $el.data('preg');
+        const elTxt = this.getPostsLbl(name);
+        const elNum = Number($el.data('num')) - 1;
+        const max = $('.js-post-field').length;
+        
+        for (let i = 0; i < max; i++) {
+          this.formData.posts[elNum] = {
+            val: {
+              data: elVal,
+              key: name,
+              lbl: elTxt,
+              preg: elPreg,
+            }
+          }
+          break;
+        }
+      },
+      /**
+       * 引数のHTMLタグに入力された値のテキストを取得する
+       * inputならvalue属性の値、sekectならtext部分を取得する
+       * @param {string} el 
+       * @returns {string} lbl
+       */
+      getPostsLbl(el) {
+        const $el = $('#' + el);
+        let lbl;
+        const elTag = $el.data('tag');
+        if (elTag === 'text') {
+          lbl = $el.val();
+        } else if (elTag === 'select') {
+          lbl = $('#' + el + ' option:selected').text();
+        }
+        return lbl;
+      },
+      /**
+       * 引数を元に正規表現を動的に生成する
+       * @param {string} str 
+       * @returns {RegExp} regExp
+       */
       setRegExp(str) {
         let regExp;
         if (str === 'alpha') {
@@ -155,30 +215,31 @@ function stepVue() {
         }
       },
       /**
-       * Ajax送信用処理
+       * Ajax送信用処理（更新用）
        * 各inputやselectに入力された値をセットする
-       * @param {string} id 
+       * 
        * @returns {object} params
        */
-      setParams(id) {
+      setParams() {
         const params = new URLSearchParams();
-        // const max = this.formData.posts.length;
-        const max = 1;
-        const dataId = id;
-        const column = 'id';
-        const preg = 'integer';
+        const max = this.formData.posts.length;
+        params.append('mode', 'update');
+        params.append('mode_preg', 'alpha');
+        params.append('id', this.id);
+        params.append('id_preg', 'integerNotZero');
+        console.log(params);
 
         for (let i = 0; i < max; i++) {
-          params.append(column, dataId);
-          params.append(column + '_preg', preg);
+          if (this.formData.posts[i].val.key) {
+            params.append(this.formData.posts[i].val.key, this.formData.posts[i].val.data);
+            params.append(this.formData.posts[i].val.key + '_preg', this.formData.posts[i].val.preg);
+          }
         }
-        params.append('mode', 'delete');
-        params.append('mode_preg', 'alpha');
 
         return params;
       },
       /**
-       * Ajax送信用処理（削除用）
+       * Ajax送信用処理（登録用）
        * 各inputやselectに入力された値をPHP側に送信する
        * @param {object} params 
        * @param {string} url 
@@ -191,7 +252,7 @@ function stepVue() {
           }
         })
         .then((res) => {
-          console.log(res.data);
+          // console.log(res.data);
           this.resJson.res = res.data.res.posts; // POSTデータ
           this.resJson.status = res.data.res.status; // statusコード
           this.resJson.errFlg = res.data.res.errFlg; // 正規表現のフラグ
@@ -218,7 +279,7 @@ function stepVue() {
             this.errRes.message = error.message;
             // console.log('Error', error.message);
           }
-          console.log(error);
+          console.log(this.errRes);
         }).finally(() => {
           this.errRes.process = '完了';
 
@@ -235,9 +296,7 @@ function stepVue() {
        * @returns {void}
        */
       postsAjaxWithParamsRun(e) {
-        const $el = $(e.target);
-        const id = $el.parents('.item__contents').attr('data-id');
-        const params = this.setParams(id);
+        const params = this.setParams();
         this.postsAjaxWithParams(params, '/ajax/contents/common.php');
       },
       /**
@@ -257,6 +316,7 @@ function stepVue() {
           .then((res) => {
             this.resJson.res = res.data.res.posts;
             this.resGetJson.res = res.data.res.query;
+            console.log(this.resGetJson.res);
           })
           .catch(error => {
             if (error.response) {
@@ -274,6 +334,30 @@ function stepVue() {
        */
       getsAjaxContentsRun() {
         this.getsAjaxContents('/ajax/contents/common.php');
+      },
+      /**
+       * IDの値を取得する
+       * @param {string} name
+       * @returns {void}
+       */
+      getIdData(name) {
+        this.id = document.getElementById(name) ? document.getElementById(name).value : ''
+      },
+      /**
+       * 名前の値を取得する
+       * @param {string} name
+       * @returns {void}
+       */
+      getNameData(name) {
+        this.name = document.getElementById(name) ? document.getElementById(name).value : ''
+      },
+      /**
+       * コンテンツラベル名の値を取得する
+       * @param {string} name
+       * @returns {void}
+       */
+      getMailData(name) {
+        this.mail = document.getElementById(name) ? document.getElementById(name).value : ''
       },
 
       /**
