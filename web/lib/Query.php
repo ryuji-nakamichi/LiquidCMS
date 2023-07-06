@@ -314,19 +314,48 @@ class QueryClass {
 
   /**
    * ユーザー管理のデータ取得（確認用）
-   * Getter
    *
-   * @param array $posts チェックしたいコンテンツ名の値
+   * @param array $posts 入力されたログイン情報の値
    * @return array $view
    */
   public function usersExists($posts): array {
-    $flg = false;
     $mode = 'select';
     $query = "
       SELECT * FROM users WHERE mail = \"{$posts['user']}\" AND password = \"{$posts['password']}\"
     ";
     $DBObj = new DB($this->dsn, $this->user, $this->password);
     $view = $DBObj->run($DBObj->dbData, $query, $mode, []);
+    return $view;
+  }
+
+
+  /**
+   * プロフィールページのユーザーデータ取得（編集用）
+   * Getter
+   *
+   * @param int $id 入力されたログイン情報の値
+   * @return array $view
+   */
+  public function getUserView($id): array {
+    $mode = 'select';
+    $query = "
+      SELECT * FROM users WHERE id = \"{$id}\"
+    ";
+    $DBObj = new DB($this->dsn, $this->user, $this->password);
+    $view = $DBObj->run($DBObj->dbData, $query, $mode, []);
+    return $view;
+  }
+
+
+  /**
+   * プロフィールページのユーザーのViewデータ取得（編集用）
+   * Setter
+   *
+   * @param int $id 入力されたログイン情報の値
+   * @return array $view
+   */
+  public function setUserView($id): array {
+    $view = $this->getUserView($id); // DBからコンテンツ管理のデータを取得する
     return $view;
   }
 

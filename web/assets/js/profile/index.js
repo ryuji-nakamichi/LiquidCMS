@@ -50,7 +50,7 @@ function stepVue() {
           'process': '',
         },
         editFlg: true,
-        pageName: 'contents_edit',
+        pageName: 'profile_edit',
         id: '', // データID
         name: '', // 名前の初期値になる
         mail: '', // メールアドレスの初期値になる
@@ -64,8 +64,8 @@ function stepVue() {
     },
     mounted: function () {
       this.getIdData('data-id');
-      this.getNameData('name');
-      this.getMailData('mail');
+      this.getNameData('data-name');
+      this.getMailData('data-mail');
     },
     methods: {
       changeNextStep() {
@@ -106,7 +106,7 @@ function stepVue() {
               key: '',
               preg: '',
               msg: '',
-              flg: true,
+              flg: false,
             }
           }
         }
@@ -171,6 +171,10 @@ function stepVue() {
           regExp = /^[0-9]+$/;
         } else if (str === 'text') {
           regExp = /^[^\s\t<>＜＞=\'\"”’^]+$/;
+        } else if (str === 'mailaddress') {
+          regExp = /^[a-zA-Z0-9\-]+@[a-zA-Z0-9\-.]+[.]{1}[a-zA-Z]+$/;
+        } else if (str === 'alpha-8') {
+          regExp = /^[a-zA-Z0-9]{8,}$/;
         }
         return regExp;
       },
@@ -227,7 +231,6 @@ function stepVue() {
         params.append('mode_preg', 'alpha');
         params.append('id', this.id);
         params.append('id_preg', 'integerNotZero');
-        console.log(params);
 
         for (let i = 0; i < max; i++) {
           if (this.formData.posts[i].val.key) {
@@ -235,6 +238,8 @@ function stepVue() {
             params.append(this.formData.posts[i].val.key + '_preg', this.formData.posts[i].val.preg);
           }
         }
+
+        console.log(params);
 
         return params;
       },
@@ -284,7 +289,6 @@ function stepVue() {
           this.errRes.process = '完了';
 
           if (!this.resFaildFlg) {
-            this.getsAjaxContentsRun();
             this.resFinishedFlg = true;
           }
         });
@@ -297,43 +301,7 @@ function stepVue() {
        */
       postsAjaxWithParamsRun(e) {
         const params = this.setParams();
-        this.postsAjaxWithParams(params, '/ajax/contents/common.php');
-      },
-      /**
-       * Ajax送信用処理（取得用）
-       * コンテンツ管理のデータを取得して表示する
-       * @returns {void}
-       */
-      getsAjaxContents(url) {
-        const reqParams = new URLSearchParams();
-        reqParams.append('mode', 'select');
-        reqParams.append('mode_preg', 'alpha');
-        axios.post(url, reqParams, {
-          headers: {
-            'X-Requested-With': 'XMLHttpRequest'
-          }
-        })
-          .then((res) => {
-            this.resJson.res = res.data.res.posts;
-            this.resGetJson.res = res.data.res.query;
-            console.log(this.resGetJson.res);
-          })
-          .catch(error => {
-            if (error.response) {
-            } else if (error.request) {
-
-            } else {
-            }
-          }).finally(() => {
-            this.errRes.process = '完了';
-          });
-      },
-      /**
-       * Ajaxで送信してPHP側で取得したデータを表示させる
-       * @returns {void}
-       */
-      getsAjaxContentsRun() {
-        this.getsAjaxContents('/ajax/contents/common.php');
+        this.postsAjaxWithParams(params, '/ajax/profile/common.php');
       },
       /**
        * IDの値を取得する

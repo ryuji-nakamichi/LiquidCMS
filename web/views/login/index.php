@@ -70,7 +70,7 @@ require_once(INCLUDE_BLOCK_PATH . 'common/start.php');
   </div>
   <div id="toastr" class="c-toastr" v-if="lginFailPopUpFlg">
     <i class="c-toastr-icon" @click="delToastr();"></i>
-    <div class="c-toastr-contents">
+    <div class="c-toastr-contents --danger">
       <i class="toastr-contents__icon --info"></i>
       <p class="toastr-contents__txt">ログインできませんでした。<br>ユーザー名またはパスワード、<br>もしくは両方が間違っている可能性があります。<br>再度お試しください。</p>
     </div>

@@ -41,25 +41,25 @@ class ProfileEditController extends BaseController {
 
 
   /**
-   * グループ設定のViewデータ取得
+   * ログインユーザーのセッションデータ取得
    *
-   * @return array $view
+   * @return int $id
    */
-  private function setGroupView(): array {
-    $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
-    $view = $QueryObj->setGroupView(); // DBからコンテンツ管理のデータを取得する
-    return $view;
+  private function getUserSession(): int {
+    $id = (isset($_SESSION['user']) && $_SESSION['user']) ? $_SESSION['user']['id']: NULL;
+    return $id;
   }
 
 
   /**
-   * コンテンツ管理のデータ取得（一覧用）
+   * ログインユーザーの編集用データ取得（formに表示する用）
    *
    * @return array $view
    */
-  private function setContentsListView(): array {
+  private function setUserEditView(): array {
+    $id = $this->getUserSession();
     $QueryObj = new Query(DB_DSH, DB_USER, DB_PASSWORD);
-    $view = $QueryObj->setContentsListView();
+    $view = $QueryObj->setUserView($id);
     return $view;
   }
 
@@ -74,6 +74,7 @@ class ProfileEditController extends BaseController {
     $navView = $this->setContentsNavView();
     // $groupView = $this->setGroupView();
     // $contentsListView = $this->setContentsListView();
+    $userView = $this->setUserEditView();
 
     // $_SESSION['user'] = array();
     $UtilityObj = new Utility();

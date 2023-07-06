@@ -270,8 +270,8 @@
   transition: all var(--transition-speed);
 }
 .--danger .c-btn .c-btn__link {
-  border-color: #AD2D27;
-  background-color: #AD2D27;
+  border-color: var(--main-03-bg-color);
+  background-color: var(--main-03-bg-color);
 }
 .--small .c-btn .c-btn__link {
   padding: 1rem;
@@ -526,7 +526,7 @@
   background-color: #007E66;
 }
 .c-recordList .item__status-icon.--private {
-  background-color: #AD2D27;
+  background-color: var(--main-03-bg-color);
 }
 
 /* item__status-txt
@@ -940,6 +940,9 @@
   align-items: center;
   border-radius: 1rem 0 0 1rem;
   background-color: var(--main-02-bg-color);
+}
+.c-toastr-contents.--danger {
+  background-color: var(--main-03-bg-color);
 }
 @media all and (min-width: 768px) {
   .c-toastr-contents {
